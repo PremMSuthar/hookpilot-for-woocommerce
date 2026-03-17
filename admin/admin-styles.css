@@ -1,0 +1,1309 @@
+/**
+ * WooCommerce Hook Manager â Premium Admin Styles
+ * Version: 2.0.0
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --whm-primary: #3b82f6;
+    /* Blue Shade */
+    --whm-primary-dark: #2563eb;
+    --whm-primary-light: #eff6ff;
+    --whm-primary-rgb: 59, 130, 246;
+
+    --whm-secondary: #7c3aed;
+    /* Purple */
+    --whm-secondary-rgb: 124, 58, 237;
+
+    --whm-success: #10b981;
+    --whm-danger: #ef4444;
+    --whm-warning: #f59e0b;
+    --whm-info: #3b82f6;
+
+    --whm-bg: #f8fafc;
+    --whm-surface: #ffffff;
+    --whm-surface-2: #f1f5f9;
+    --whm-border: #e2e8f0;
+    --whm-border-light: #f1f5f9;
+
+    --whm-text: #0f172a;
+    --whm-text-muted: #64748b;
+    --whm-text-light: #94a3b8;
+
+    --whm-radius: 12px;
+    --whm-radius-sm: 8px;
+    --whm-radius-xs: 4px;
+    --whm-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --whm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --whm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    --whm-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --whm-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+
+    /* Rule-type badge colours - Modern variants */
+    --whm-c-disable: #ef4444;
+    --whm-c-priority: #f59e0b;
+    --whm-c-wrapper: #8b5cf6;
+    --whm-c-content: #06b6d4;
+    --whm-c-shortcode: #10b981;
+}
+
+/* Badges */
+.whm-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.whm-badge--disable        { background: var(--whm-c-disable); }
+.whm-badge--priority       { background: var(--whm-c-priority); }
+.whm-badge--wrapper        { background: var(--whm-c-wrapper); }
+.whm-badge--custom_content { background: var(--whm-c-content); }
+.whm-badge--shortcode      { background: var(--whm-c-shortcode); }
+
+
+
+/* âââ Base âââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-wrap {
+    margin: 20px 20px 0 0;
+    max-width: 100%;
+    font-family: var(--whm-font);
+    color: var(--whm-text);
+}
+
+.whm-wrap *,
+.whm-wrap *::before,
+.whm-wrap *::after {
+    box-sizing: border-box;
+}
+
+.whm-wrap h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px !important;
+    color: var(--whm-text);
+}
+
+.whm-wrap h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 12px !important;
+    color: var(--whm-text);
+}
+
+.whm-wrap p {
+    font-size: 13px;
+    color: var(--whm-text-muted);
+    margin: 0 0 8px;
+    line-height: 1.6;
+}
+
+/* âââ Layout âââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-admin-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.whm-main-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.whm-sidebar {
+    width: 270px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 32px;
+}
+
+/* âââ Header âââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-header-premium {
+    padding: 24px 0 32px 0;
+}
+
+.whm-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.whm-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.whm-logo-group .whm-icon-box {
+    width: 48px;
+    height: 48px;
+    background: var(--whm-primary-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--whm-primary);
+}
+
+.whm-logo-group svg {
+    width: 30px;
+    height: 30px;
+}
+
+.whm-logo-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 !important;
+    letter-spacing: -0.02em;
+    color: var(--whm-text);
+}
+
+.whm-version-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--whm-border);
+    color: var(--whm-text-muted);
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+}
+
+.whm-header-tagline {
+    font-size: 14px;
+    color: var(--whm-text-muted);
+    margin: 4px 0 0;
+}
+
+/* âââ Tabs âââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--whm-border);
+}
+
+.whm-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--whm-text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all .2s ease;
+}
+
+.whm-tab:hover {
+    color: var(--whm-text);
+    background: var(--whm-surface-2);
+}
+
+.whm-tab--active {
+    color: var(--whm-primary) !important;
+    border-bottom-color: var(--whm-primary);
+}
+
+.whm-tab .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.whm-tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--whm-primary-light);
+    color: var(--whm-primary);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+/* âââ Content Card âââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-content {
+    background: var(--whm-surface);
+    padding: 32px;
+    border: 1px solid var(--whm-border);
+    border-top: none;
+    box-shadow: var(--whm-shadow);
+    border-radius: 0 0 var(--whm-radius) var(--whm-radius);
+    min-height: 400px;
+}
+
+/* âââ Notice âââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-notice {
+    padding: 12px 16px;
+    border-radius: var(--whm-radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--whm-primary);
+    background: var(--whm-primary-light);
+}
+
+/* âââ Dashboard ââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-welcome-box {
+    background: linear-gradient(135deg, var(--whm-primary) 0%, var(--whm-secondary) 100%);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgb(99 102 241 / 0.25);
+}
+
+.whm-welcome-actions {
+    margin-top: 24px;
+}
+
+.whm-welcome-actions .whm-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff !important;
+}
+
+.whm-welcome-actions .whm-btn:hover {
+    background: #fff;
+    color: var(--whm-primary) !important;
+    transform: translateY(-2px);
+}
+
+.whm-welcome-text {
+    position: relative;
+    z-index: 2;
+}
+
+.whm-welcome-text h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff !important;
+    margin: 0 0 12px !important;
+    letter-spacing: -0.02em;
+}
+
+.whm-welcome-text p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 24px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.whm-welcome-image {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.whm-welcome-image .dashicons {
+    font-size: 200px;
+    width: 200px;
+    height: 200px;
+    transform: rotate(12deg);
+}
+
+.whm-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.whm-card {
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    padding: 24px;
+    border-radius: 20px;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--whm-shadow);
+}
+
+.whm-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--whm-primary);
+    box-shadow: var(--whm-shadow-lg);
+}
+
+.whm-card .dashicons {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    line-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--whm-primary-light);
+    color: var(--whm-primary);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: all .3s ease;
+}
+
+.whm-card:hover .dashicons {
+    background: var(--whm-primary);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.whm-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px !important;
+    color: var(--whm-text);
+}
+
+.whm-card p {
+    font-size: 14px;
+    color: var(--whm-text-muted);
+    margin-bottom: 20px;
+    min-height: 48px;
+    line-height: 1.6;
+}
+
+/* âââ Sidebar ââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-sidebar-box {
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--whm-shadow);
+}
+
+.whm-sidebar-box h3 {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--whm-text-light);
+    margin: 0 0 20px !important;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--whm-border-light);
+}
+
+.whm-mini-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.whm-mini-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--whm-surface-2);
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all .2s ease;
+}
+
+.whm-mini-stat:hover {
+    transform: translateX(4px);
+    border-color: var(--whm-primary-light);
+    background: #fff;
+}
+
+.whm-stat-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--whm-primary);
+    line-height: 1;
+}
+
+.whm-stat-lbl {
+    font-size: 12px;
+    color: var(--whm-text-muted);
+    font-weight: 600;
+    text-align: right;
+}
+
+.whm-sidebar-setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.whm-sys-info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.whm-sys-info li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.whm-sys-info li strong {
+    color: var(--whm-text-muted);
+    font-weight: 500;
+}
+
+.whm-sys-info li span {
+    font-family: var(--whm-mono);
+    color: var(--whm-text);
+    font-weight: 600;
+}
+
+.whm-sidebar-footer p {
+    font-size: 12px;
+    color: var(--whm-text-light);
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* âââ Buttons ââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--whm-font);
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+    line-height: 1.4;
+    transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.whm-btn .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.whm-btn--primary {
+    background: var(--whm-primary);
+    border-color: var(--whm-primary);
+    color: #fff !important;
+    box-shadow: 0 4px 6px -1px rgb(99 102 241 / 0.2);
+}
+
+.whm-btn--primary:hover {
+    background: var(--whm-primary-dark);
+    border-color: var(--whm-primary-dark);
+    box-shadow: 0 10px 15px -3px rgb(99 102 241 / 0.3);
+    transform: translateY(-1px);
+}
+
+.whm-btn--outline {
+    background: var(--whm-surface);
+    border-color: var(--whm-border);
+    color: var(--whm-text) !important;
+}
+
+.whm-btn--outline:hover {
+    border-color: var(--whm-primary);
+    background: var(--whm-surface-2);
+    color: var(--whm-primary) !important;
+}
+
+.whm-btn--danger {
+    background: transparent;
+    border-color: #fee2e2;
+    color: var(--whm-danger) !important;
+}
+
+.whm-btn--danger:hover {
+    background: #fef2f2;
+    border-color: var(--whm-danger);
+    color: var(--whm-danger) !important;
+}
+
+.whm-btn--sm {
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+.whm-btn--full {
+    width: 100%;
+}
+
+/* âââ Toggle âââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-toggle {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    min-width: 48px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.whm-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.whm-toggle__slider {
+    position: absolute;
+    inset: 0;
+    background: #c3c4c7;
+    border-radius: 22px;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.whm-toggle__slider::before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: .2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.whm-toggle input:checked+.whm-toggle__slider {
+    background: var(--whm-primary);
+}
+
+
+
+/* Table Design */
+.whm-rules-container {
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--whm-shadow-md);
+}
+
+.whm-rules-table-header {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 1fr 1fr;
+    background: #fcfdfe;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--whm-border);
+    align-items: center;
+}
+
+.whm-rules-table-header span {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--whm-text-muted);
+    letter-spacing: 0.05em;
+}
+
+.whm-rules-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.whm-rule-card {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 1fr 1fr;
+    align-items: center;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--whm-border-light);
+    background: var(--whm-surface);
+    transition: all .2s ease;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.whm-rule-card:last-child {
+    border-bottom: none;
+}
+
+.whm-rule-card:hover {
+    background: #f8fafc;
+}
+
+.whm-rule-title-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.whm-rule-title-cell strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--whm-text);
+}
+
+.whm-rule-hook-cell code {
+    font-family: var(--whm-mono);
+    font-size: 13px;
+    color: #1e40af;
+    background: #eff6ff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1px solid #dbeafe;
+}
+
+.whm-rule-priority-cell .pill {
+    background: #f1f5f9;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-block;
+    min-width: 44px;
+    text-align: center;
+}
+
+.whm-rule-actions-cell {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+
+
+
+.whm-empty-state {
+    text-align: center;
+    padding: 52px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.whm-empty-state .dashicons {
+    font-size: 42px;
+    width: 42px;
+    height: 42px;
+    color: var(--whm-border);
+}
+
+.whm-empty-state p {
+    font-size: 14px;
+    color: var(--whm-text-muted);
+    margin: 0 0 8px;
+}
+
+/* âââ Inspector ââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-inspector h2 {
+    margin-bottom: 4px !important;
+}
+
+.whm-toolbar {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.whm-placeholder {
+    text-align: center;
+    padding: 40px;
+    color: var(--whm-text-muted);
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Inspector output table */
+#whm-inspector-table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+#whm-inspector-table-wrap th {
+    background: var(--whm-surface-2);
+    padding: 9px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--whm-text-muted);
+    border-bottom: 2px solid var(--whm-border);
+}
+
+#whm-inspector-table-wrap td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--whm-border-light);
+    vertical-align: top;
+}
+
+#whm-inspector-table-wrap tr:last-child td {
+    border-bottom: none;
+}
+
+#whm-inspector-table-wrap tr:hover td {
+    background: var(--whm-surface-2);
+}
+
+/* âââ Add Rule Form ââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-add-hook h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px !important;
+}
+
+.whm-form {
+    margin-top: 32px;
+}
+
+.whm-form-row {
+    margin-bottom: 24px;
+}
+
+.whm-form-row label,
+.whm-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--whm-text);
+    margin-bottom: 8px;
+}
+
+.whm-form-row label .required {
+    color: var(--whm-danger);
+    margin-left: 2px;
+}
+
+.whm-input,
+.whm-select,
+.whm-textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: var(--whm-font);
+    color: var(--whm-text);
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: 10px;
+    transition: all .2s ease;
+    line-height: 1.5;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.whm-input:focus,
+.whm-select:focus,
+.whm-textarea:focus {
+    outline: none;
+    border-color: var(--whm-primary);
+    box-shadow: 0 0 0 4px rgba(var(--whm-primary-rgb), .1);
+    background: #fff;
+}
+
+.whm-input--small {
+    width: 120px;
+}
+
+.whm-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.whm-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--whm-mono);
+    font-size: 13px;
+}
+
+.whm-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--whm-border-light);
+}
+
+/* Rule Type Selector Cards */
+.whm-type-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.whm-type-card {
+    position: relative;
+    padding: 16px;
+    border: 2px solid var(--whm-border);
+    border-radius: 12px;
+    background: var(--whm-surface);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.whm-type-card:hover {
+    border-color: var(--whm-primary-light);
+    background: var(--whm-surface-2);
+}
+
+.whm-type-card.is-active {
+    border-color: var(--whm-primary);
+    background: var(--whm-primary-light);
+    box-shadow: 0 4px 12px rgba(var(--whm-primary-rgb), 0.1);
+}
+
+.whm-type-card input {
+    position: absolute;
+    opacity: 0;
+}
+
+.whm-type-card__icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.whm-type-card strong {
+    display: block;
+    font-size: 13px;
+    color: var(--whm-text);
+    margin-bottom: 4px;
+}
+
+.whm-type-card small {
+    display: block;
+    font-size: 11px;
+    color: var(--whm-text-muted);
+    line-height: 1.4;
+}
+
+.whm-type-card.is-active strong {
+    color: var(--whm-primary);
+}
+
+/* âââ Shortcodes Page ââââââââââââââââââââââââââââââââââââââââââ */
+.whm-shortcodes h2 {
+    margin-bottom: 4px !important;
+}
+
+.whm-shortcode-box {
+    margin: 18px 0 28px;
+    background: #1d2327;
+    border-radius: var(--whm-radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.whm-shortcode-box pre.whm-code {
+    font-family: var(--whm-mono);
+    font-size: 13px;
+    color: #a5f3fc;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.whm-shortcodes h3 {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    margin: 0 0 4px !important;
+    color: var(--whm-text) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Grid of shortcode copy cards */
+.whm-shortcode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.whm-shortcode-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: var(--whm-radius-sm);
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.whm-shortcode-card:hover {
+    border-color: var(--whm-primary);
+    box-shadow: 0 2px 8px rgba(var(--whm-primary-rgb), .1);
+}
+
+.whm-shortcode-card code {
+    font-family: var(--whm-mono);
+    font-size: 12px;
+    color: #1e40af;
+    background: #f0f9ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #bae6fd;
+    font-weight: 600;
+}
+
+.whm-copy-shortcode {
+    padding: 0 !important;
+    height: 34px !important;
+    width: 34px !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff !important;
+    border: 1px solid var(--whm-border) !important;
+    border-radius: 8px !important;
+    color: var(--whm-text-muted) !important;
+    transition: all 0.2s ease !important;
+}
+
+.whm-copy-shortcode:hover {
+    border-color: var(--whm-primary) !important;
+    color: var(--whm-primary) !important;
+    background: var(--whm-primary-light) !important;
+}
+
+.whm-copy-shortcode .dashicons {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 16px !important;
+    margin: 0 !important;
+}
+
+/* âââ Modal ââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whm-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(2px);
+}
+
+.whm-modal__box {
+    position: relative;
+    z-index: 1;
+    background: var(--whm-surface);
+    border-radius: var(--whm-radius);
+    box-shadow: var(--whm-shadow-md);
+    width: 520px;
+    max-width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.whm-modal__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--whm-border);
+    background: var(--whm-surface-2);
+}
+
+.whm-modal__head h3 {
+    margin: 0 !important;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.whm-modal__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--whm-text-muted);
+    padding: 2px 6px;
+    line-height: 1;
+    border-radius: 4px;
+    transition: background .15s, color .15s;
+}
+
+.whm-modal__close:hover {
+    background: var(--whm-border-light);
+    color: var(--whm-text);
+}
+
+.whm-modal__body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.whm-modal__foot {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--whm-border);
+    background: var(--whm-surface-2);
+}
+
+.whm-form--modal .whm-form-row {
+    margin-bottom: 14px;
+}
+
+/* âââ Spinner ââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-spinner {
+    visibility: hidden;
+}
+
+.whm-spinner.is-active {
+    visibility: visible;
+}
+
+/* âââ Screen reader ââââââââââââââââââââââââââââââââââââââââââââ */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* âââ Responsive âââââââââââââââââââââââââââââââââââââââââââââââ */
+@media (max-width: 1024px) {
+    .whm-admin-layout {
+        flex-direction: column;
+    }
+
+    .whm-sidebar {
+        width: 100%;
+        position: static;
+    }
+
+    .whm-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .whm-shortcode-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .whm-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .whm-rule-hook {
+        max-width: 180px;
+    }
+}
+
+/* âââ Rule Type Cards ââââââââââââââââââââââââââââââââââââââââââ */
+
+
+/* âââ Section Box ââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-section-box {
+    border: 1px solid var(--whm-border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 32px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.whm-section-box__head {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--whm-text);
+    margin: 0 0 24px !important;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f5f9;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* âââ Tag Picker âââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-tag-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.whm-tag-btn {
+    padding: 5px 12px;
+    font-size: 12px;
+    font-family: var(--whm-mono);
+    font-weight: 600;
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: var(--whm-radius-sm);
+    cursor: pointer;
+    color: var(--whm-text-muted);
+    transition: all .15s;
+}
+
+.whm-tag-btn:hover {
+    border-color: var(--whm-primary);
+    color: var(--whm-primary);
+    background: var(--whm-primary-light);
+}
+
+.whm-tag-btn.is-active {
+    background: var(--whm-primary);
+    border-color: var(--whm-primary);
+    color: #fff;
+}
+
+/* âââ Wrapper Preview ââââââââââââââââââââââââââââââââââââââââââ */
+.whm-wrapper-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #1d2327;
+    border-radius: var(--whm-radius-sm);
+    font-size: 12px;
+}
+
+.whm-wrapper-preview span {
+    color: #9ca3af;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.whm-wrapper-preview code {
+    font-family: var(--whm-mono);
+    font-size: 12px;
+    color: #a5f3fc;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* âââ Priority Presets âââââââââââââââââââââââââââââââââââââââââ */
+.whm-priority-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.whm-preset-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: var(--whm-mono);
+    font-weight: 700;
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--whm-text-muted);
+    transition: all .12s;
+}
+
+.whm-preset-btn:hover {
+    background: var(--whm-primary);
+    border-color: var(--whm-primary);
+    color: #fff;
+}
+
+/* âââ Priority Grid ââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-priority-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+/* âââ Field Hint âââââââââââââââââââââââââââââââââââââââââââââââ */
+.whm-field-hint {
+    font-size: 11px !important;
+    color: var(--whm-text-light) !important;
+    margin: 5px 0 0 !important;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .whm-type-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .whm-priority-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .whm-type-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

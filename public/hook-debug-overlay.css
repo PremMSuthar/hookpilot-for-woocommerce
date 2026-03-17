@@ -1,0 +1,367 @@
+/**
+ * WooCommerce Hook Manager – Debug Overlay Styles
+ *
+ * Visual hook markers inspired by WooCommerce's official hook diagram style.
+ * Each hook is shown as a dashed-border box with the hook name centered on
+ * the top border, using the WHM plugin's brand colors (purple/indigo).
+ *
+ * @package WHM
+ * @version 2.0.0
+ */
+
+/* ============================================================
+   CSS Variables – WHM Brand Colors
+   ============================================================ */
+:root {
+    --whm-purple:        #7c3aed;
+    --whm-indigo:        #4f46e5;
+    --whm-indigo-dark:   #4338ca;
+    --whm-indigo-light:  #e0e7ff;
+    --whm-indigo-bg:     rgba(79, 70, 229, 0.04);
+    --whm-border-dash:   rgba(79, 70, 229, 0.55);
+    --whm-label-bg:      #4f46e5;
+    --whm-label-color:   #ffffff;
+    --whm-compact-bg:    rgba(124, 58, 237, 0.08);
+    --whm-compact-border: rgba(124, 58, 237, 0.45);
+    --whm-font:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --whm-mono:          'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+}
+
+/* ============================================================
+   Area Hook Box – Wraps a full page section
+   (e.g. woocommerce_before_shop_loop, woocommerce_before_cart)
+   ============================================================ */
+.whm-area-box {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px dashed var(--whm-border-dash);
+    background: var(--whm-indigo-bg);
+    padding: 20px 12px 8px;
+    margin: 6px 0;
+    clear: both;
+    z-index: 9;
+}
+
+/* The centered hook name label on the top border */
+.whm-area-label {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: var(--whm-label-bg);
+    color: var(--whm-label-color);
+    font-family: var(--whm-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ============================================================
+   Inline Marker – Single-line bar for hooks inside product
+   cards and other compact contexts
+   ============================================================ */
+.whm-inline-marker {
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: transparent;
+    border-top: 1px dashed var(--whm-compact-border);
+    border-bottom: 1px dashed var(--whm-compact-border);
+    padding: 7px 0;
+    margin: 4px 0;
+    clear: both;
+    z-index: 9;
+    position: relative;
+}
+
+/* Centered label for inline markers */
+.whm-inline-label {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: var(--whm-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--whm-indigo);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+}
+
+/* ============================================================
+   Loop Item Box – Dashed border wrapping each product card
+   ============================================================ */
+
+/* We inject a wrapper class onto WooCommerce .product elements */
+.whm-loop-item-wrap {
+    position: relative !important;
+    border: 1.5px dashed var(--whm-compact-border) !important;
+    background: var(--whm-compact-bg) !important;
+    box-sizing: border-box !important;
+}
+
+/* ============================================================
+   Floating Panel (Hook List)
+   ============================================================ */
+#whm-debug-panel {
+    position: fixed;
+    bottom: 88px;
+    right: 24px;
+    z-index: 100000;
+    width: 340px;
+    max-height: 55vh;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(79, 70, 229, 0.18), 0 4px 16px rgba(0,0,0,0.10);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: var(--whm-font);
+    border: 1px solid rgba(79, 70, 229, 0.15);
+}
+
+#whm-debug-panel.whm-panel--open {
+    display: flex;
+}
+
+.whm-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 12px;
+    background: var(--whm-indigo);
+    color: #fff;
+    flex-shrink: 0;
+    border-radius: 16px 16px 0 0;
+}
+
+.whm-panel-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.whm-panel-title-icon {
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+}
+
+.whm-panel-count {
+    font-size: 11px;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.whm-panel-list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.whm-panel-list::-webkit-scrollbar {
+    width: 4px;
+}
+.whm-panel-list::-webkit-scrollbar-track {
+    background: #f8f9ff;
+}
+.whm-panel-list::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 4px;
+}
+
+.whm-panel-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #374151;
+    cursor: default;
+    transition: background 0.15s;
+}
+
+.whm-panel-item:hover {
+    background: #f0f0ff;
+    color: var(--whm-indigo);
+}
+
+.whm-panel-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--whm-indigo-light);
+    color: var(--whm-indigo);
+    font-size: 10px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.whm-panel-hook-name {
+    font-family: var(--whm-mono);
+    font-size: 11px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.whm-panel-cb-count {
+    font-size: 10px;
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   Floating Toggle Button
+   ============================================================ */
+#whm-debug-toggle-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100001;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: var(--whm-indigo);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
+    transition: background 0.2s, transform 0.15s;
+    font-family: var(--whm-font);
+}
+
+#whm-debug-toggle-btn:hover {
+    background: var(--whm-indigo-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.55);
+}
+
+#whm-debug-toggle-btn:active {
+    transform: translateY(0);
+}
+
+.whm-toggle-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.whm-toggle-label {
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   Rule Panel — list item layout
+   ============================================================ */
+
+/* Override base item for the rules layout */
+.whm-panel-item {
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* Stacks hook name + sub-label vertically */
+.whm-panel-rule-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Secondary label: callback name, wrapper class, etc. */
+.whm-rule-sub {
+    font-family: var(--whm-mono);
+    font-size: 10px;
+    color: var(--whm-indigo);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Right-side badges group */
+.whm-rule-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+/* Coloured rule-type pill */
+.whm-rule-type-badge {
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+/* Priority indicator (e.g. "p10" or "5 → 20") */
+.whm-rule-priority {
+    font-family: var(--whm-mono);
+    font-size: 9px;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+/* Empty-state row */
+.whm-panel-empty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 16px;
+    color: #9ca3af;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.whm-panel-empty-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
