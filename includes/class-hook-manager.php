@@ -333,7 +333,10 @@ class WHM_Hook_Manager {
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification -- already verified above.
-		$raw = isset( $_POST['setting'] ) ? $_POST['setting'] : array();
+		$raw = isset( $_POST['setting'] ) ? wp_unslash( $_POST['setting'] ) : array();
+		if ( ! is_array( $raw ) ) {
+			$raw = array();
+		}
 		// phpcs:enable
 
 		$setting = $this->sanitize_setting( $raw );
@@ -377,7 +380,10 @@ class WHM_Hook_Manager {
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification -- already verified.
-		$raw = isset( $_POST['setting'] ) ? $_POST['setting'] : array();
+		$raw = isset( $_POST['setting'] ) ? wp_unslash( $_POST['setting'] ) : array();
+		if ( ! is_array( $raw ) ) {
+			$raw = array();
+		}
 		$id  = isset( $raw['id'] ) ? (int) $raw['id'] : -1;
 		// phpcs:enable
 

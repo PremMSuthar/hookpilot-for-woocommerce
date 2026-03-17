@@ -283,7 +283,7 @@ function whm_status_label( $status ) {
 												<input type="number" id="whm-edit-priority-val" name="setting[priority]" class="whm-input whm-priority-input" value="10" min="0" max="9999" />
 												<div class="whm-priority-presets">
 													<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $p ) : ?>
-													<button type="button" class="whm-preset-btn" data-target="whm-edit-priority-val" data-val="<?php echo $p; ?>"><?php echo $p; ?></button>
+													<button type="button" class="whm-preset-btn" data-target="whm-edit-priority-val" data-val="<?php echo esc_attr( $p ); ?>"><?php echo esc_html( $p ); ?></button>
 													<?php endforeach; ?>
 												</div>
 											</div>
@@ -397,7 +397,7 @@ function whm_status_label( $status ) {
 									foreach ( $types as $val => $info ) : ?>
 									<label class="whm-type-card <?php echo $val === 'disable' ? 'is-active' : ''; ?>">
 										<input type="radio" name="setting[status]" value="<?php echo esc_attr( $val ); ?>" class="whm-rule-type-radio" <?php echo $val === 'disable' ? 'checked' : ''; ?>>
-										<span class="whm-type-card__icon"><?php echo $info[0]; ?></span>
+										<span class="whm-type-card__icon"><?php echo wp_kses_post( $info[0] ); ?></span>
 										<strong><?php echo esc_html( $info[1] ); ?></strong>
 										<small><?php echo esc_html( $info[2] ); ?></small>
 									</label>
@@ -440,7 +440,7 @@ function whm_status_label( $status ) {
 										<input type="number" id="whm-new-priority" name="setting[priority]" class="whm-input" value="10" min="0" max="9999" />
 										<div class="whm-priority-presets">
 											<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $p ) : ?>
-											<button type="button" class="whm-preset-btn" data-target="whm-new-priority" data-val="<?php echo $p; ?>"><?php echo $p; ?></button>
+											<button type="button" class="whm-preset-btn" data-target="whm-new-priority" data-val="<?php echo esc_attr( $p ); ?>"><?php echo esc_html( $p ); ?></button>
 											<?php endforeach; ?>
 										</div>
 									</div>
@@ -614,7 +614,7 @@ function whm_status_label( $status ) {
 			</div>
 
 			<div class="whm-sidebar-footer">
-				<p>&copy; <?php echo date('Y'); ?> WooCommerce Hook Manager</p>
+				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> WooCommerce Hook Manager</p>
 			</div>
 		</aside>
 

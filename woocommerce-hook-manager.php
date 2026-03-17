@@ -1,15 +1,14 @@
 <?php
 /**
- * Plugin Name: WooCommerce Hook Manager
- * Plugin URI:  https://example.com/woocommerce-hook-manager
+ * Plugin Name: Hook Manager for WooCommerce
+ * Plugin URI:  https://github.com/prem/woocommerce-hook-manager
  * Description: Manage WooCommerce hooks visually. Inspect hooks, change priority, add wrappers, disable callbacks, and insert custom content using a GUI.
  * Version:     1.0.0
  * Author:      Developer Tools
- * Author URI:  https://example.com
+ * Author URI:  https://github.com/prem
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: woocommerce-hook-manager
- * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -63,7 +62,7 @@ function whm_woocommerce_missing_notice() {
 			echo wp_kses_post(
 				sprintf(
 					/* translators: %s: WooCommerce plugin link */
-					__( '<strong>WooCommerce Hook Manager</strong> requires %s to be installed and active.', 'woocommerce-hook-manager' ),
+					__( '<strong>Hook Manager for WooCommerce</strong> requires %s to be installed and active.', 'woocommerce-hook-manager' ),
 					'<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>'
 				)
 			);
@@ -81,13 +80,6 @@ function whm_init() {
 		add_action( 'admin_notices', 'whm_woocommerce_missing_notice' );
 		return;
 	}
-
-	// Load text domain for translations.
-	load_plugin_textdomain(
-		'woocommerce-hook-manager',
-		false,
-		dirname( WHM_PLUGIN_BASENAME ) . '/languages'
-	);
 
 	// Require core class files.
 	require_once WHM_PLUGIN_DIR . 'includes/class-plugin-loader.php';

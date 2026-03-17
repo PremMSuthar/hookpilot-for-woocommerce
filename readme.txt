@@ -1,14 +1,14 @@
-=== WooCommerce Hook Manager ===
+=== Hook Manager for WooCommerce ===
 Contributors: prem
 Tags: woocommerce, hooks, developer-tools, actions, filters
 Requires at least: 5.8
-Tested up to: 6.4
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Manage WooCommerce hooks visually with a premium, modern interface. Inspect callbacks, change priorities, add HTML wrappers, and inject custom content directly from your WordPress admin.
+Manage hooks visually. Inspect callbacks, change priorities, add HTML wrappers, and inject custom content directly for WooCommerce.
 
 == Description ==
 
