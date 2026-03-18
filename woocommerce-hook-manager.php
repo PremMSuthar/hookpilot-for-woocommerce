@@ -85,7 +85,6 @@ function whm_init() {
 	require_once WHM_PLUGIN_DIR . 'includes/class-plugin-loader.php';
 	require_once WHM_PLUGIN_DIR . 'includes/class-hook-inspector.php';
 	require_once WHM_PLUGIN_DIR . 'includes/class-hook-manager.php';
-	require_once WHM_PLUGIN_DIR . 'includes/class-shortcode-manager.php';
 	require_once WHM_PLUGIN_DIR . 'includes/class-admin-page.php';
 	require_once WHM_PLUGIN_DIR . 'includes/class-export-manager.php';
 

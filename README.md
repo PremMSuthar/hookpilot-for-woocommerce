@@ -18,7 +18,6 @@ No more guessing hook names or digging through WooCommerce templates! Simply ena
   * **Disable Adjustments:** Prevent specific hook callbacks from running altogether.
 * **Comprehensive Hook Manager:** A central admin dashboard (`Woo Hooks > Hook Manager`) to review, edit, toggle, or delete all your custom rules in a beautiful, organized table.
 * **Import/Export Engine:** Easily migrate your hook configurations between staging and production environments gracefully.
-* **Shortcode Support:** Includes the `[whm_hook]` shortcode to manually drop specific hooks into page builders or classic content areas.
 
 ---
 
@@ -40,16 +39,7 @@ To start visualizing hooks, toggle the **"WHM Debug"** switch located in your Wo
    * **Priority:** Set the execution priority (lower numbers run earlier).
 5. Click **Save Rule**.
 
-### 3. Using the Shortcode
-You can manually output standard hooks inside any page builder, widget, or Gutenberg block using the included shortcode:
-```text
-[whm_hook name="woocommerce_after_single_product_summary" priority="10" wrapper_class="my-custom-wrapper"]
-```
-* **`name`** *(required)*: The exact WooCommerce hook name.
-* **`priority`** *(optional)*: The hook priority. Default is `10`.
-* **`wrapper_class`** *(optional)*: Add a custom CSS class to the generated wrapper `<div>`.
 
----
 
 ## ⚙️ Administration & Settings
 
@@ -76,6 +66,11 @@ This plugin does not override WooCommerce templates. It uses standard WordPress 
 * WordPress 6.0+
 * WooCommerce 7.0+
 * PHP 7.4+
+
+---
+
+## 🔮 Future Scope
+* **Shortcode Generator (`[whm_hook]`)**: A future update will allow you to generate shortcodes to manually drop specific WooCommerce hooks (like the Add to Cart button or product summaries) into page builders (Elementor, Divi) or Gutenberg blocks on any page or post. This will include special `product_id` context mocking to safely render WooCommerce data outside of product pages!
 
 ---
 

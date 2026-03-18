@@ -86,7 +86,6 @@ function whm_status_label( $status ) {
 					'inspector'  => array( 'label' => __( 'Hook Inspector', 'woocommerce-hook-manager' ), 'slug' => 'whm-inspector', 'icon' => 'search' ),
 					'manager'    => array( 'label' => __( 'Hook Manager', 'woocommerce-hook-manager' ), 'slug' => 'whm-manager', 'icon' => 'sort' ),
 					'add_hook'   => array( 'label' => __( '+ Add Rule', 'woocommerce-hook-manager' ), 'slug' => 'whm-add-hook', 'icon' => 'edit' ),
-					'shortcodes' => array( 'label' => __( 'Shortcodes', 'woocommerce-hook-manager' ), 'slug' => 'whm-shortcodes', 'icon' => 'editor-code' ),
 					'import_export' => array( 'label' => __( 'Import/Export', 'woocommerce-hook-manager' ), 'slug' => 'whm-import-export', 'icon' => 'migrate' ),
 				);
 				foreach ( $tabs as $key => $tab ) : ?>
@@ -524,90 +523,6 @@ function whm_status_label( $status ) {
 
 				<?php
 				/* ================================================================
-				 * VIEW: SHORTCODES
-				 * ============================================================== */
-				elseif ( 'shortcodes' === $view ) : ?>
-					<div class="whm-shortcodes">
-						<h2><?php esc_html_e( 'Shortcodes Reference', 'woocommerce-hook-manager' ); ?></h2>
-						<p><?php esc_html_e( 'Render WooCommerce hooks directly inside your page builders or Gutenberg content.', 'woocommerce-hook-manager' ); ?></p>
-						
-						<div class="whm-shortcode-box">
-							<pre class="whm-code">[whm_hook name="woocommerce_after_main_content" priority="10" wrapper_class="my-wrapper"]</pre>
-						</div>
-
-						<!-- Attributes Reference Table -->
-						<div class="whm-section-box" style="margin-top: 24px;">
-							<h3 class="whm-section-box__head"><?php esc_html_e( 'Available Attributes', 'woocommerce-hook-manager' ); ?></h3>
-							<table class="whm-attr-table">
-								<thead>
-									<tr>
-										<th><?php esc_html_e( 'Attribute', 'woocommerce-hook-manager' ); ?></th>
-										<th><?php esc_html_e( 'Required', 'woocommerce-hook-manager' ); ?></th>
-										<th><?php esc_html_e( 'Default', 'woocommerce-hook-manager' ); ?></th>
-										<th><?php esc_html_e( 'Description', 'woocommerce-hook-manager' ); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><code>name</code></td>
-										<td><span class="whm-badge whm-badge--disable" style="font-size:9px;padding:2px 6px;"><?php esc_html_e( 'Required', 'woocommerce-hook-manager' ); ?></span></td>
-										<td>—</td>
-										<td><?php esc_html_e( 'The WooCommerce hook name to execute, e.g. woocommerce_after_main_content', 'woocommerce-hook-manager' ); ?></td>
-									</tr>
-									<tr>
-										<td><code>priority</code></td>
-										<td><span style="color:var(--whm-text-muted);font-size:12px;"><?php esc_html_e( 'Optional', 'woocommerce-hook-manager' ); ?></span></td>
-										<td><code>10</code></td>
-										<td><?php esc_html_e( 'The priority at which to execute the hook action. Lower numbers run first.', 'woocommerce-hook-manager' ); ?></td>
-									</tr>
-									<tr>
-										<td><code>wrapper_class</code></td>
-										<td><span style="color:var(--whm-text-muted);font-size:12px;"><?php esc_html_e( 'Optional', 'woocommerce-hook-manager' ); ?></span></td>
-										<td>—</td>
-										<td><?php esc_html_e( 'CSS class(es) to add to a wrapping <div> around the hook output.', 'woocommerce-hook-manager' ); ?></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<!-- Usage Examples -->
-						<div class="whm-section-box" style="margin-top: 0;">
-							<h3 class="whm-section-box__head"><?php esc_html_e( 'Usage Examples', 'woocommerce-hook-manager' ); ?></h3>
-							<div class="whm-example-list">
-								<div class="whm-example-item">
-									<span class="whm-example-label"><?php esc_html_e( 'Basic usage (name only):', 'woocommerce-hook-manager' ); ?></span>
-									<code>[whm_hook name="woocommerce_after_single_product"]</code>
-								</div>
-								<div class="whm-example-item">
-									<span class="whm-example-label"><?php esc_html_e( 'With custom priority:', 'woocommerce-hook-manager' ); ?></span>
-									<code>[whm_hook name="woocommerce_before_cart" priority="5"]</code>
-								</div>
-								<div class="whm-example-item">
-									<span class="whm-example-label"><?php esc_html_e( 'With wrapper class:', 'woocommerce-hook-manager' ); ?></span>
-									<code>[whm_hook name="woocommerce_before_shop_loop" wrapper_class="custom-section"]</code>
-								</div>
-								<div class="whm-example-item">
-									<span class="whm-example-label"><?php esc_html_e( 'All attributes:', 'woocommerce-hook-manager' ); ?></span>
-									<code>[whm_hook name="woocommerce_sidebar" priority="20" wrapper_class="sidebar-wrap"]</code>
-								</div>
-							</div>
-						</div>
-
-						<h3 style="margin-top: 30px;"><?php esc_html_e( 'Currently Tracked Hooks', 'woocommerce-hook-manager' ); ?></h3>
-						<p class="description"><?php esc_html_e( 'Copy and paste any of these active hook shortcodes into your content.', 'woocommerce-hook-manager' ); ?></p>
-						
-						<div class="whm-shortcode-grid">
-							<?php foreach ( array_slice( $hook_list, 0, 20 ) as $h ) : ?>
-							<div class="whm-shortcode-card">
-								<code>[whm_hook name="<?php echo esc_attr( $h ); ?>"]</code>
-								<button class="whm-btn whm-btn--sm whm-btn--outline whm-copy-shortcode"
-									data-shortcode="[whm_hook name='<?php echo esc_js( $h ); ?>']">
-									<span class="dashicons dashicons-clipboard"></span>
-								</button>
-							</div>
-							<?php endforeach; ?>
-						</div>
-					</div>
 
 				<?php
 				/* ================================================================
@@ -685,19 +600,8 @@ function whm_status_label( $status ) {
 
 		<!-- Sidebar -->
 		<aside class="whm-sidebar">
-			<div class="whm-sidebar-box">
-				<h3><?php esc_html_e( 'Quick Stats', 'woocommerce-hook-manager' ); ?></h3>
-				<div class="whm-mini-stats">
-					<div class="whm-mini-stat">
-						<span class="whm-stat-val"><?php echo esc_html( count( $settings ) ); ?></span>
-						<span class="whm-stat-lbl"><?php esc_html_e( 'Active Rules', 'woocommerce-hook-manager' ); ?></span>
-					</div>
-					<div class="whm-mini-stat">
-						<span class="whm-stat-val"><?php echo esc_html( count( $hook_list ) ); ?></span>
-						<span class="whm-stat-lbl"><?php esc_html_e( 'Tracked Hooks', 'woocommerce-hook-manager' ); ?></span>
-					</div>
-				</div>
-			</div>
+
+
 
 			<div class="whm-sidebar-box">
 				<h3><?php esc_html_e( 'Quick Settings', 'woocommerce-hook-manager' ); ?></h3>

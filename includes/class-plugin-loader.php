@@ -58,9 +58,6 @@ class WHM_Plugin_Loader {
 		$manager = new WHM_Hook_Manager();
 		$manager->register_hooks();
 
-		// Shortcode system.
-		$shortcodes = new WHM_Shortcode_Manager();
-		$shortcodes->register_hooks();
 
 		// Hook inspector (AJAX data provider for the admin panel).
 		$inspector = new WHM_Hook_Inspector();
