@@ -1,5 +1,5 @@
 === Hook Manager for WooCommerce ===
-Contributors: prem
+Contributors: premsutharm, hdkothari81, wpjitendra
 Tags: woocommerce, hooks, developer-tools, actions, filters
 Requires at least: 5.8
 Tested up to: 6.9

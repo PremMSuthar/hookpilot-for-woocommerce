@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Hook Manager for WooCommerce
- * Plugin URI:  https://github.com/prem/hook-manager-for-woocommerce
+ * Plugin URI:  https://github.com/premsutharm/hook-manager-for-woocommerce
  * Description: Manage WooCommerce hooks visually. Inspect hooks, change priority, add wrappers, disable callbacks, and insert custom content using a GUI.
  * Version:     1.0.0
- * Author:      Developer Tools
- * Author URI:  https://github.com/prem
+ * Author:      premsutharm, hdkothari81, wpjitendra
+ * Author URI:  https://github.com/premsutharm
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: hook-manager-for-woocommerce
