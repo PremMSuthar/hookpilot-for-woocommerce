@@ -33,9 +33,11 @@
             whm.bindEditModal();
             whm.bindDeleteButtons();
             whm.bindDebugToggle();
+            whm.bindUninstallToggle();
             whm.bindExport();
             whm.bindCopyButtons();
             whm.bindResetSettings();
+            whm.bindImportExport();
         },
 
         /* ----------------------------------------------------------------
@@ -69,7 +71,7 @@
                     type: 'POST',
                     data: { action: 'whm_get_hooks', nonce: whmData.nonce },
                     success: function ( response ) {
-                        $btn.prop( 'disabled', false ).text( 'Reload Hooks' );
+                        $btn.prop( 'disabled', false ).text( whmData.strings.reload_hooks );
                         if ( response.success ) {
                             whm.renderInspectorTable( response.data );
                         } else {
@@ -77,7 +79,7 @@
                         }
                     },
                     error: function () {
-                        $btn.prop( 'disabled', false ).text( 'Load Hooks' );
+                        $btn.prop( 'disabled', false ).text( whmData.strings.load_hooks );
                         $wrap.html( '<p class="whm-placeholder">' + whmData.strings.error + '</p>' );
                     }
                 } );
@@ -524,13 +526,35 @@
 
             $toggles.on( 'change', function () {
                 var enabled = $( this ).is( ':checked' ) ? 1 : 0;
-                // Keep both toggles in sync visually
                 $toggles.prop( 'checked', enabled === 1 );
 
-                $.post( whmData.ajax_url, { action: 'whm_toggle_debug', nonce: whmData.nonce, enabled: enabled }, function ( response ) {
+                $.post( whmData.ajax_url, { 
+                    action: 'whm_toggle_debug', 
+                    nonce: whmData.nonce, 
+                    enabled: enabled 
+                }, function ( response ) {
                     if ( response.success ) {
-                        // Reload the page to apply/remove the debug overlays.
                         window.location.reload();
+                    }
+                } );
+            } );
+        },
+
+        bindUninstallToggle: function () {
+            $( document ).on( 'change', '#whm-uninstall-cleanup-toggle', function () {
+                var enabled = $( this ).is( ':checked' ) ? 1 : 0;
+                var $lbl = $( this ).closest( '.whm-sidebar-setting' );
+                
+                $lbl.css( 'opacity', '0.5' );
+                
+                $.post( whmData.ajax_url, { 
+                    action: 'whm_toggle_uninstall_cleanup', 
+                    nonce: whmData.nonce, 
+                    enabled: enabled 
+                }, function( response ) {
+                    $lbl.css( 'opacity', '1' );
+                    if ( response.success ) {
+                        // Optional: show a small toast or notice
                     }
                 } );
             } );
@@ -614,8 +638,8 @@
          * ---------------------------------------------------------------- */
         bindCopyButtons: function () {
             // Legacy copy buttons (.whm-copy-btn) and new shortcode cards (.whm-copy-shortcode)
-            $( document ).on( 'click', '.whm-copy-btn, .whm-copy-shortcode', function () {
-                var text = $( this ).data( 'copy' ) || $( this ).data( 'shortcode' ) || '';
+            $( document ).on( 'click', '.whm-copy-btn, .whm-copy-shortcode, #whm-copy-json', function () {
+                var text = ( $( this ).attr( 'id' ) === 'whm-copy-json' ) ? $( '#whm-export-json' ).val() : ( $( this ).data( 'copy' ) || $( this ).data( 'shortcode' ) || '' );
                 if ( ! text ) { return; }
                 var $btn = $( this );
                 var origHtml = $btn.html();
@@ -634,6 +658,53 @@
                 }
             } );
         },
+
+        /* ----------------------------------------------------------------
+         * Import / Export JSON
+         * ---------------------------------------------------------------- */
+        bindImportExport: function () {
+            var $importBtn = $( '#whm-process-import' );
+            if ( ! $importBtn.length ) { return; }
+
+            $importBtn.on( 'click', function () {
+                var json = $( '#whm-import-json' ).val().trim();
+                
+                if ( ! json ) {
+                    alert( 'Please paste JSON data first.' );
+                    return;
+                }
+
+                if ( ! window.confirm( 'This will DELETE all current rules and replace them with the imported ones. Continue?' ) ) {
+                    return;
+                }
+
+                $importBtn.prop( 'disabled', true ).text( 'Importing...' );
+
+                $.ajax( {
+                    url:  whmData.ajax_url,
+                    type: 'POST',
+                    data: { 
+                        action: 'whm_import_json', 
+                        nonce:  whmData.nonce, 
+                        json:   json 
+                    },
+                    success: function ( response ) {
+                        if ( response.success ) {
+                            alert( response.data.message );
+                            window.location.href = whmData.admin_url + 'page=whm-manager';
+                        } else {
+                            alert( 'Error: ' + response.data.message );
+                            $importBtn.prop( 'disabled', false ).text( 'Import Rules' );
+                        }
+                    },
+                    error: function () {
+                        alert( 'A server error occurred during import.' );
+                        $importBtn.prop( 'disabled', false ).text( 'Import Rules' );
+                    }
+                } );
+            } );
+        },
+
 
         /* ----------------------------------------------------------------
          * HTML escape utility

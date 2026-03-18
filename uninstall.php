@@ -13,6 +13,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// Delete plugin options.
-delete_option( 'whm_hook_settings' );
-delete_option( 'whm_debug_mode' );
+// Only clean up if the user has opted in.
+if ( get_option( 'whm_uninstall_cleanup', 0 ) ) {
+	// Delete plugin options.
+	delete_option( 'whm_hook_settings' );
+	delete_option( 'whm_debug_mode' );
+	delete_option( 'whm_uninstall_cleanup' );
+}

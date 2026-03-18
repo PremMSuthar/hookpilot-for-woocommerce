@@ -82,18 +82,21 @@ class WHM_Export_Manager {
 					break;
 
 				case 'wrapper':
-					$wrapper_start = isset( $setting['wrapper_start'] ) ? $setting['wrapper_start'] : '';
-					$wrapper_end   = isset( $setting['wrapper_end'] ) ? $setting['wrapper_end'] : '';
-					$lines[]       = sprintf(
+					$tag   = ! empty( $setting['wrapper_tag'] ) ? $setting['wrapper_tag'] : 'div';
+					$class = ! empty( $setting['wrapper_class'] ) ? $setting['wrapper_class'] : '';
+					$attrs = ! empty( $setting['wrapper_attrs'] ) ? $setting['wrapper_attrs'] : '';
+					$open  = '<' . $tag . ( $class ? ' class="' . $class . '"' : '' ) . ( $attrs ? ' ' . $attrs : '' ) . '>';
+					$close = '</' . $tag . '>';
+					$lines[] = sprintf(
 						"add_action( '%s', function() { echo '%s'; }, %d );",
 						$hook,
-						addslashes( $wrapper_start ),
+						addslashes( $open ),
 						( $priority - 1 )
 					);
 					$lines[] = sprintf(
 						"add_action( '%s', function() { echo '%s'; }, PHP_INT_MAX );",
 						$hook,
-						addslashes( $wrapper_end )
+						addslashes( $close )
 					);
 					break;
 

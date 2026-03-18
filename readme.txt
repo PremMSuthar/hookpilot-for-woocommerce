@@ -2,7 +2,7 @@
 Contributors: prem
 Tags: woocommerce, hooks, developer-tools, actions, filters
 Requires at least: 5.8
-Tested up to: 6.9
+Tested up to: 6.7
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -12,7 +12,7 @@ Manage hooks visually. Inspect callbacks, change priorities, add HTML wrappers, 
 
 == Description ==
 
-**WooCommerce Hook Manager** is a powerful developer tool designed to simplify the customization of WooCommerce stores. Instead of digging through template files or writing custom PHP to modify hook priorities and outputs, this plugin provides a clean, visual interface to manage everything.
+**Hook Manager for WooCommerce** is a powerful developer tool designed to simplify the customization of WooCommerce stores. Instead of digging through template files or writing custom PHP to modify hook priorities and outputs, this plugin provides a clean, visual interface to manage everything.
 
 Built with a premium, responsive design, it allows you to:
 

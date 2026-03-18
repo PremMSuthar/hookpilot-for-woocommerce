@@ -52,6 +52,8 @@ class WHM_Hook_Manager {
 		add_action( 'wp_ajax_whm_update_setting', array( $this, 'ajax_update_setting' ) );
 		add_action( 'wp_ajax_whm_delete_setting', array( $this, 'ajax_delete_setting' ) );
 		add_action( 'wp_ajax_whm_toggle_debug', array( $this, 'ajax_toggle_debug' ) );
+		add_action( 'wp_ajax_whm_toggle_uninstall_cleanup', array( $this, 'ajax_toggle_uninstall_cleanup' ) );
+		add_action( 'wp_ajax_whm_import_json', array( $this, 'ajax_import_json' ) );
 		add_action( 'wp_ajax_whm_get_hook_callbacks', array( $this, 'ajax_get_hook_callbacks' ) );
 	}
 
@@ -315,8 +317,20 @@ class WHM_Hook_Manager {
 			'whm-debug-overlay',
 			'whmDebugData',
 			array(
-				'hooks' => $hook_data,
-				'rules' => $active_rules,
+				'hooks'   => $hook_data,
+				'rules'   => $active_rules,
+				'strings' => array(
+					'panel_title'  => esc_html__( 'Active WHM Rules', 'woocommerce-hook-manager' ),
+					'rule'         => esc_html__( 'rule', 'woocommerce-hook-manager' ),
+					'rules'        => esc_html__( 'rules', 'woocommerce-hook-manager' ),
+					'no_rules'     => esc_html__( 'No active rules configured.', 'woocommerce-hook-manager' ),
+					'disabled'     => esc_html__( 'Disabled', 'woocommerce-hook-manager' ),
+					'priority'     => esc_html__( 'Priority', 'woocommerce-hook-manager' ),
+					'wrapper'      => esc_html__( 'Wrapper', 'woocommerce-hook-manager' ),
+					'custom_html'  => esc_html__( 'Custom HTML', 'woocommerce-hook-manager' ),
+					'shortcode'    => esc_html__( 'Shortcode', 'woocommerce-hook-manager' ),
+					'active'       => esc_html__( 'Active', 'woocommerce-hook-manager' ),
+				),
 			)
 		);
 
@@ -465,6 +479,71 @@ class WHM_Hook_Manager {
 	}
 
 	/**
+	 * AJAX: Toggle the uninstall cleanup flag.
+	 */
+	public function ajax_toggle_uninstall_cleanup() {
+		check_ajax_referer( 'whm_nonce', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+		}
+
+		// phpcs:disable WordPress.Security.NonceVerification
+		$enabled = isset( $_POST['enabled'] ) ? (int) $_POST['enabled'] : 0;
+		// phpcs:enable
+
+		update_option( 'whm_uninstall_cleanup', $enabled ? 1 : 0 );
+
+		wp_send_json_success( array( 'uninstall_cleanup' => $enabled ) );
+	}
+
+	/**
+	 * AJAX: Import settings from a JSON string.
+	 */
+	public function ajax_import_json() {
+		check_ajax_referer( 'whm_nonce', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+		}
+
+		// phpcs:disable WordPress.Security.NonceVerification
+		$json = isset( $_POST['json'] ) ? wp_unslash( $_POST['json'] ) : '';
+		// phpcs:enable
+
+		if ( empty( $json ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'No JSON data provided.', 'woocommerce-hook-manager' ) ) );
+		}
+
+		$data = json_decode( $json, true );
+
+		if ( ! is_array( $data ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid JSON format.', 'woocommerce-hook-manager' ) ) );
+		}
+
+		$sanitized_settings = array();
+		foreach ( $data as $row ) {
+			if ( empty( $row['hook_name'] ) ) {
+				continue;
+			}
+			$sanitized_settings[] = $this->sanitize_setting( $row );
+		}
+
+		// Update indices to be sequential based on the new array order.
+		foreach ( $sanitized_settings as $index => &$setting ) {
+			$setting['id'] = $index;
+		}
+
+		update_option( WHM_OPTION_KEY, $sanitized_settings );
+
+		wp_send_json_success( array(
+			'message' => esc_html__( 'Settings imported successfully.', 'woocommerce-hook-manager' ),
+			'count'   => count( $sanitized_settings ),
+		) );
+	}
+
+
+	/**
 	 * Sanitize a raw setting array from POST data.
 	 *
 	 * @param  array $raw Raw POST data.
@@ -477,6 +556,7 @@ class WHM_Hook_Manager {
 
 		return array(
 			'id'                => isset( $raw['id'] ) ? (int) $raw['id'] : - 1,
+			'rule_title'        => isset( $raw['rule_title'] ) ? sanitize_text_field( wp_unslash( $raw['rule_title'] ) ) : '',
 			'hook_name'         => isset( $raw['hook_name'] ) ? sanitize_text_field( wp_unslash( $raw['hook_name'] ) ) : '',
 			'callback_name'     => isset( $raw['callback_name'] ) ? sanitize_text_field( wp_unslash( $raw['callback_name'] ) ) : '',
 			'priority'          => isset( $raw['priority'] ) ? (int) $raw['priority'] : 10,

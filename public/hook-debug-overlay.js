@@ -305,8 +305,8 @@
      */
     function makeInlineMarker( hookName ) {
         var $bar   = $( '<div class="whm-inline-marker"></div>' ).attr( 'data-hook', hookName );
-        var $label = $( '<span class="whm-inline-label"></span>' ).text( hookName );
-        $bar.append( $label );
+        var $text  = $( '<span class="whm-inline-text"></span>' ).text( hookName );
+        $bar.append( $text );
         return $bar;
     }
 
@@ -325,10 +325,60 @@
        ============================================================ */
     var mappedHooks = []; // { name, count } – for panel list
 
+    /**
+     * Check if the current page is a WooCommerce page.
+     * Uses body classes added by WooCommerce.
+     */
+    var WC_BODY_CLASSES = [
+        'woocommerce',
+        'woocommerce-page',
+        'single-product',
+        'woocommerce-cart',
+        'woocommerce-checkout',
+        'woocommerce-account',
+        'post-type-archive-product',
+        'tax-product_cat',
+        'tax-product_tag'
+    ];
+
+    function isWooCommercePage() {
+        // 1. Strict check for official WC page body classes
+        for ( var i = 0; i < WC_BODY_CLASSES.length; i++ ) {
+            if ( document.body.classList && document.body.classList.contains( WC_BODY_CLASSES[i] ) ) {
+                return true;
+            }
+        }
+        
+        // 2. Check if there are ANY actual WooCommerce products/elements on the page
+        // This ensures hooks display on a homepage using [products] shortcodes 
+        // even if the body lacks the specific WC page classes.
+        if ( $( '.woocommerce, .woocommerce-page, .products, .product' ).length > 0 ) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * Hooks that should ONLY render on WooCommerce pages (page-level wrappers).
+     * These use broad selectors like .site-main that exist on every page,
+     * so they must be restricted to WC pages to avoid showing on blogs etc.
+     */
+    var WC_ONLY_HOOKS = [
+        'woocommerce_before_main_content',
+        'woocommerce_after_main_content',
+        'woocommerce_sidebar'
+    ];
+
     function renderHooks() {
         var hooksData = whmDebugData.hooks;
+        var isWCPage  = isWooCommercePage();
 
         $.each( HOOK_MAP, function ( hookName, config ) {
+            // Skip page-level hooks on non-WooCommerce pages (e.g. blog)
+            if ( !isWCPage && WC_ONLY_HOOKS.indexOf( hookName ) !== -1 ) {
+                return; // continue to next hook
+            }
             // Only render if the hook actually has callbacks (exists in data).
             var callbacks = hooksData[ hookName ];
             // We still render the placeholder even if there are 0 callbacks,
@@ -388,12 +438,12 @@
      * Human-readable label + colour for each rule status/type.
      */
     var RULE_TYPE_META = {
-        disable:        { label: 'Disabled',      color: '#ef4444' },
-        priority:       { label: 'Priority',      color: '#f59e0b' },
-        wrapper:        { label: 'Wrapper',       color: '#8b5cf6' },
-        custom_content: { label: 'Custom HTML',   color: '#06b6d4' },
-        shortcode:      { label: 'Shortcode',     color: '#10b981' },
-        active:         { label: 'Active',        color: '#4f46e5' }
+        disable:        { label: whmDebugData.strings.disabled,    color: '#ef4444' },
+        priority:       { label: whmDebugData.strings.priority,    color: '#f59e0b' },
+        wrapper:        { label: whmDebugData.strings.wrapper,     color: '#8b5cf6' },
+        custom_content: { label: whmDebugData.strings.custom_html, color: '#06b6d4' },
+        shortcode:      { label: whmDebugData.strings.shortcode,   color: '#10b981' },
+        active:         { label: whmDebugData.strings.active,      color: '#4f46e5' }
     };
 
     function getRuleTypeMeta( status ) {
@@ -442,9 +492,9 @@
                 '<div class="whm-panel-header">' +
                     '<span class="whm-panel-title">' +
                         '<span class="whm-panel-title-icon">⚙️</span>' +
-                        'Active WHM Rules' +
+                        whmDebugData.strings.panel_title +
                     '</span>' +
-                    '<span class="whm-panel-count">' + count + ( count === 1 ? ' rule' : ' rules' ) + '</span>' +
+                    '<span class="whm-panel-count">' + count + ' ' + ( count === 1 ? whmDebugData.strings.rule : whmDebugData.strings.rules ) + '</span>' +
                 '</div>' +
                 '<ul class="whm-panel-list" id="whm-panel-list"></ul>' +
             '</div>'
@@ -456,7 +506,7 @@
             $list.append(
                 '<li class="whm-panel-empty">' +
                     '<span class="whm-panel-empty-icon">📋</span>' +
-                    '<span>No active rules configured.</span>' +
+                    '<span>' + whmDebugData.strings.no_rules + '</span>' +
                 '</li>'
             );
         }

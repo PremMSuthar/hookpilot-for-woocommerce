@@ -75,6 +75,12 @@ class WHM_Admin_Page {
 				'slug'   => 'whm-shortcodes',
 				'cb'     => array( $this, 'render_shortcodes' ),
 			),
+			array(
+				'title'  => esc_html__( 'Import/Export', 'woocommerce-hook-manager' ),
+				'label'  => esc_html__( 'Import/Export', 'woocommerce-hook-manager' ),
+				'slug'   => 'whm-import-export',
+				'cb'     => array( $this, 'render_import_export' ),
+			),
 		);
 
 		foreach ( $subpages as $page ) {
@@ -101,6 +107,7 @@ class WHM_Admin_Page {
 			'woo-hook-manager_page_whm-manager',
 			'woo-hook-manager_page_whm-add-hook',
 			'woo-hook-manager_page_whm-shortcodes',
+			'woo-hook-manager_page_whm-import-export',
 		);
 
 		if ( ! in_array( $hook, $whm_pages, true ) ) {
@@ -140,6 +147,8 @@ class WHM_Admin_Page {
 					'update'         => esc_html__( 'Update Rule', 'woocommerce-hook-manager' ),
 					'debug_enabled'  => esc_html__( 'Debug mode enabled.', 'woocommerce-hook-manager' ),
 					'debug_disabled' => esc_html__( 'Debug mode disabled.', 'woocommerce-hook-manager' ),
+					'reload_hooks'   => esc_html__( 'Reload Hooks', 'woocommerce-hook-manager' ),
+					'load_hooks'     => esc_html__( 'Load Hooks', 'woocommerce-hook-manager' ),
 				),
 			)
 		);
@@ -324,14 +333,22 @@ class WHM_Admin_Page {
 		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
-	/**
-	 * Shortcodes reference page.
-	 */
 	public function render_shortcodes() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'shortcodes';
+		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+	}
+
+	/**
+	 * Import/Export page.
+	 */
+	public function render_import_export() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$view = 'import_export';
 		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 }

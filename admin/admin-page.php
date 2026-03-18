@@ -38,13 +38,13 @@ $export_manager = new WHM_Export_Manager();
 // Helper: human-readable status label.
 function whm_status_label( $status ) {
 	$map = array(
-		'disable'        => 'Disable Callback',
-		'priority'       => 'Change Priority',
-		'wrapper'        => 'HTML Wrapper',
-		'custom_content' => 'Custom Content',
-		'shortcode'      => 'Shortcode',
-		'active'         => 'Active',
-		'inactive'       => 'Inactive',
+		'disable'        => __( 'Disable Callback', 'woocommerce-hook-manager' ),
+		'priority'       => __( 'Change Priority', 'woocommerce-hook-manager' ),
+		'wrapper'        => __( 'HTML Wrapper', 'woocommerce-hook-manager' ),
+		'custom_content' => __( 'Custom Content', 'woocommerce-hook-manager' ),
+		'shortcode'      => __( 'Shortcode', 'woocommerce-hook-manager' ),
+		'active'         => __( 'Active', 'woocommerce-hook-manager' ),
+		'inactive'       => __( 'Inactive', 'woocommerce-hook-manager' ),
 	);
 	return isset( $map[ $status ] ) ? $map[ $status ] : ucfirst( str_replace( '_', ' ', $status ) );
 }
@@ -87,6 +87,7 @@ function whm_status_label( $status ) {
 					'manager'    => array( 'label' => __( 'Hook Manager', 'woocommerce-hook-manager' ), 'slug' => 'whm-manager', 'icon' => 'sort' ),
 					'add_hook'   => array( 'label' => __( '+ Add Rule', 'woocommerce-hook-manager' ), 'slug' => 'whm-add-hook', 'icon' => 'edit' ),
 					'shortcodes' => array( 'label' => __( 'Shortcodes', 'woocommerce-hook-manager' ), 'slug' => 'whm-shortcodes', 'icon' => 'editor-code' ),
+					'import_export' => array( 'label' => __( 'Import/Export', 'woocommerce-hook-manager' ), 'slug' => 'whm-import-export', 'icon' => 'migrate' ),
 				);
 				foreach ( $tabs as $key => $tab ) : ?>
 					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $tab['slug'] ) ); ?>"
@@ -169,9 +170,10 @@ function whm_status_label( $status ) {
 				 * ============================================================== */
 				elseif ( 'manager' === $view ) : ?>
 					<div class="whm-manager" id="whm-manager-view">
-
-
-
+						<div class="whm-section-header" style="margin-bottom: 32px;">
+							<h2><?php esc_html_e( 'Hook Manager', 'woocommerce-hook-manager' ); ?></h2>
+							<p><?php esc_html_e( 'Review, edit, or delete existing hook rules. Drag to reorder priorities.', 'woocommerce-hook-manager' ); ?></p>
+						</div>
 
 						<div class="whm-rules-container">
 							<div class="whm-rules-table-header">
@@ -388,11 +390,11 @@ function whm_status_label( $status ) {
 								<div class="whm-type-cards">
 									<?php
 									$types = array(
-										'disable'        => array( '&#x1F6AB;', 'Disable Callback',      'Remove a callback from this hook' ),
-										'priority'       => array( '&#x26A1;', 'Change Priority',        'Move a callback to a new priority' ),
-										'wrapper'        => array( '&#x1F4E6;', 'Add HTML Wrapper',       'Wrap hook output in an HTML element' ),
-										'custom_content' => array( '&#x270F;&#xFE0F;', 'Insert Custom Content', 'Output custom HTML at this hook' ),
-										'shortcode'      => array( '&#x1F516;', 'Insert Shortcode',       'Run a shortcode at this hook' ),
+										'disable'        => array( '&#x1F6AB;', __( 'Disable Callback', 'woocommerce-hook-manager' ),      __( 'Remove a callback from this hook', 'woocommerce-hook-manager' ) ),
+										'priority'       => array( '&#x26A1;', __( 'Change Priority', 'woocommerce-hook-manager' ),        __( 'Move a callback to a new priority', 'woocommerce-hook-manager' ) ),
+										'wrapper'        => array( '&#x1F4E6;', __( 'Add HTML Wrapper', 'woocommerce-hook-manager' ),       __( 'Wrap hook output in an HTML element', 'woocommerce-hook-manager' ) ),
+										'custom_content' => array( '&#x270F;&#xFE0F;', __( 'Insert Custom Content', 'woocommerce-hook-manager' ), __( 'Output custom HTML at this hook', 'woocommerce-hook-manager' ) ),
+										'shortcode'      => array( '&#x1F516;', __( 'Insert Shortcode', 'woocommerce-hook-manager' ),       __( 'Run a shortcode at this hook', 'woocommerce-hook-manager' ) ),
 									);
 									foreach ( $types as $val => $info ) : ?>
 									<label class="whm-type-card <?php echo $val === 'disable' ? 'is-active' : ''; ?>">
@@ -530,7 +532,65 @@ function whm_status_label( $status ) {
 						<p><?php esc_html_e( 'Render WooCommerce hooks directly inside your page builders or Gutenberg content.', 'woocommerce-hook-manager' ); ?></p>
 						
 						<div class="whm-shortcode-box">
-							<pre class="whm-code">[whm_hook name="woocommerce_after_main_content"]</pre>
+							<pre class="whm-code">[whm_hook name="woocommerce_after_main_content" priority="10" wrapper_class="my-wrapper"]</pre>
+						</div>
+
+						<!-- Attributes Reference Table -->
+						<div class="whm-section-box" style="margin-top: 24px;">
+							<h3 class="whm-section-box__head"><?php esc_html_e( 'Available Attributes', 'woocommerce-hook-manager' ); ?></h3>
+							<table class="whm-attr-table">
+								<thead>
+									<tr>
+										<th><?php esc_html_e( 'Attribute', 'woocommerce-hook-manager' ); ?></th>
+										<th><?php esc_html_e( 'Required', 'woocommerce-hook-manager' ); ?></th>
+										<th><?php esc_html_e( 'Default', 'woocommerce-hook-manager' ); ?></th>
+										<th><?php esc_html_e( 'Description', 'woocommerce-hook-manager' ); ?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>name</code></td>
+										<td><span class="whm-badge whm-badge--disable" style="font-size:9px;padding:2px 6px;"><?php esc_html_e( 'Required', 'woocommerce-hook-manager' ); ?></span></td>
+										<td>—</td>
+										<td><?php esc_html_e( 'The WooCommerce hook name to execute, e.g. woocommerce_after_main_content', 'woocommerce-hook-manager' ); ?></td>
+									</tr>
+									<tr>
+										<td><code>priority</code></td>
+										<td><span style="color:var(--whm-text-muted);font-size:12px;"><?php esc_html_e( 'Optional', 'woocommerce-hook-manager' ); ?></span></td>
+										<td><code>10</code></td>
+										<td><?php esc_html_e( 'The priority at which to execute the hook action. Lower numbers run first.', 'woocommerce-hook-manager' ); ?></td>
+									</tr>
+									<tr>
+										<td><code>wrapper_class</code></td>
+										<td><span style="color:var(--whm-text-muted);font-size:12px;"><?php esc_html_e( 'Optional', 'woocommerce-hook-manager' ); ?></span></td>
+										<td>—</td>
+										<td><?php esc_html_e( 'CSS class(es) to add to a wrapping <div> around the hook output.', 'woocommerce-hook-manager' ); ?></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Usage Examples -->
+						<div class="whm-section-box" style="margin-top: 0;">
+							<h3 class="whm-section-box__head"><?php esc_html_e( 'Usage Examples', 'woocommerce-hook-manager' ); ?></h3>
+							<div class="whm-example-list">
+								<div class="whm-example-item">
+									<span class="whm-example-label"><?php esc_html_e( 'Basic usage (name only):', 'woocommerce-hook-manager' ); ?></span>
+									<code>[whm_hook name="woocommerce_after_single_product"]</code>
+								</div>
+								<div class="whm-example-item">
+									<span class="whm-example-label"><?php esc_html_e( 'With custom priority:', 'woocommerce-hook-manager' ); ?></span>
+									<code>[whm_hook name="woocommerce_before_cart" priority="5"]</code>
+								</div>
+								<div class="whm-example-item">
+									<span class="whm-example-label"><?php esc_html_e( 'With wrapper class:', 'woocommerce-hook-manager' ); ?></span>
+									<code>[whm_hook name="woocommerce_before_shop_loop" wrapper_class="custom-section"]</code>
+								</div>
+								<div class="whm-example-item">
+									<span class="whm-example-label"><?php esc_html_e( 'All attributes:', 'woocommerce-hook-manager' ); ?></span>
+									<code>[whm_hook name="woocommerce_sidebar" priority="20" wrapper_class="sidebar-wrap"]</code>
+								</div>
+							</div>
 						</div>
 
 						<h3 style="margin-top: 30px;"><?php esc_html_e( 'Currently Tracked Hooks', 'woocommerce-hook-manager' ); ?></h3>
@@ -546,6 +606,75 @@ function whm_status_label( $status ) {
 								</button>
 							</div>
 							<?php endforeach; ?>
+						</div>
+					</div>
+
+				<?php
+				/* ================================================================
+				 * VIEW: IMPORT / EXPORT
+				 * ============================================================== */
+				elseif ( 'import_export' === $view ) : ?>
+					<div class="whm-import-export">
+						<div class="whm-section-header" style="margin-bottom: 32px;">
+							<h2><?php esc_html_e( 'Import / Export Settings', 'woocommerce-hook-manager' ); ?></h2>
+							<p><?php esc_html_e( 'Transfer your hook rules between different sites or environments using JSON.', 'woocommerce-hook-manager' ); ?></p>
+						</div>
+
+						<div class="whm-ie-grid">
+							<!-- Export Section -->
+							<div class="whm-ie-section">
+								<div class="whm-ie-header">
+									<div class="whm-ie-icon whm-ie-icon--export">
+										<span class="dashicons dashicons-upload"></span>
+									</div>
+									<div>
+										<h3><?php esc_html_e( 'Export Rules', 'woocommerce-hook-manager' ); ?></h3>
+										<p><?php esc_html_e( 'Copy this JSON to import on another site.', 'woocommerce-hook-manager' ); ?></p>
+									</div>
+								</div>
+								<textarea id="whm-export-json" class="whm-textarea" rows="12" readonly><?php echo esc_textarea( wp_json_encode( $settings, JSON_PRETTY_PRINT ) ); ?></textarea>
+								<div class="whm-ie-actions">
+									<button type="button" id="whm-copy-json" class="whm-btn whm-btn--primary whm-btn--full">
+										<span class="dashicons dashicons-clipboard"></span> <?php esc_html_e( 'Copy to Clipboard', 'woocommerce-hook-manager' ); ?>
+									</button>
+								</div>
+								<p class="whm-ie-hint">
+									<span class="dashicons dashicons-info-outline"></span>
+									<?php
+									printf(
+										/* translators: %d: number of rules */
+										esc_html__( 'Currently exporting %d rule(s).', 'woocommerce-hook-manager' ),
+										count( $settings )
+									);
+									?>
+								</p>
+							</div>
+
+							<!-- Import Section -->
+							<div class="whm-ie-section">
+								<div class="whm-ie-header">
+									<div class="whm-ie-icon whm-ie-icon--import">
+										<span class="dashicons dashicons-download"></span>
+									</div>
+									<div>
+										<h3><?php esc_html_e( 'Import Rules', 'woocommerce-hook-manager' ); ?></h3>
+										<p><?php esc_html_e( 'Paste a previously exported JSON string.', 'woocommerce-hook-manager' ); ?></p>
+									</div>
+								</div>
+								<textarea id="whm-import-json" class="whm-textarea" rows="12" placeholder='[{"hook_name":"woocommerce_after_main_content","status":"custom_content","priority":10}]'></textarea>
+								<div class="whm-ie-actions">
+									<button type="button" id="whm-process-import" class="whm-btn whm-btn--primary whm-btn--full">
+										<span class="dashicons dashicons-database-import"></span> <?php esc_html_e( 'Import Rules', 'woocommerce-hook-manager' ); ?>
+									</button>
+								</div>
+								<div class="whm-ie-warning">
+									<span class="dashicons dashicons-warning"></span>
+									<div>
+										<strong><?php esc_html_e( 'Caution', 'woocommerce-hook-manager' ); ?></strong>
+										<p><?php esc_html_e( 'Importing will overwrite all existing hook rules. This action cannot be undone.', 'woocommerce-hook-manager' ); ?></p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -579,6 +708,16 @@ function whm_status_label( $status ) {
 						<span class="whm-toggle__slider"></span>
 					</label>
 				</div>
+				<div class="whm-sidebar-setting">
+					<span><?php esc_html_e( 'Clean on Uninstall', 'woocommerce-hook-manager' ); ?></span>
+					<label class="whm-toggle whm-toggle--sm">
+						<input type="checkbox" id="whm-uninstall-cleanup-toggle" <?php checked( (int) get_option( 'whm_uninstall_cleanup', 0 ), 1 ); ?> />
+						<span class="whm-toggle__slider"></span>
+					</label>
+				</div>
+				<p class="whm-field-hint" style="margin-top: 8px; font-size: 11px;">
+					<?php esc_html_e( 'If enabled, all data will be removed when deleting the plugin.', 'woocommerce-hook-manager' ); ?>
+				</p>
 				<button id="whm-reset-settings-sidebar" class="whm-btn whm-btn--sm whm-btn--danger whm-btn--full whm-reset-trigger" style="margin-top: 15px;">
 					<span class="dashicons dashicons-trash"></span> <?php esc_html_e( 'Reset All Data', 'woocommerce-hook-manager' ); ?>
 				</button>

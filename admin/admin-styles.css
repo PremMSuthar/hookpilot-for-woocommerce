@@ -606,6 +606,29 @@
     background: var(--whm-primary);
 }
 
+.whm-toggle input:checked+.whm-toggle__slider::before {
+    transform: translateX(26px);
+}
+
+/* Small Variant */
+.whm-toggle--sm {
+    width: 36px;
+    min-width: 36px;
+    height: 18px;
+}
+
+.whm-toggle--sm .whm-toggle__slider::before {
+    height: 12px;
+    width: 12px;
+    top: 3px;
+    left: 3px;
+}
+
+.whm-toggle--sm input:checked+.whm-toggle__slider::before {
+    transform: translateX(18px);
+}
+
+
 
 
 /* Table Design */
@@ -1149,6 +1172,10 @@
     .whm-cards {
         grid-template-columns: repeat(2, 1fr);
     }
+    .whm-ie-grid {
+        grid-template-columns: 1fr;
+    }
+
 
     .whm-shortcode-grid {
         grid-template-columns: 1fr;
@@ -1307,3 +1334,214 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* ——— Import / Export — Redesigned ——————————————————————————— */
+.whm-ie-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.whm-ie-section {
+    background: var(--whm-surface);
+    border: 1px solid var(--whm-border);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--whm-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.whm-ie-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.whm-ie-header h3 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    color: var(--whm-text) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.whm-ie-header p {
+    font-size: 13px;
+    color: var(--whm-text-muted);
+    margin: 4px 0 0;
+    line-height: 1.4;
+}
+
+.whm-ie-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.whm-ie-icon .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: inherit;
+}
+
+.whm-ie-icon--export {
+    background: #eff6ff;
+    color: var(--whm-primary);
+}
+
+.whm-ie-icon--import {
+    background: #f0fdf4;
+    color: var(--whm-success);
+}
+
+.whm-ie-actions {
+    margin-top: 4px;
+}
+
+.whm-ie-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px !important;
+    color: var(--whm-text-muted) !important;
+    margin: 0 !important;
+    padding: 10px 14px;
+    background: var(--whm-surface-2);
+    border-radius: 10px;
+}
+
+.whm-ie-hint .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--whm-info);
+    flex-shrink: 0;
+}
+
+.whm-ie-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-radius: 10px;
+}
+
+.whm-ie-warning > .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--whm-danger);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.whm-ie-warning strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--whm-danger);
+    margin-bottom: 2px;
+}
+
+.whm-ie-warning p {
+    font-size: 12px;
+    color: #991b1b;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ——— Shortcode Attributes Table ———————————————————————————— */
+.whm-attr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.whm-attr-table th {
+    background: var(--whm-surface-2);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--whm-text-muted);
+    border-bottom: 2px solid var(--whm-border);
+}
+
+.whm-attr-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--whm-border-light);
+    vertical-align: middle;
+    color: var(--whm-text);
+    line-height: 1.5;
+}
+
+.whm-attr-table tr:last-child td {
+    border-bottom: none;
+}
+
+.whm-attr-table tr:hover td {
+    background: var(--whm-surface-2);
+}
+
+.whm-attr-table code {
+    font-family: var(--whm-mono);
+    font-size: 12px;
+    color: #1e40af;
+    background: #eff6ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #dbeafe;
+    font-weight: 600;
+}
+
+/* ——— Shortcode Usage Examples ————————————————————————————— */
+.whm-example-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.whm-example-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--whm-surface-2);
+    border-radius: 10px;
+    border: 1px solid var(--whm-border-light);
+}
+
+.whm-example-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--whm-text-muted);
+}
+
+.whm-example-item code {
+    font-family: var(--whm-mono);
+    font-size: 12px;
+    color: #1e40af;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #dbeafe;
+    font-weight: 500;
+    display: block;
+    overflow-x: auto;
+}
+
