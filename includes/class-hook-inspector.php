@@ -141,7 +141,7 @@ class WHM_Hook_Inspector {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
 		wp_send_json_success( $this->get_all_hook_data() );

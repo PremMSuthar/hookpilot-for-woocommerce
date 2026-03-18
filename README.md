@@ -63,7 +63,7 @@ This plugin does not override WooCommerce templates. It uses standard WordPress 
 ---
 
 ## 📦 Requirements
-* WordPress 6.0+
+* WordPress 6.9+
 * WooCommerce 7.0+
 * PHP 7.4+
 

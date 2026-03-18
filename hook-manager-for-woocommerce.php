@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Hook Manager for WooCommerce
- * Plugin URI:  https://github.com/prem/woocommerce-hook-manager
+ * Plugin URI:  https://github.com/prem/hook-manager-for-woocommerce
  * Description: Manage WooCommerce hooks visually. Inspect hooks, change priority, add wrappers, disable callbacks, and insert custom content using a GUI.
  * Version:     1.0.0
  * Author:      Developer Tools
  * Author URI:  https://github.com/prem
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: woocommerce-hook-manager
+ * Text Domain: hook-manager-for-woocommerce
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -62,7 +62,7 @@ function whm_woocommerce_missing_notice() {
 			echo wp_kses_post(
 				sprintf(
 					/* translators: %s: WooCommerce plugin link */
-					__( '<strong>Hook Manager for WooCommerce</strong> requires %s to be installed and active.', 'woocommerce-hook-manager' ),
+					__( '<strong>Hook Manager for WooCommerce</strong> requires %s to be installed and active.', 'hook-manager-for-woocommerce' ),
 					'<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>'
 				)
 			);

@@ -2,7 +2,7 @@
 Contributors: prem
 Tags: woocommerce, hooks, developer-tools, actions, filters
 Requires at least: 5.8
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -27,7 +27,7 @@ Built with a premium, responsive design, it allows you to:
 
 == Installation ==
 
-1. Upload the `woocommerce-hook-manager` folder to the `/wp-content/plugins/` directory.
+1. Upload the `hook-manager-for-woocommerce` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Access the manager via the 'Woo Hook Manager' menu in your admin sidebar.
 

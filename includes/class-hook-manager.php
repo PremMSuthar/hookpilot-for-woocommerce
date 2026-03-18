@@ -320,16 +320,16 @@ class WHM_Hook_Manager {
 				'hooks'   => $hook_data,
 				'rules'   => $active_rules,
 				'strings' => array(
-					'panel_title'  => esc_html__( 'Active WHM Rules', 'woocommerce-hook-manager' ),
-					'rule'         => esc_html__( 'rule', 'woocommerce-hook-manager' ),
-					'rules'        => esc_html__( 'rules', 'woocommerce-hook-manager' ),
-					'no_rules'     => esc_html__( 'No active rules configured.', 'woocommerce-hook-manager' ),
-					'disabled'     => esc_html__( 'Disabled', 'woocommerce-hook-manager' ),
-					'priority'     => esc_html__( 'Priority', 'woocommerce-hook-manager' ),
-					'wrapper'      => esc_html__( 'Wrapper', 'woocommerce-hook-manager' ),
-					'custom_html'  => esc_html__( 'Custom HTML', 'woocommerce-hook-manager' ),
-					'shortcode'    => esc_html__( 'Shortcode', 'woocommerce-hook-manager' ),
-					'active'       => esc_html__( 'Active', 'woocommerce-hook-manager' ),
+					'panel_title'  => esc_html__( 'Active WHM Rules', 'hook-manager-for-woocommerce' ),
+					'rule'         => esc_html__( 'rule', 'hook-manager-for-woocommerce' ),
+					'rules'        => esc_html__( 'rules', 'hook-manager-for-woocommerce' ),
+					'no_rules'     => esc_html__( 'No active rules configured.', 'hook-manager-for-woocommerce' ),
+					'disabled'     => esc_html__( 'Disabled', 'hook-manager-for-woocommerce' ),
+					'priority'     => esc_html__( 'Priority', 'hook-manager-for-woocommerce' ),
+					'wrapper'      => esc_html__( 'Wrapper', 'hook-manager-for-woocommerce' ),
+					'custom_html'  => esc_html__( 'Custom HTML', 'hook-manager-for-woocommerce' ),
+					'shortcode'    => esc_html__( 'Shortcode', 'hook-manager-for-woocommerce' ),
+					'active'       => esc_html__( 'Active', 'hook-manager-for-woocommerce' ),
 				),
 			)
 		);
@@ -343,10 +343,11 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
-		// phpcs:disable WordPress.Security.NonceVerification -- already verified above.
+		// phpcs:disable WordPress.Security.NonceVerification -- validated via check_ajax_referer.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized in $this->sanitize_setting().
 		$raw = isset( $_POST['setting'] ) ? wp_unslash( $_POST['setting'] ) : array();
 		if ( ! is_array( $raw ) ) {
 			$raw = array();
@@ -356,7 +357,7 @@ class WHM_Hook_Manager {
 		$setting = $this->sanitize_setting( $raw );
 
 		if ( empty( $setting['hook_name'] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Hook name is required.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Hook name is required.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$settings = get_option( WHM_OPTION_KEY, array() );
@@ -380,7 +381,7 @@ class WHM_Hook_Manager {
 
 		update_option( WHM_OPTION_KEY, $settings );
 
-		wp_send_json_success( array( 'message' => esc_html__( 'Setting saved.', 'woocommerce-hook-manager' ) ) );
+		wp_send_json_success( array( 'message' => esc_html__( 'Setting saved.', 'hook-manager-for-woocommerce' ) ) );
 	}
 
 	/**
@@ -390,10 +391,11 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
-		// phpcs:disable WordPress.Security.NonceVerification -- already verified.
+		// phpcs:disable WordPress.Security.NonceVerification -- validated via check_ajax_referer.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized in $this->sanitize_setting().
 		$raw = isset( $_POST['setting'] ) ? wp_unslash( $_POST['setting'] ) : array();
 		if ( ! is_array( $raw ) ) {
 			$raw = array();
@@ -402,18 +404,18 @@ class WHM_Hook_Manager {
 		// phpcs:enable
 
 		if ( $id < 0 ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Invalid rule ID.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid rule ID.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$settings = get_option( WHM_OPTION_KEY, array() );
 		if ( ! is_array( $settings ) || ! isset( $settings[ $id ] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Rule not found.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Rule not found.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$setting = $this->sanitize_setting( $raw );
 
 		if ( empty( $setting['hook_name'] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Hook name is required.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Hook name is required.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$setting['id']   = $id;
@@ -422,7 +424,7 @@ class WHM_Hook_Manager {
 
 		wp_send_json_success(
 			array(
-				'message'  => esc_html__( 'Rule updated.', 'woocommerce-hook-manager' ),
+				'message'  => esc_html__( 'Rule updated.', 'hook-manager-for-woocommerce' ),
 				'setting'  => $setting,
 				'settings' => array_values( $settings ),
 			)
@@ -436,7 +438,7 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification -- already verified.
@@ -449,14 +451,14 @@ class WHM_Hook_Manager {
 		}
 
 		if ( ! isset( $settings[ $id ] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Setting not found.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Setting not found.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		unset( $settings[ $id ] );
 		$settings = array_values( $settings ); // Re-index.
 		update_option( WHM_OPTION_KEY, $settings );
 
-		wp_send_json_success( array( 'message' => esc_html__( 'Setting deleted.', 'woocommerce-hook-manager' ) ) );
+		wp_send_json_success( array( 'message' => esc_html__( 'Setting deleted.', 'hook-manager-for-woocommerce' ) ) );
 	}
 
 	/**
@@ -466,7 +468,7 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification -- already verified.
@@ -485,7 +487,7 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification
@@ -504,21 +506,22 @@ class WHM_Hook_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'woocommerce-hook-manager' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
 		}
 
-		// phpcs:disable WordPress.Security.NonceVerification
+		// phpcs:disable WordPress.Security.NonceVerification -- validated via check_ajax_referer.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized via json_decode and individual field sanitization.
 		$json = isset( $_POST['json'] ) ? wp_unslash( $_POST['json'] ) : '';
 		// phpcs:enable
 
 		if ( empty( $json ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'No JSON data provided.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'No JSON data provided.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$data = json_decode( $json, true );
 
 		if ( ! is_array( $data ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Invalid JSON format.', 'woocommerce-hook-manager' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid JSON format.', 'hook-manager-for-woocommerce' ) ) );
 		}
 
 		$sanitized_settings = array();
@@ -537,7 +540,7 @@ class WHM_Hook_Manager {
 		update_option( WHM_OPTION_KEY, $sanitized_settings );
 
 		wp_send_json_success( array(
-			'message' => esc_html__( 'Settings imported successfully.', 'woocommerce-hook-manager' ),
+			'message' => esc_html__( 'Settings imported successfully.', 'hook-manager-for-woocommerce' ),
 			'count'   => count( $sanitized_settings ),
 		) );
 	}
