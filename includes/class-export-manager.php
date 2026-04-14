@@ -124,7 +124,7 @@ class WHM_Export_Manager {
 		check_ajax_referer( 'whm_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hook-manager-for-woocommerce' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
 		}
 
 		wp_send_json_success( array( 'code' => $this->generate_export_code() ) );

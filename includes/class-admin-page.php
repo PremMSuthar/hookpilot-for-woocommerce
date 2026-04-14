@@ -40,8 +40,8 @@ class WHM_Admin_Page {
 
 		// Top-level menu.
 		add_menu_page(
-			esc_html__( 'Woo Hook Manager', 'hook-manager-for-woocommerce' ),
-			esc_html__( 'Woo Hook Manager', 'hook-manager-for-woocommerce' ),
+			esc_html__( 'Woo Hook Manager', 'hookpilot-for-woocommerce' ),
+			esc_html__( 'Woo Hook Manager', 'hookpilot-for-woocommerce' ),
 			'manage_options',
 			'whm-dashboard',
 			array( $this, 'render_dashboard' ),
@@ -52,32 +52,32 @@ class WHM_Admin_Page {
 		// Sub-pages.
 		$subpages = array(
 			array(
-				'title'  => esc_html__( 'Hook Inspector', 'hook-manager-for-woocommerce' ),
-				'label'  => esc_html__( 'Hook Inspector', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
+				'label'  => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
 				'slug'   => 'whm-inspector',
 				'cb'     => array( $this, 'render_inspector' ),
 			),
 			array(
-				'title'  => esc_html__( 'Hook Manager', 'hook-manager-for-woocommerce' ),
-				'label'  => esc_html__( 'Hook Manager', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
+				'label'  => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
 				'slug'   => 'whm-manager',
 				'cb'     => array( $this, 'render_manager' ),
 			),
 			array(
-				'title'  => esc_html__( 'Add Custom Hook', 'hook-manager-for-woocommerce' ),
-				'label'  => esc_html__( 'Add Custom Hook', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
+				'label'  => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
 				'slug'   => 'whm-add-hook',
 				'cb'     => array( $this, 'render_add_hook' ),
 			),
 			array(
-				'title'  => esc_html__( 'Shortcodes', 'hook-manager-for-woocommerce' ),
-				'label'  => esc_html__( 'Shortcodes', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
+				'label'  => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
 				'slug'   => 'whm-shortcodes',
 				'cb'     => array( $this, 'render_shortcodes' ),
 			),
 			array(
-				'title'  => esc_html__( 'Import/Export', 'hook-manager-for-woocommerce' ),
-				'label'  => esc_html__( 'Import/Export', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
+				'label'  => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
 				'slug'   => 'whm-import-export',
 				'cb'     => array( $this, 'render_import_export' ),
 			),
@@ -138,17 +138,17 @@ class WHM_Admin_Page {
 				'debug_mode' => (int) get_option( 'whm_debug_mode', 0 ),
 				'settings'   => get_option( WHM_OPTION_KEY, array() ),
 				'strings'    => array(
-					'confirm_delete' => esc_html__( 'Are you sure you want to delete this setting?', 'hook-manager-for-woocommerce' ),
-					'saved'          => esc_html__( 'Saved successfully.', 'hook-manager-for-woocommerce' ),
-					'deleted'        => esc_html__( 'Deleted.', 'hook-manager-for-woocommerce' ),
-					'error'          => esc_html__( 'An error occurred. Please try again.', 'hook-manager-for-woocommerce' ),
-					'loading'        => esc_html__( 'Loading hooks…', 'hook-manager-for-woocommerce' ),
-					'edit_rule'      => esc_html__( 'Edit Rule', 'hook-manager-for-woocommerce' ),
-					'update'         => esc_html__( 'Update Rule', 'hook-manager-for-woocommerce' ),
-					'debug_enabled'  => esc_html__( 'Debug mode enabled.', 'hook-manager-for-woocommerce' ),
-					'debug_disabled' => esc_html__( 'Debug mode disabled.', 'hook-manager-for-woocommerce' ),
-					'reload_hooks'   => esc_html__( 'Reload Hooks', 'hook-manager-for-woocommerce' ),
-					'load_hooks'     => esc_html__( 'Load Hooks', 'hook-manager-for-woocommerce' ),
+					'confirm_delete' => esc_html__( 'Are you sure you want to delete this setting?', 'hookpilot-for-woocommerce' ),
+					'saved'          => esc_html__( 'Saved successfully.', 'hookpilot-for-woocommerce' ),
+					'deleted'        => esc_html__( 'Deleted.', 'hookpilot-for-woocommerce' ),
+					'error'          => esc_html__( 'An error occurred. Please try again.', 'hookpilot-for-woocommerce' ),
+					'loading'        => esc_html__( 'Loading hooks…', 'hookpilot-for-woocommerce' ),
+					'edit_rule'      => esc_html__( 'Edit Rule', 'hookpilot-for-woocommerce' ),
+					'update'         => esc_html__( 'Update Rule', 'hookpilot-for-woocommerce' ),
+					'debug_enabled'  => esc_html__( 'Debug mode enabled.', 'hookpilot-for-woocommerce' ),
+					'debug_disabled' => esc_html__( 'Debug mode disabled.', 'hookpilot-for-woocommerce' ),
+					'reload_hooks'   => esc_html__( 'Reload Hooks', 'hookpilot-for-woocommerce' ),
+					'load_hooks'     => esc_html__( 'Load Hooks', 'hookpilot-for-woocommerce' ),
 				),
 			)
 		);
@@ -171,7 +171,7 @@ class WHM_Admin_Page {
 		$label = sprintf(
 			'<span class="whm-ab-label">%s</span>
 			 <span class="whm-ab-switch %s"><span class="whm-ab-slider"></span></span>',
-			esc_html__( 'WHM Debug', 'hook-manager-for-woocommerce' ),
+			esc_html__( 'WHM Debug', 'hookpilot-for-woocommerce' ),
 			$state
 		);
 
@@ -183,7 +183,7 @@ class WHM_Admin_Page {
 				'href'  => '#',
 				'meta'  => array(
 					'class' => 'whm-admin-bar-node',
-					'title' => esc_attr__( 'Toggle WooCommerce Hook Manager Debug Mode', 'hook-manager-for-woocommerce' ),
+					'title' => esc_attr__( 'Toggle WooCommerce Hook Manager Debug Mode', 'hookpilot-for-woocommerce' ),
 				),
 			)
 		);
@@ -194,8 +194,8 @@ class WHM_Admin_Page {
 				'id'     => 'whm-debug-bar-toggle',
 				'parent' => 'whm-debug-bar',
 				'title'  => $debug
-					? esc_html__( 'Disable Debug Overlay', 'hook-manager-for-woocommerce' )
-					: esc_html__( 'Enable Debug Overlay', 'hook-manager-for-woocommerce' ),
+					? esc_html__( 'Disable Debug Overlay', 'hookpilot-for-woocommerce' )
+					: esc_html__( 'Enable Debug Overlay', 'hookpilot-for-woocommerce' ),
 				'href'   => '#',
 				'meta'   => array(
 					'class'      => 'whm-ab-toggle-action',
@@ -209,7 +209,7 @@ class WHM_Admin_Page {
 			array(
 				'id'     => 'whm-debug-bar-settings',
 				'parent' => 'whm-debug-bar',
-				'title'  => esc_html__( 'Hook Manager Dashboard', 'hook-manager-for-woocommerce' ),
+				'title'  => esc_html__( 'Hook Manager Dashboard', 'hookpilot-for-woocommerce' ),
 				'href'   => admin_url( 'admin.php?page=whm-dashboard' ),
 			)
 		);
@@ -240,10 +240,10 @@ class WHM_Admin_Page {
 				'nonce'      => wp_create_nonce( 'whm_nonce' ),
 				'debug_mode' => (int) get_option( 'whm_debug_mode', 0 ),
 				'strings'    => array(
-					'enabled_label'  => esc_html__( 'Enable Debug Overlay', 'hook-manager-for-woocommerce' ),
-					'disabled_label' => esc_html__( 'Disable Debug Overlay', 'hook-manager-for-woocommerce' ),
-					'visible'        => esc_html__( 'Visible', 'hook-manager-for-woocommerce' ),
-					'hidden'         => esc_html__( 'Hidden', 'hook-manager-for-woocommerce' ),
+					'enabled_label'  => esc_html__( 'Enable Debug Overlay', 'hookpilot-for-woocommerce' ),
+					'disabled_label' => esc_html__( 'Disable Debug Overlay', 'hookpilot-for-woocommerce' ),
+					'visible'        => esc_html__( 'Visible', 'hookpilot-for-woocommerce' ),
+					'hidden'         => esc_html__( 'Hidden', 'hookpilot-for-woocommerce' ),
 				),
 			)
 		);

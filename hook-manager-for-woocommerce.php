@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: Hook Manager for WooCommerce
- * Plugin URI:  https://github.com/premsutharm/hook-manager-for-woocommerce
+ * Plugin Name: Hookpilot for WooCommerce
+ * Plugin URI:  https://github.com/premsutharm/hookpilot-for-woocommerce
  * Description: Manage WooCommerce hooks visually. Inspect hooks, change priority, add wrappers, disable callbacks, and insert custom content using a GUI.
  * Version:     1.0.0
  * Author:      premsutharm, hdkothari81, wpjitendra
  * Author URI:  https://github.com/premsutharm
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: hook-manager-for-woocommerce
+ * Text Domain: hookpilot-for-woocommerce
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -62,7 +62,7 @@ function whm_woocommerce_missing_notice() {
 			echo wp_kses_post(
 				sprintf(
 					/* translators: %s: WooCommerce plugin link */
-					__( '<strong>Hook Manager for WooCommerce</strong> requires %s to be installed and active.', 'hook-manager-for-woocommerce' ),
+					__( '<strong>Hookpilot for WooCommerce</strong> requires %s to be installed and active.', 'hookpilot-for-woocommerce' ),
 					'<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>'
 				)
 			);

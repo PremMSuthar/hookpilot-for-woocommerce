@@ -1,6 +1,6 @@
-# Hook Manager for WooCommerce
+# Hookpilot for WooCommerce
 
-**Hook Manager for WooCommerce** is an advanced developer utility that empowers you to visually map, manage, and attach custom functionalities to WooCommerce hooks directly from the WordPress front-end and admin panel.
+**Hookpilot for WooCommerce** is an advanced developer utility that empowers you to visually map, manage, and attach custom functionalities to WooCommerce hooks directly from the WordPress front-end and admin panel.
 
 No more guessing hook names or digging through WooCommerce templates! Simply enable the Debug Overlay, click on a visual hook marker anywhere on your site, and instantly attach your custom callbacks, shortcodes, or wrapper HTML.
 

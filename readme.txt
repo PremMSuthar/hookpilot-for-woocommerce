@@ -1,5 +1,5 @@
-=== Hook Manager for WooCommerce ===
-Contributors: premsutharm, hdkothari81, wpjitendra
+=== Hookpilot for WooCommerce ===
+Contributors: premsutharm
 Tags: woocommerce, hooks, developer-tools, actions, filters
 Requires at least: 5.8
 Tested up to: 6.9
@@ -12,7 +12,7 @@ Manage hooks visually. Inspect callbacks, change priorities, add HTML wrappers, 
 
 == Description ==
 
-**Hook Manager for WooCommerce** is a powerful developer tool designed to simplify the customization of WooCommerce stores. Instead of digging through template files or writing custom PHP to modify hook priorities and outputs, this plugin provides a clean, visual interface to manage everything.
+**Hookpilot for WooCommerce** is a powerful developer tool designed to simplify the customization of WooCommerce stores. Instead of digging through template files or writing custom PHP to modify hook priorities and outputs, this plugin provides a clean, visual interface to manage everything.
 
 Built with a premium, responsive design, it allows you to:
 
@@ -27,7 +27,7 @@ Built with a premium, responsive design, it allows you to:
 
 == Installation ==
 
-1. Upload the `hook-manager-for-woocommerce` folder to the `/wp-content/plugins/` directory.
+1. Upload the `hookpilot-for-woocommerce` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Access the manager via the 'Woo Hook Manager' menu in your admin sidebar.
 
