@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Hookpilot for WooCommerce
- * Plugin URI:  https://github.com/premsutharm/hookpilot-for-woocommerce
+ * Plugin URI:  https://github.com/PremMSuthar/hookpilot-for-woocommerce
  * Description: Manage WooCommerce hooks visually. Inspect hooks, change priority, add wrappers, disable callbacks, and insert custom content using a GUI.
  * Version:     1.0.0
  * Author:      premsutharm, hdkothari81, wpjitendra
- * Author URI:  https://github.com/premsutharm
+ * Author URI:  https://github.com/PremMSuthar
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: hookpilot-for-woocommerce
