@@ -46,7 +46,7 @@ define( 'HKPLT_OPTION_KEY', 'hkplt_hook_settings' );
 function hkplt_is_woocommerce_active() {
 	return in_array(
 		'woocommerce/woocommerce.php',
-		apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ),
+		(array) get_option( 'active_plugins', array() ),
 		true
 	);
 }

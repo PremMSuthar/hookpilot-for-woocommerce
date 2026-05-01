@@ -3,7 +3,7 @@
  * Admin Page Template
  *
  * Single template file that renders all sub-page views based on
- * the $view variable set by HKPLT_Admin_Page render callbacks.
+ * the $hkplt_view variable set by HKPLT_Admin_Page render callbacks.
  *
  * @package Hookpilot
  */
@@ -19,21 +19,21 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 // Default view.
-$view = isset( $view ) ? $view : 'dashboard';
+$hkplt_view = isset( $hkplt_view ) ? $hkplt_view : 'dashboard';
 
 // Load settings for views that need them.
-$settings   = get_option( HKPLT_OPTION_KEY, array() );
-if ( ! is_array( $settings ) ) {
-	$settings = array();
+$hkplt_settings   = get_option( HKPLT_OPTION_KEY, array() );
+if ( ! is_array( $hkplt_settings ) ) {
+	$hkplt_settings = array();
 }
-$debug_mode = (int) get_option( 'hkplt_debug_mode', 0 );
+$hkplt_debug_mode = (int) get_option( 'hkplt_debug_mode', 0 );
 
 // Inspector data.
-$inspector = new HKPLT_Hook_Inspector();
-$hook_list = $inspector->get_wc_hook_list();
+$hkplt_inspector = new HKPLT_Hook_Inspector();
+$hkplt_hook_list = $hkplt_inspector->get_wc_hook_list();
 
 // Export manager.
-$export_manager = new HKPLT_Export_Manager();
+$hkplt_export_manager = new HKPLT_Export_Manager();
 
 // Helper: human-readable status label.
 function hkplt_status_label( $status ) {
@@ -81,20 +81,20 @@ function hkplt_status_label( $status ) {
 			<!-- Navigation Tabs -->
 			<nav class="hkplt-nav-tabs">
 				<?php
-				$tabs = array(
+				$hkplt_tabs = array(
 					'dashboard'  => array( 'label' => __( 'Dashboard', 'hookpilot-for-woocommerce' ), 'slug' => 'hkplt-dashboard', 'icon' => 'dashboard' ),
 					'inspector'  => array( 'label' => __( 'Hook Inspector', 'hookpilot-for-woocommerce' ), 'slug' => 'hkplt-inspector', 'icon' => 'search' ),
 					'manager'    => array( 'label' => __( 'Hook Manager', 'hookpilot-for-woocommerce' ), 'slug' => 'hkplt-manager', 'icon' => 'sort' ),
 					'add_hook'   => array( 'label' => __( '+ Add Rule', 'hookpilot-for-woocommerce' ), 'slug' => 'hkplt-add-hook', 'icon' => 'edit' ),
 					'import_export' => array( 'label' => __( 'Import/Export', 'hookpilot-for-woocommerce' ), 'slug' => 'hkplt-import-export', 'icon' => 'migrate' ),
 				);
-				foreach ( $tabs as $key => $tab ) : ?>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $tab['slug'] ) ); ?>"
-					   class="hkplt-tab <?php echo ( $view === $key ) ? 'hkplt-tab--active' : ''; ?>">
-						<span class="dashicons dashicons-<?php echo esc_attr( $tab['icon'] ); ?>"></span>
-						<?php echo esc_html( $tab['label'] ); ?>
-						<?php if ( 'manager' === $key && ! empty( $settings ) ) : ?>
-							<span class="hkplt-tab-count"><?php echo count( $settings ); ?></span>
+				foreach ( $hkplt_tabs as $hkplt_key => $hkplt_tab ) : ?>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $hkplt_tab['slug'] ) ); ?>"
+					   class="hkplt-tab <?php echo ( $hkplt_view === $hkplt_key ) ? 'hkplt-tab--active' : ''; ?>">
+						<span class="dashicons dashicons-<?php echo esc_attr( $hkplt_tab['icon'] ); ?>"></span>
+						<?php echo esc_html( $hkplt_tab['label'] ); ?>
+						<?php if ( 'manager' === $hkplt_key && ! empty( $hkplt_settings ) ) : ?>
+							<span class="hkplt-tab-count"><?php echo count( $hkplt_settings ); ?></span>
 						<?php endif; ?>
 					</a>
 				<?php endforeach; ?>
@@ -107,7 +107,7 @@ function hkplt_status_label( $status ) {
 				/* ================================================================
 				 * VIEW: DASHBOARD
 				 * ============================================================== */
-				if ( 'dashboard' === $view ) : ?>
+				if ( 'dashboard' === $hkplt_view ) : ?>
 					<div class="hkplt-dashboard">
 						<div class="hkplt-welcome-box">
 							<div class="hkplt-welcome-text">
@@ -148,7 +148,7 @@ function hkplt_status_label( $status ) {
 				/* ================================================================
 				 * VIEW: HOOK INSPECTOR
 				 * ============================================================== */
-				elseif ( 'inspector' === $view ) : ?>
+				elseif ( 'inspector' === $hkplt_view ) : ?>
 					<div class="hkplt-inspector">
 						<h2><?php esc_html_e( 'Hook Inspector', 'hookpilot-for-woocommerce' ); ?></h2>
 						<p><?php esc_html_e( 'Displays registered callbacks for known WooCommerce hooks.', 'hookpilot-for-woocommerce' ); ?></p>
@@ -167,7 +167,7 @@ function hkplt_status_label( $status ) {
 				/* ================================================================
 				 * VIEW: HOOK MANAGER
 				 * ============================================================== */
-				elseif ( 'manager' === $view ) : ?>
+				elseif ( 'manager' === $hkplt_view ) : ?>
 					<div class="hkplt-manager" id="hkplt-manager-view">
 						<div class="hkplt-section-header" style="margin-bottom: 32px;">
 							<h2><?php esc_html_e( 'Hook Manager', 'hookpilot-for-woocommerce' ); ?></h2>
@@ -182,7 +182,7 @@ function hkplt_status_label( $status ) {
 								<span style="text-align: right;"><?php esc_html_e( 'Actions', 'hookpilot-for-woocommerce' ); ?></span>
 							</div>
 
-							<?php if ( empty( $settings ) ) : ?>
+							<?php if ( empty( $hkplt_settings ) ) : ?>
 								<div class="hkplt-empty-state" style="padding: 60px;">
 									<span class="dashicons dashicons-info-outline"></span>
 									<p><?php esc_html_e( 'No hook rules configured yet.', 'hookpilot-for-woocommerce' ); ?></p>
@@ -190,35 +190,35 @@ function hkplt_status_label( $status ) {
 								</div>
 							<?php else : ?>
 								<div class="hkplt-rules-grid" id="hkplt-rules-grid">
-									<?php foreach ( $settings as $index => $s ) :
-										$status    = isset( $s['status'] ) ? $s['status'] : 'active';
-										$hook_name = isset( $s['hook_name'] ) ? $s['hook_name'] : '';
-										$priority  = isset( $s['priority'] ) ? (int) $s['priority'] : 10;
-										$is_active = ( $status !== 'inactive' );
+									<?php foreach ( $hkplt_settings as $hkplt_index => $hkplt_s ) :
+										$status    = isset( $hkplt_s['status'] ) ? $hkplt_s['status'] : 'active';
+										$hkplt_hook_name = isset( $hkplt_s['hook_name'] ) ? $hkplt_s['hook_name'] : '';
+										$hkplt_priority  = isset( $hkplt_s['priority'] ) ? (int) $hkplt_s['priority'] : 10;
+										$hkplt_is_active = ( $status !== 'inactive' );
 									?>
-										<div class="hkplt-rule-card" data-id="<?php echo (int) $index; ?>">
+										<div class="hkplt-rule-card" data-id="<?php echo (int) $hkplt_index; ?>">
 											<div class="hkplt-rule-title-cell">
-												<strong><?php echo esc_html( !empty($s['rule_title']) ? $s['rule_title'] : hkplt_status_label( $status ) ); ?></strong>
+												<strong><?php echo esc_html( !empty($hkplt_s['rule_title']) ? $hkplt_s['rule_title'] : hkplt_status_label( $status ) ); ?></strong>
 												<span class="hkplt-badge hkplt-badge--<?php echo esc_attr( $status ); ?>" style="font-size: 10px; padding: 2px 8px;">
 													<?php echo esc_html( hkplt_status_label( $status ) ); ?>
 												</span>
 											</div>
 
 											<div class="hkplt-rule-hook-cell">
-												<code><?php echo esc_html( $hook_name ); ?></code>
+												<code><?php echo esc_html( $hkplt_hook_name ); ?></code>
 											</div>
 
 											<div class="hkplt-rule-priority-cell">
-												<span class="pill"><?php echo (int) $priority; ?></span>
+												<span class="pill"><?php echo (int) $hkplt_priority; ?></span>
 											</div>
 
 
 
 											<div class="hkplt-rule-actions-cell">
-												<button class="hkplt-btn hkplt-btn--sm hkplt-btn--outline hkplt-btn-edit" data-id="<?php echo (int) $index; ?>" title="<?php esc_attr_e( 'Edit', 'hookpilot-for-woocommerce' ); ?>">
+												<button class="hkplt-btn hkplt-btn--sm hkplt-btn--outline hkplt-btn-edit" data-id="<?php echo (int) $hkplt_index; ?>" title="<?php esc_attr_e( 'Edit', 'hookpilot-for-woocommerce' ); ?>">
 													<span class="dashicons dashicons-edit"></span>
 												</button>
-												<button class="hkplt-btn hkplt-btn--sm hkplt-btn--danger hkplt-btn-delete" data-id="<?php echo (int) $index; ?>" title="<?php esc_attr_e( 'Delete', 'hookpilot-for-woocommerce' ); ?>">
+												<button class="hkplt-btn hkplt-btn--sm hkplt-btn--danger hkplt-btn-delete" data-id="<?php echo (int) $hkplt_index; ?>" title="<?php esc_attr_e( 'Delete', 'hookpilot-for-woocommerce' ); ?>">
 													<span class="dashicons dashicons-trash"></span>
 												</button>
 											</div>
@@ -244,8 +244,8 @@ function hkplt_status_label( $status ) {
 										<label><?php esc_html_e( 'Hook Name', 'hookpilot-for-woocommerce' ); ?></label>
 										<select id="hkplt-edit-hook-name" name="setting[hook_name]" class="hkplt-select hkplt-hook-select-edit" required>
 											<option value=""><?php esc_html_e( '— Select a Hook —', 'hookpilot-for-woocommerce' ); ?></option>
-											<?php foreach ( $hook_list as $h ) : ?>
-												<option value="<?php echo esc_attr( $h ); ?>"><?php echo esc_html( $h ); ?></option>
+											<?php foreach ( $hkplt_hook_list as $hkplt_h ) : ?>
+												<option value="<?php echo esc_attr( $hkplt_h ); ?>"><?php echo esc_html( $hkplt_h ); ?></option>
 											<?php endforeach; ?>
 										</select>
 									</div>
@@ -283,8 +283,8 @@ function hkplt_status_label( $status ) {
 												<label><?php esc_html_e( 'New Priority', 'hookpilot-for-woocommerce' ); ?></label>
 												<input type="number" id="hkplt-edit-priority-val" name="setting[priority]" class="hkplt-input hkplt-priority-input" value="10" min="0" max="9999" />
 												<div class="hkplt-priority-presets">
-													<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $p ) : ?>
-													<button type="button" class="hkplt-preset-btn" data-target="hkplt-edit-priority-val" data-val="<?php echo esc_attr( $p ); ?>"><?php echo esc_html( $p ); ?></button>
+													<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $hkplt_p ) : ?>
+													<button type="button" class="hkplt-preset-btn" data-target="hkplt-edit-priority-val" data-val="<?php echo esc_attr( $hkplt_p ); ?>"><?php echo esc_html( $hkplt_p ); ?></button>
 													<?php endforeach; ?>
 												</div>
 											</div>
@@ -359,7 +359,7 @@ function hkplt_status_label( $status ) {
 				/* ================================================================
 				 * VIEW: ADD CUSTOM HOOK
 				 * ============================================================== */
-				elseif ( 'add_hook' === $view ) : ?>
+				elseif ( 'add_hook' === $hkplt_view ) : ?>
 					<div class="hkplt-add-hook">
 						<div class="hkplt-section-header" style="margin-bottom: 32px;">
 							<h2><?php esc_html_e( 'Create New Rule', 'hookpilot-for-woocommerce' ); ?></h2>
@@ -378,8 +378,8 @@ function hkplt_status_label( $status ) {
 								<label><?php esc_html_e( 'Select Hook', 'hookpilot-for-woocommerce' ); ?> <span class="required">*</span></label>
 								<select id="hkplt-hook-name" name="setting[hook_name]" class="hkplt-select hkplt-hook-select" required>
 									<option value=""><?php esc_html_e( '— Select a hook —', 'hookpilot-for-woocommerce' ); ?></option>
-									<?php foreach ( $hook_list as $h ) : ?>
-										<option value="<?php echo esc_attr( $h ); ?>"><?php echo esc_html( $h ); ?></option>
+									<?php foreach ( $hkplt_hook_list as $hkplt_h ) : ?>
+										<option value="<?php echo esc_attr( $hkplt_h ); ?>"><?php echo esc_html( $hkplt_h ); ?></option>
 									<?php endforeach; ?>
 								</select>
 							</div>
@@ -388,19 +388,19 @@ function hkplt_status_label( $status ) {
 								<label><?php esc_html_e( 'Rule Type', 'hookpilot-for-woocommerce' ); ?></label>
 								<div class="hkplt-type-cards">
 									<?php
-									$types = array(
+									$hkplt_types = array(
 										'disable'        => array( '&#x1F6AB;', __( 'Disable Callback', 'hookpilot-for-woocommerce' ),      __( 'Remove a callback from this hook', 'hookpilot-for-woocommerce' ) ),
 										'priority'       => array( '&#x26A1;', __( 'Change Priority', 'hookpilot-for-woocommerce' ),        __( 'Move a callback to a new priority', 'hookpilot-for-woocommerce' ) ),
 										'wrapper'        => array( '&#x1F4E6;', __( 'Add HTML Wrapper', 'hookpilot-for-woocommerce' ),       __( 'Wrap hook output in an HTML element', 'hookpilot-for-woocommerce' ) ),
 										'custom_content' => array( '&#x270F;&#xFE0F;', __( 'Insert Custom Content', 'hookpilot-for-woocommerce' ), __( 'Output custom HTML at this hook', 'hookpilot-for-woocommerce' ) ),
 										'shortcode'      => array( '&#x1F516;', __( 'Insert Shortcode', 'hookpilot-for-woocommerce' ),       __( 'Run a shortcode at this hook', 'hookpilot-for-woocommerce' ) ),
 									);
-									foreach ( $types as $val => $info ) : ?>
-									<label class="hkplt-type-card <?php echo $val === 'disable' ? 'is-active' : ''; ?>">
-										<input type="radio" name="setting[status]" value="<?php echo esc_attr( $val ); ?>" class="hkplt-rule-type-radio" <?php echo $val === 'disable' ? 'checked' : ''; ?>>
-										<span class="hkplt-type-card__icon"><?php echo wp_kses_post( $info[0] ); ?></span>
-										<strong><?php echo esc_html( $info[1] ); ?></strong>
-										<small><?php echo esc_html( $info[2] ); ?></small>
+									foreach ( $hkplt_types as $hkplt_val => $hkplt_info ) : ?>
+									<label class="hkplt-type-card <?php echo $hkplt_val === 'disable' ? 'is-active' : ''; ?>">
+										<input type="radio" name="setting[status]" value="<?php echo esc_attr( $hkplt_val ); ?>" class="hkplt-rule-type-radio" <?php echo $hkplt_val === 'disable' ? 'checked' : ''; ?>>
+										<span class="hkplt-type-card__icon"><?php echo wp_kses_post( $hkplt_info[0] ); ?></span>
+										<strong><?php echo esc_html( $hkplt_info[1] ); ?></strong>
+										<small><?php echo esc_html( $hkplt_info[2] ); ?></small>
 									</label>
 									<?php endforeach; ?>
 								</div>
@@ -440,8 +440,8 @@ function hkplt_status_label( $status ) {
 										<label><?php esc_html_e( 'New Priority', 'hookpilot-for-woocommerce' ); ?></label>
 										<input type="number" id="hkplt-new-priority" name="setting[priority]" class="hkplt-input" value="10" min="0" max="9999" />
 										<div class="hkplt-priority-presets">
-											<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $p ) : ?>
-											<button type="button" class="hkplt-preset-btn" data-target="hkplt-new-priority" data-val="<?php echo esc_attr( $p ); ?>"><?php echo esc_html( $p ); ?></button>
+											<?php foreach ( array( 1, 5, 10, 20, 100, 999 ) as $hkplt_p ) : ?>
+											<button type="button" class="hkplt-preset-btn" data-target="hkplt-new-priority" data-val="<?php echo esc_attr( $hkplt_p ); ?>"><?php echo esc_html( $hkplt_p ); ?></button>
 											<?php endforeach; ?>
 										</div>
 									</div>
@@ -528,7 +528,7 @@ function hkplt_status_label( $status ) {
 				/* ================================================================
 				 * VIEW: IMPORT / EXPORT
 				 * ============================================================== */
-				elseif ( 'import_export' === $view ) : ?>
+				elseif ( 'import_export' === $hkplt_view ) : ?>
 					<div class="hkplt-import-export">
 						<div class="hkplt-section-header" style="margin-bottom: 32px;">
 							<h2><?php esc_html_e( 'Import / Export Settings', 'hookpilot-for-woocommerce' ); ?></h2>
@@ -547,7 +547,7 @@ function hkplt_status_label( $status ) {
 										<p><?php esc_html_e( 'Copy this JSON to import on another site.', 'hookpilot-for-woocommerce' ); ?></p>
 									</div>
 								</div>
-								<textarea id="hkplt-export-json" class="hkplt-textarea" rows="12" readonly><?php echo esc_textarea( wp_json_encode( $settings, JSON_PRETTY_PRINT ) ); ?></textarea>
+								<textarea id="hkplt-export-json" class="hkplt-textarea" rows="12" readonly><?php echo esc_textarea( wp_json_encode( $hkplt_settings, JSON_PRETTY_PRINT ) ); ?></textarea>
 								<div class="hkplt-ie-actions">
 									<button type="button" id="hkplt-copy-json" class="hkplt-btn hkplt-btn--primary hkplt-btn--full">
 										<span class="dashicons dashicons-clipboard"></span> <?php esc_html_e( 'Copy to Clipboard', 'hookpilot-for-woocommerce' ); ?>
@@ -559,7 +559,7 @@ function hkplt_status_label( $status ) {
 									printf(
 										/* translators: %d: number of rules */
 										esc_html__( 'Currently exporting %d rule(s).', 'hookpilot-for-woocommerce' ),
-										count( $settings )
+										count( $hkplt_settings )
 									);
 									?>
 								</p>
@@ -608,7 +608,7 @@ function hkplt_status_label( $status ) {
 				<div class="hkplt-sidebar-setting">
 					<span><?php esc_html_e( 'Debug Mode', 'hookpilot-for-woocommerce' ); ?></span>
 					<label class="hkplt-toggle hkplt-toggle--sm">
-						<input type="checkbox" class="hkplt-debug-sync" id="hkplt-debug-toggle" <?php checked( $debug_mode, 1 ); ?> />
+						<input type="checkbox" class="hkplt-debug-sync" id="hkplt-debug-toggle" <?php checked( $hkplt_debug_mode, 1 ); ?> />
 						<span class="hkplt-toggle__slider"></span>
 					</label>
 				</div>

@@ -294,7 +294,7 @@ class HKPLT_Admin_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$view = 'inspector';
+		$hkplt_view = 'inspector';
 		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
@@ -303,7 +303,7 @@ class HKPLT_Admin_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$view = 'manager';
+		$hkplt_view = 'manager';
 		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
@@ -312,7 +312,7 @@ class HKPLT_Admin_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$view = 'add_hook';
+		$hkplt_view = 'add_hook';
 		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
@@ -321,7 +321,7 @@ class HKPLT_Admin_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$view = 'shortcodes';
+		$hkplt_view = 'shortcodes';
 		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
@@ -330,7 +330,7 @@ class HKPLT_Admin_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$view = 'import_export';
+		$hkplt_view = 'import_export';
 		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 }
