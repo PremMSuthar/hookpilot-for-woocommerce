@@ -3,7 +3,7 @@
  *
  * Renders hook markers on the front-end that look like the official
  * WooCommerce hook diagrams: dashed-border boxes with a centered hook-name
- * label on the top edge, using WHM's indigo/purple brand palette.
+ * label on the top edge, using Hookpilot's indigo/purple brand palette.
  *
  * Strategy
  * --------
@@ -14,16 +14,16 @@
  *  3. A floating action button opens a sidebar panel listing every hook that
  *     was successfully mapped on the current page.
  *
- * @package WHM
+ * @package Hookpilot
  * @version 2.0.0
  */
 
-/* global whmDebugData, jQuery */
+/* global hkpltDebugData, jQuery */
 ( function ( $ ) {
     'use strict';
 
     /* ── Guard ─────────────────────────────────────────────────── */
-    if ( typeof whmDebugData === 'undefined' || ! whmDebugData.hooks ) {
+    if ( typeof hkpltDebugData === 'undefined' || ! hkpltDebugData.hooks ) {
         return;
     }
 
@@ -291,8 +291,8 @@
      * @return {jQuery}
      */
     function makeAreaBox( hookName ) {
-        var $box   = $( '<div class="whm-area-box"></div>' );
-        var $label = $( '<span class="whm-area-label"></span>' ).text( hookName );
+        var $box   = $( '<div class="hkplt-area-box"></div>' );
+        var $label = $( '<span class="hkplt-area-label"></span>' ).text( hookName );
         $box.append( $label );
         return $box;
     }
@@ -304,8 +304,8 @@
      * @return {jQuery}
      */
     function makeInlineMarker( hookName ) {
-        var $bar   = $( '<div class="whm-inline-marker"></div>' ).attr( 'data-hook', hookName );
-        var $text  = $( '<span class="whm-inline-text"></span>' ).text( hookName );
+        var $bar   = $( '<div class="hkplt-inline-marker"></div>' ).attr( 'data-hook', hookName );
+        var $text  = $( '<span class="hkplt-inline-text"></span>' ).text( hookName );
         $bar.append( $text );
         return $bar;
     }
@@ -371,7 +371,7 @@
     ];
 
     function renderHooks() {
-        var hooksData = whmDebugData.hooks;
+        var hooksData = hkpltDebugData.hooks;
         var isWCPage  = isWooCommercePage();
 
         $.each( HOOK_MAP, function ( hookName, config ) {
@@ -438,12 +438,12 @@
      * Human-readable label + colour for each rule status/type.
      */
     var RULE_TYPE_META = {
-        disable:        { label: whmDebugData.strings.disabled,    color: '#ef4444' },
-        priority:       { label: whmDebugData.strings.priority,    color: '#f59e0b' },
-        wrapper:        { label: whmDebugData.strings.wrapper,     color: '#8b5cf6' },
-        custom_content: { label: whmDebugData.strings.custom_html, color: '#06b6d4' },
-        shortcode:      { label: whmDebugData.strings.shortcode,   color: '#10b981' },
-        active:         { label: whmDebugData.strings.active,      color: '#4f46e5' }
+        disable:        { label: hkpltDebugData.strings.disabled,    color: '#ef4444' },
+        priority:       { label: hkpltDebugData.strings.priority,    color: '#f59e0b' },
+        wrapper:        { label: hkpltDebugData.strings.wrapper,     color: '#8b5cf6' },
+        custom_content: { label: hkpltDebugData.strings.custom_html, color: '#06b6d4' },
+        shortcode:      { label: hkpltDebugData.strings.shortcode,   color: '#10b981' },
+        active:         { label: hkpltDebugData.strings.active,      color: '#4f46e5' }
     };
 
     function getRuleTypeMeta( status ) {
@@ -457,7 +457,7 @@
      *  1. If the hook is in HOOK_MAP, check whether any of its CSS selectors
      *     match a live element. This is the most accurate test.
      *  2. Fallback: check if the hook has at least one registered callback
-     *     in whmDebugData.hooks (means WordPress fired/registered it here).
+     *     in hkpltDebugData.hooks (means WordPress fired/registered it here).
      *
      * @param  {string} hookName
      * @return {boolean}
@@ -475,38 +475,38 @@
         }
 
         // Not in HOOK_MAP: fall back to checking if WP registered any callbacks.
-        var callbacks = whmDebugData.hooks[ hookName ];
+        var callbacks = hkpltDebugData.hooks[ hookName ];
         return !! ( callbacks && callbacks.length );
     }
 
     function buildPanel() {
         // Filter to rules whose hook is actually present on the current page.
-        var allRules = ( whmDebugData.rules && whmDebugData.rules.length ) ? whmDebugData.rules : [];
+        var allRules = ( hkpltDebugData.rules && hkpltDebugData.rules.length ) ? hkpltDebugData.rules : [];
         var rules    = allRules.filter( function ( rule ) {
             return isHookOnCurrentPage( rule.hook_name );
         } );
         var count   = rules.length;
 
         var $panel = $(
-            '<div id="whm-debug-panel">' +
-                '<div class="whm-panel-header">' +
-                    '<span class="whm-panel-title">' +
-                        '<span class="whm-panel-title-icon">⚙️</span>' +
-                        whmDebugData.strings.panel_title +
+            '<div id="hkplt-debug-panel">' +
+                '<div class="hkplt-panel-header">' +
+                    '<span class="hkplt-panel-title">' +
+                        '<span class="hkplt-panel-title-icon">⚙️</span>' +
+                        hkpltDebugData.strings.panel_title +
                     '</span>' +
-                    '<span class="whm-panel-count">' + count + ' ' + ( count === 1 ? whmDebugData.strings.rule : whmDebugData.strings.rules ) + '</span>' +
+                    '<span class="hkplt-panel-count">' + count + ' ' + ( count === 1 ? hkpltDebugData.strings.rule : hkpltDebugData.strings.rules ) + '</span>' +
                 '</div>' +
-                '<ul class="whm-panel-list" id="whm-panel-list"></ul>' +
+                '<ul class="hkplt-panel-list" id="hkplt-panel-list"></ul>' +
             '</div>'
         );
 
-        var $list = $panel.find( '#whm-panel-list' );
+        var $list = $panel.find( '#hkplt-panel-list' );
 
         if ( ! count ) {
             $list.append(
-                '<li class="whm-panel-empty">' +
-                    '<span class="whm-panel-empty-icon">📋</span>' +
-                    '<span>' + whmDebugData.strings.no_rules + '</span>' +
+                '<li class="hkplt-panel-empty">' +
+                    '<span class="hkplt-panel-empty-icon">📋</span>' +
+                    '<span>' + hkpltDebugData.strings.no_rules + '</span>' +
                 '</li>'
             );
         }
@@ -526,26 +526,26 @@
             var priorityInfo = '';
             if ( rule.status === 'priority' ) {
                 priorityInfo =
-                    '<span class="whm-rule-priority">' +
+                    '<span class="hkplt-rule-priority">' +
                         rule.old_priority + ' → ' + rule.priority +
                     '</span>';
             } else if ( rule.priority ) {
                 priorityInfo =
-                    '<span class="whm-rule-priority">p' + rule.priority + '</span>';
+                    '<span class="hkplt-rule-priority">p' + rule.priority + '</span>';
             }
 
             var $li = $(
-                '<li class="whm-panel-item">' +
-                    '<span class="whm-panel-num">' + ( i + 1 ) + '</span>' +
-                    '<span class="whm-panel-rule-body">' +
-                        '<span class="whm-panel-hook-name">' + rule.hook_name + '</span>' +
+                '<li class="hkplt-panel-item">' +
+                    '<span class="hkplt-panel-num">' + ( i + 1 ) + '</span>' +
+                    '<span class="hkplt-panel-rule-body">' +
+                        '<span class="hkplt-panel-hook-name">' + rule.hook_name + '</span>' +
                         ( subLabel
-                            ? '<span class="whm-rule-sub">' + subLabel + '</span>'
+                            ? '<span class="hkplt-rule-sub">' + subLabel + '</span>'
                             : '' ) +
                     '</span>' +
-                    '<span class="whm-rule-badges">' +
+                    '<span class="hkplt-rule-badges">' +
                         priorityInfo +
-                        '<span class="whm-rule-type-badge" style="background:' + meta.color + '">' +
+                        '<span class="hkplt-rule-type-badge" style="background:' + meta.color + '">' +
                             meta.label +
                         '</span>' +
                     '</span>' +
@@ -563,16 +563,16 @@
        ============================================================ */
     function buildToggle( $panel ) {
         var $btn = $(
-            '<button id="whm-debug-toggle-btn" title="WHM Debug Overlay">' +
-                '<span class="whm-toggle-icon">🔗</span>' +
-                '<span class="whm-toggle-label">WHM</span>' +
+            '<button id="hkplt-debug-toggle-btn" title="Hookpilot Debug Overlay">' +
+                '<span class="hkplt-toggle-icon">🔗</span>' +
+                '<span class="hkplt-toggle-label">Hookpilot</span>' +
             '</button>'
         );
 
         $( 'body' ).append( $btn );
 
         $btn.on( 'click', function () {
-            $panel.toggleClass( 'whm-panel--open' );
+            $panel.toggleClass( 'hkplt-panel--open' );
         } );
     }
 

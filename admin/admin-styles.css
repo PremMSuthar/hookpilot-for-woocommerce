@@ -6,51 +6,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --whm-primary: #3b82f6;
+    --hkplt-primary: #3b82f6;
     /* Blue Shade */
-    --whm-primary-dark: #2563eb;
-    --whm-primary-light: #eff6ff;
-    --whm-primary-rgb: 59, 130, 246;
+    --hkplt-primary-dark: #2563eb;
+    --hkplt-primary-light: #eff6ff;
+    --hkplt-primary-rgb: 59, 130, 246;
 
-    --whm-secondary: #7c3aed;
+    --hkplt-secondary: #7c3aed;
     /* Purple */
-    --whm-secondary-rgb: 124, 58, 237;
+    --hkplt-secondary-rgb: 124, 58, 237;
 
-    --whm-success: #10b981;
-    --whm-danger: #ef4444;
-    --whm-warning: #f59e0b;
-    --whm-info: #3b82f6;
+    --hkplt-success: #10b981;
+    --hkplt-danger: #ef4444;
+    --hkplt-warning: #f59e0b;
+    --hkplt-info: #3b82f6;
 
-    --whm-bg: #f8fafc;
-    --whm-surface: #ffffff;
-    --whm-surface-2: #f1f5f9;
-    --whm-border: #e2e8f0;
-    --whm-border-light: #f1f5f9;
+    --hkplt-bg: #f8fafc;
+    --hkplt-surface: #ffffff;
+    --hkplt-surface-2: #f1f5f9;
+    --hkplt-border: #e2e8f0;
+    --hkplt-border-light: #f1f5f9;
 
-    --whm-text: #0f172a;
-    --whm-text-muted: #64748b;
-    --whm-text-light: #94a3b8;
+    --hkplt-text: #0f172a;
+    --hkplt-text-muted: #64748b;
+    --hkplt-text-light: #94a3b8;
 
-    --whm-radius: 12px;
-    --whm-radius-sm: 8px;
-    --whm-radius-xs: 4px;
-    --whm-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --whm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --whm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --hkplt-radius: 12px;
+    --hkplt-radius-sm: 8px;
+    --hkplt-radius-xs: 4px;
+    --hkplt-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --hkplt-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --hkplt-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-    --whm-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --whm-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+    --hkplt-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --hkplt-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
 
     /* Rule-type badge colours - Modern variants */
-    --whm-c-disable: #ef4444;
-    --whm-c-priority: #f59e0b;
-    --whm-c-wrapper: #8b5cf6;
-    --whm-c-content: #06b6d4;
-    --whm-c-shortcode: #10b981;
+    --hkplt-c-disable: #ef4444;
+    --hkplt-c-priority: #f59e0b;
+    --hkplt-c-wrapper: #8b5cf6;
+    --hkplt-c-content: #06b6d4;
+    --hkplt-c-shortcode: #10b981;
 }
 
 /* Badges */
-.whm-badge {
+.hkplt-badge {
     display: inline-flex;
     align-items: center;
     padding: 2px 10px;
@@ -63,62 +63,62 @@
     letter-spacing: 0.02em;
 }
 
-.whm-badge--disable        { background: var(--whm-c-disable); }
-.whm-badge--priority       { background: var(--whm-c-priority); }
-.whm-badge--wrapper        { background: var(--whm-c-wrapper); }
-.whm-badge--custom_content { background: var(--whm-c-content); }
-.whm-badge--shortcode      { background: var(--whm-c-shortcode); }
+.hkplt-badge--disable        { background: var(--hkplt-c-disable); }
+.hkplt-badge--priority       { background: var(--hkplt-c-priority); }
+.hkplt-badge--wrapper        { background: var(--hkplt-c-wrapper); }
+.hkplt-badge--custom_content { background: var(--hkplt-c-content); }
+.hkplt-badge--shortcode      { background: var(--hkplt-c-shortcode); }
 
 
 
 /* âââ Base âââââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-wrap {
+.hkplt-wrap {
     margin: 20px 20px 0 0;
     max-width: 100%;
-    font-family: var(--whm-font);
-    color: var(--whm-text);
+    font-family: var(--hkplt-font);
+    color: var(--hkplt-text);
 }
 
-.whm-wrap *,
-.whm-wrap *::before,
-.whm-wrap *::after {
+.hkplt-wrap *,
+.hkplt-wrap *::before,
+.hkplt-wrap *::after {
     box-sizing: border-box;
 }
 
-.whm-wrap h2 {
+.hkplt-wrap h2 {
     font-size: 18px;
     font-weight: 700;
     margin: 0 0 6px !important;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
 }
 
-.whm-wrap h3 {
+.hkplt-wrap h3 {
     font-size: 13px;
     font-weight: 600;
     margin: 0 0 12px !important;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
 }
 
-.whm-wrap p {
+.hkplt-wrap p {
     font-size: 13px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     margin: 0 0 8px;
     line-height: 1.6;
 }
 
 /* âââ Layout âââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-admin-layout {
+.hkplt-admin-layout {
     display: flex;
     gap: 24px;
     align-items: flex-start;
 }
 
-.whm-main-column {
+.hkplt-main-column {
     flex: 1;
     min-width: 0;
 }
 
-.whm-sidebar {
+.hkplt-sidebar {
     width: 270px;
     flex-shrink: 0;
     position: sticky;
@@ -126,51 +126,51 @@
 }
 
 /* âââ Header âââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-header-premium {
+.hkplt-header-premium {
     padding: 24px 0 32px 0;
 }
 
-.whm-header-content {
+.hkplt-header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.whm-logo-group {
+.hkplt-logo-group {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.whm-logo-group .whm-icon-box {
+.hkplt-logo-group .hkplt-icon-box {
     width: 48px;
     height: 48px;
-    background: var(--whm-primary-light);
+    background: var(--hkplt-primary-light);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--whm-primary);
+    color: var(--hkplt-primary);
 }
 
-.whm-logo-group svg {
+.hkplt-logo-group svg {
     width: 30px;
     height: 30px;
 }
 
-.whm-logo-title {
+.hkplt-logo-title {
     font-size: 24px;
     font-weight: 800;
     margin: 0 !important;
     letter-spacing: -0.02em;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
 }
 
-.whm-version-badge {
+.hkplt-version-badge {
     font-size: 10px;
     font-weight: 700;
-    background: var(--whm-border);
-    color: var(--whm-text-muted);
+    background: var(--hkplt-border);
+    color: var(--hkplt-text-muted);
     padding: 2px 8px;
     border-radius: 20px;
     text-transform: uppercase;
@@ -178,29 +178,29 @@
     margin-left: 8px;
 }
 
-.whm-header-tagline {
+.hkplt-header-tagline {
     font-size: 14px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     margin: 4px 0 0;
 }
 
 /* âââ Tabs âââââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-nav-tabs {
+.hkplt-nav-tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid var(--whm-border);
+    border-bottom: 1px solid var(--hkplt-border);
 }
 
-.whm-tab {
+.hkplt-tab {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 12px 20px;
     text-decoration: none;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     font-size: 14px;
     font-weight: 600;
     border-bottom: 2px solid transparent;
@@ -208,31 +208,31 @@
     transition: all .2s ease;
 }
 
-.whm-tab:hover {
-    color: var(--whm-text);
-    background: var(--whm-surface-2);
+.hkplt-tab:hover {
+    color: var(--hkplt-text);
+    background: var(--hkplt-surface-2);
 }
 
-.whm-tab--active {
-    color: var(--whm-primary) !important;
-    border-bottom-color: var(--whm-primary);
+.hkplt-tab--active {
+    color: var(--hkplt-primary) !important;
+    border-bottom-color: var(--hkplt-primary);
 }
 
-.whm-tab .dashicons {
+.hkplt-tab .dashicons {
     font-size: 18px;
     width: 18px;
     height: 18px;
 }
 
-.whm-tab-count {
+.hkplt-tab-count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 22px;
     height: 20px;
     padding: 0 6px;
-    background: var(--whm-primary-light);
-    color: var(--whm-primary);
+    background: var(--hkplt-primary-light);
+    color: var(--hkplt-primary);
     border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
@@ -240,30 +240,30 @@
 }
 
 /* âââ Content Card âââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-content {
-    background: var(--whm-surface);
+.hkplt-content {
+    background: var(--hkplt-surface);
     padding: 32px;
-    border: 1px solid var(--whm-border);
+    border: 1px solid var(--hkplt-border);
     border-top: none;
-    box-shadow: var(--whm-shadow);
-    border-radius: 0 0 var(--whm-radius) var(--whm-radius);
+    box-shadow: var(--hkplt-shadow);
+    border-radius: 0 0 var(--hkplt-radius) var(--hkplt-radius);
     min-height: 400px;
 }
 
 /* âââ Notice âââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-notice {
+.hkplt-notice {
     padding: 12px 16px;
-    border-radius: var(--whm-radius-sm);
+    border-radius: var(--hkplt-radius-sm);
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 20px;
-    border-left: 4px solid var(--whm-primary);
-    background: var(--whm-primary-light);
+    border-left: 4px solid var(--hkplt-primary);
+    background: var(--hkplt-primary-light);
 }
 
 /* âââ Dashboard ââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-welcome-box {
-    background: linear-gradient(135deg, var(--whm-primary) 0%, var(--whm-secondary) 100%);
+.hkplt-welcome-box {
+    background: linear-gradient(135deg, var(--hkplt-primary) 0%, var(--hkplt-secondary) 100%);
     border-radius: 24px;
     padding: 48px;
     margin-bottom: 40px;
@@ -276,29 +276,29 @@
     box-shadow: 0 25px 50px -12px rgb(99 102 241 / 0.25);
 }
 
-.whm-welcome-actions {
+.hkplt-welcome-actions {
     margin-top: 24px;
 }
 
-.whm-welcome-actions .whm-btn {
+.hkplt-welcome-actions .hkplt-btn {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: #fff !important;
 }
 
-.whm-welcome-actions .whm-btn:hover {
+.hkplt-welcome-actions .hkplt-btn:hover {
     background: #fff;
-    color: var(--whm-primary) !important;
+    color: var(--hkplt-primary) !important;
     transform: translateY(-2px);
 }
 
-.whm-welcome-text {
+.hkplt-welcome-text {
     position: relative;
     z-index: 2;
 }
 
-.whm-welcome-text h2 {
+.hkplt-welcome-text h2 {
     font-size: 28px;
     font-weight: 800;
     color: #fff !important;
@@ -306,7 +306,7 @@
     letter-spacing: -0.02em;
 }
 
-.whm-welcome-text p {
+.hkplt-welcome-text p {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.9);
     margin: 0 0 24px;
@@ -314,7 +314,7 @@
     line-height: 1.6;
 }
 
-.whm-welcome-image {
+.hkplt-welcome-image {
     position: absolute;
     right: -20px;
     bottom: -20px;
@@ -323,36 +323,36 @@
     pointer-events: none;
 }
 
-.whm-welcome-image .dashicons {
+.hkplt-welcome-image .dashicons {
     font-size: 200px;
     width: 200px;
     height: 200px;
     transform: rotate(12deg);
 }
 
-.whm-cards {
+.hkplt-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     margin-bottom: 32px;
 }
 
-.whm-card {
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+.hkplt-card {
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     padding: 24px;
     border-radius: 20px;
     transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--whm-shadow);
+    box-shadow: var(--hkplt-shadow);
 }
 
-.whm-card:hover {
+.hkplt-card:hover {
     transform: translateY(-4px);
-    border-color: var(--whm-primary);
-    box-shadow: var(--whm-shadow-lg);
+    border-color: var(--hkplt-primary);
+    box-shadow: var(--hkplt-shadow-lg);
 }
 
-.whm-card .dashicons {
+.hkplt-card .dashicons {
     width: 48px;
     height: 48px;
     font-size: 24px;
@@ -360,93 +360,93 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--whm-primary-light);
-    color: var(--whm-primary);
+    background: var(--hkplt-primary-light);
+    color: var(--hkplt-primary);
     border-radius: 12px;
     margin-bottom: 20px;
     transition: all .3s ease;
 }
 
-.whm-card:hover .dashicons {
-    background: var(--whm-primary);
+.hkplt-card:hover .dashicons {
+    background: var(--hkplt-primary);
     color: #fff;
     transform: scale(1.1);
 }
 
-.whm-card h3 {
+.hkplt-card h3 {
     font-size: 18px;
     font-weight: 700;
     margin: 0 0 8px !important;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
 }
 
-.whm-card p {
+.hkplt-card p {
     font-size: 14px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     margin-bottom: 20px;
     min-height: 48px;
     line-height: 1.6;
 }
 
 /* âââ Sidebar ââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-sidebar-box {
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+.hkplt-sidebar-box {
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     border-radius: 20px;
     padding: 24px;
     margin-bottom: 24px;
-    box-shadow: var(--whm-shadow);
+    box-shadow: var(--hkplt-shadow);
 }
 
-.whm-sidebar-box h3 {
+.hkplt-sidebar-box h3 {
     font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--whm-text-light);
+    color: var(--hkplt-text-light);
     margin: 0 0 20px !important;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--whm-border-light);
+    border-bottom: 1px solid var(--hkplt-border-light);
 }
 
-.whm-mini-stats {
+.hkplt-mini-stats {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.whm-mini-stat {
+.hkplt-mini-stat {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    background: var(--whm-surface-2);
+    background: var(--hkplt-surface-2);
     border-radius: 12px;
     border: 1px solid transparent;
     transition: all .2s ease;
 }
 
-.whm-mini-stat:hover {
+.hkplt-mini-stat:hover {
     transform: translateX(4px);
-    border-color: var(--whm-primary-light);
+    border-color: var(--hkplt-primary-light);
     background: #fff;
 }
 
-.whm-stat-val {
+.hkplt-stat-val {
     font-size: 28px;
     font-weight: 800;
-    color: var(--whm-primary);
+    color: var(--hkplt-primary);
     line-height: 1;
 }
 
-.whm-stat-lbl {
+.hkplt-stat-lbl {
     font-size: 12px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     font-weight: 600;
     text-align: right;
 }
 
-.whm-sidebar-setting {
+.hkplt-sidebar-setting {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -455,7 +455,7 @@
     font-weight: 500;
 }
 
-.whm-sys-info {
+.hkplt-sys-info {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -465,32 +465,32 @@
     font-size: 13px;
 }
 
-.whm-sys-info li {
+.hkplt-sys-info li {
     display: flex;
     justify-content: space-between;
 }
 
-.whm-sys-info li strong {
-    color: var(--whm-text-muted);
+.hkplt-sys-info li strong {
+    color: var(--hkplt-text-muted);
     font-weight: 500;
 }
 
-.whm-sys-info li span {
-    font-family: var(--whm-mono);
-    color: var(--whm-text);
+.hkplt-sys-info li span {
+    font-family: var(--hkplt-mono);
+    color: var(--hkplt-text);
     font-weight: 600;
 }
 
-.whm-sidebar-footer p {
+.hkplt-sidebar-footer p {
     font-size: 12px;
-    color: var(--whm-text-light);
+    color: var(--hkplt-text-light);
     text-align: center;
     margin: 0;
     font-weight: 500;
 }
 
 /* âââ Buttons ââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-btn {
+.hkplt-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -499,7 +499,7 @@
     border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
-    font-family: var(--whm-font);
+    font-family: var(--hkplt-font);
     cursor: pointer;
     border: 1px solid transparent;
     text-decoration: none !important;
@@ -508,63 +508,63 @@
     white-space: nowrap;
 }
 
-.whm-btn .dashicons {
+.hkplt-btn .dashicons {
     font-size: 18px;
     width: 18px;
     height: 18px;
     flex-shrink: 0;
 }
 
-.whm-btn--primary {
-    background: var(--whm-primary);
-    border-color: var(--whm-primary);
+.hkplt-btn--primary {
+    background: var(--hkplt-primary);
+    border-color: var(--hkplt-primary);
     color: #fff !important;
     box-shadow: 0 4px 6px -1px rgb(99 102 241 / 0.2);
 }
 
-.whm-btn--primary:hover {
-    background: var(--whm-primary-dark);
-    border-color: var(--whm-primary-dark);
+.hkplt-btn--primary:hover {
+    background: var(--hkplt-primary-dark);
+    border-color: var(--hkplt-primary-dark);
     box-shadow: 0 10px 15px -3px rgb(99 102 241 / 0.3);
     transform: translateY(-1px);
 }
 
-.whm-btn--outline {
-    background: var(--whm-surface);
-    border-color: var(--whm-border);
-    color: var(--whm-text) !important;
+.hkplt-btn--outline {
+    background: var(--hkplt-surface);
+    border-color: var(--hkplt-border);
+    color: var(--hkplt-text) !important;
 }
 
-.whm-btn--outline:hover {
-    border-color: var(--whm-primary);
-    background: var(--whm-surface-2);
-    color: var(--whm-primary) !important;
+.hkplt-btn--outline:hover {
+    border-color: var(--hkplt-primary);
+    background: var(--hkplt-surface-2);
+    color: var(--hkplt-primary) !important;
 }
 
-.whm-btn--danger {
+.hkplt-btn--danger {
     background: transparent;
     border-color: #fee2e2;
-    color: var(--whm-danger) !important;
+    color: var(--hkplt-danger) !important;
 }
 
-.whm-btn--danger:hover {
+.hkplt-btn--danger:hover {
     background: #fef2f2;
-    border-color: var(--whm-danger);
-    color: var(--whm-danger) !important;
+    border-color: var(--hkplt-danger);
+    color: var(--hkplt-danger) !important;
 }
 
-.whm-btn--sm {
+.hkplt-btn--sm {
     padding: 6px 14px;
     font-size: 13px;
     border-radius: 8px;
 }
 
-.whm-btn--full {
+.hkplt-btn--full {
     width: 100%;
 }
 
 /* âââ Toggle âââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-toggle {
+.hkplt-toggle {
     display: inline-block;
     position: relative;
     width: 48px;
@@ -573,14 +573,14 @@
     flex-shrink: 0;
 }
 
-.whm-toggle input {
+.hkplt-toggle input {
     opacity: 0;
     width: 0;
     height: 0;
     position: absolute;
 }
 
-.whm-toggle__slider {
+.hkplt-toggle__slider {
     position: absolute;
     inset: 0;
     background: #c3c4c7;
@@ -589,7 +589,7 @@
     cursor: pointer;
 }
 
-.whm-toggle__slider::before {
+.hkplt-toggle__slider::before {
     content: '';
     position: absolute;
     height: 16px;
@@ -602,29 +602,29 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
 }
 
-.whm-toggle input:checked+.whm-toggle__slider {
-    background: var(--whm-primary);
+.hkplt-toggle input:checked+.hkplt-toggle__slider {
+    background: var(--hkplt-primary);
 }
 
-.whm-toggle input:checked+.whm-toggle__slider::before {
+.hkplt-toggle input:checked+.hkplt-toggle__slider::before {
     transform: translateX(26px);
 }
 
 /* Small Variant */
-.whm-toggle--sm {
+.hkplt-toggle--sm {
     width: 36px;
     min-width: 36px;
     height: 18px;
 }
 
-.whm-toggle--sm .whm-toggle__slider::before {
+.hkplt-toggle--sm .hkplt-toggle__slider::before {
     height: 12px;
     width: 12px;
     top: 3px;
     left: 3px;
 }
 
-.whm-toggle--sm input:checked+.whm-toggle__slider::before {
+.hkplt-toggle--sm input:checked+.hkplt-toggle__slider::before {
     transform: translateX(18px);
 }
 
@@ -632,72 +632,72 @@
 
 
 /* Table Design */
-.whm-rules-container {
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+.hkplt-rules-container {
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--whm-shadow-md);
+    box-shadow: var(--hkplt-shadow-md);
 }
 
-.whm-rules-table-header {
+.hkplt-rules-table-header {
     display: grid;
     grid-template-columns: 2.5fr 1.5fr 1fr 1fr;
     background: #fcfdfe;
     padding: 16px 32px;
-    border-bottom: 1px solid var(--whm-border);
+    border-bottom: 1px solid var(--hkplt-border);
     align-items: center;
 }
 
-.whm-rules-table-header span {
+.hkplt-rules-table-header span {
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     letter-spacing: 0.05em;
 }
 
-.whm-rules-grid {
+.hkplt-rules-grid {
     display: flex;
     flex-direction: column;
 }
 
-.whm-rule-card {
+.hkplt-rule-card {
     display: grid;
     grid-template-columns: 2.5fr 1.5fr 1fr 1fr;
     align-items: center;
     padding: 24px 32px;
-    border-bottom: 1px solid var(--whm-border-light);
-    background: var(--whm-surface);
+    border-bottom: 1px solid var(--hkplt-border-light);
+    background: var(--hkplt-surface);
     transition: all .2s ease;
     border-radius: 0;
     box-shadow: none;
     overflow: visible;
 }
 
-.whm-rule-card:last-child {
+.hkplt-rule-card:last-child {
     border-bottom: none;
 }
 
-.whm-rule-card:hover {
+.hkplt-rule-card:hover {
     background: #f8fafc;
 }
 
-.whm-rule-title-cell {
+.hkplt-rule-title-cell {
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
 }
 
-.whm-rule-title-cell strong {
+.hkplt-rule-title-cell strong {
     font-size: 16px;
     font-weight: 700;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
 }
 
-.whm-rule-hook-cell code {
-    font-family: var(--whm-mono);
+.hkplt-rule-hook-cell code {
+    font-family: var(--hkplt-mono);
     font-size: 13px;
     color: #1e40af;
     background: #eff6ff;
@@ -706,7 +706,7 @@
     border: 1px solid #dbeafe;
 }
 
-.whm-rule-priority-cell .pill {
+.hkplt-rule-priority-cell .pill {
     background: #f1f5f9;
     padding: 6px 16px;
     border-radius: 12px;
@@ -717,7 +717,7 @@
     text-align: center;
 }
 
-.whm-rule-actions-cell {
+.hkplt-rule-actions-cell {
     display: flex;
     gap: 8px;
     justify-content: flex-end;
@@ -726,7 +726,7 @@
 
 
 
-.whm-empty-state {
+.hkplt-empty-state {
     text-align: center;
     padding: 52px 20px;
     display: flex;
@@ -735,132 +735,132 @@
     gap: 12px;
 }
 
-.whm-empty-state .dashicons {
+.hkplt-empty-state .dashicons {
     font-size: 42px;
     width: 42px;
     height: 42px;
-    color: var(--whm-border);
+    color: var(--hkplt-border);
 }
 
-.whm-empty-state p {
+.hkplt-empty-state p {
     font-size: 14px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     margin: 0 0 8px;
 }
 
 /* âââ Inspector ââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-inspector h2 {
+.hkplt-inspector h2 {
     margin-bottom: 4px !important;
 }
 
-.whm-toolbar {
+.hkplt-toolbar {
     display: flex;
     gap: 10px;
     margin: 16px 0;
 }
 
-.whm-placeholder {
+.hkplt-placeholder {
     text-align: center;
     padding: 40px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     font-size: 13px;
     font-style: italic;
 }
 
 /* Inspector output table */
-#whm-inspector-table-wrap table {
+#hkplt-inspector-table-wrap table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
 }
 
-#whm-inspector-table-wrap th {
-    background: var(--whm-surface-2);
+#hkplt-inspector-table-wrap th {
+    background: var(--hkplt-surface-2);
     padding: 9px 14px;
     text-align: left;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .05em;
-    color: var(--whm-text-muted);
-    border-bottom: 2px solid var(--whm-border);
+    color: var(--hkplt-text-muted);
+    border-bottom: 2px solid var(--hkplt-border);
 }
 
-#whm-inspector-table-wrap td {
+#hkplt-inspector-table-wrap td {
     padding: 9px 14px;
-    border-bottom: 1px solid var(--whm-border-light);
+    border-bottom: 1px solid var(--hkplt-border-light);
     vertical-align: top;
 }
 
-#whm-inspector-table-wrap tr:last-child td {
+#hkplt-inspector-table-wrap tr:last-child td {
     border-bottom: none;
 }
 
-#whm-inspector-table-wrap tr:hover td {
-    background: var(--whm-surface-2);
+#hkplt-inspector-table-wrap tr:hover td {
+    background: var(--hkplt-surface-2);
 }
 
 /* âââ Add Rule Form ââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-add-hook h2 {
+.hkplt-add-hook h2 {
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 8px !important;
 }
 
-.whm-form {
+.hkplt-form {
     margin-top: 32px;
 }
 
-.whm-form-row {
+.hkplt-form-row {
     margin-bottom: 24px;
 }
 
-.whm-form-row label,
-.whm-form label {
+.hkplt-form-row label,
+.hkplt-form label {
     display: block;
     font-size: 14px;
     font-weight: 700;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
     margin-bottom: 8px;
 }
 
-.whm-form-row label .required {
-    color: var(--whm-danger);
+.hkplt-form-row label .required {
+    color: var(--hkplt-danger);
     margin-left: 2px;
 }
 
-.whm-input,
-.whm-select,
-.whm-textarea {
+.hkplt-input,
+.hkplt-select,
+.hkplt-textarea {
     display: block;
     width: 100%;
     max-width: 100%;
     padding: 12px 14px;
     font-size: 14px;
-    font-family: var(--whm-font);
-    color: var(--whm-text);
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+    font-family: var(--hkplt-font);
+    color: var(--hkplt-text);
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     border-radius: 10px;
     transition: all .2s ease;
     line-height: 1.5;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-.whm-input:focus,
-.whm-select:focus,
-.whm-textarea:focus {
+.hkplt-input:focus,
+.hkplt-select:focus,
+.hkplt-textarea:focus {
     outline: none;
-    border-color: var(--whm-primary);
-    box-shadow: 0 0 0 4px rgba(var(--whm-primary-rgb), .1);
+    border-color: var(--hkplt-primary);
+    box-shadow: 0 0 0 4px rgba(var(--hkplt-primary-rgb), .1);
     background: #fff;
 }
 
-.whm-input--small {
+.hkplt-input--small {
     width: 120px;
 }
 
-.whm-select {
+.hkplt-select {
     appearance: none;
     cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
@@ -870,36 +870,36 @@
     padding-right: 40px;
 }
 
-.whm-textarea {
+.hkplt-textarea {
     resize: vertical;
     min-height: 120px;
-    font-family: var(--whm-mono);
+    font-family: var(--hkplt-mono);
     font-size: 13px;
 }
 
-.whm-form-actions {
+.hkplt-form-actions {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-top: 40px;
     padding-top: 32px;
-    border-top: 1px solid var(--whm-border-light);
+    border-top: 1px solid var(--hkplt-border-light);
 }
 
 /* Rule Type Selector Cards */
-.whm-type-cards {
+.hkplt-type-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 12px;
     margin-top: 4px;
 }
 
-.whm-type-card {
+.hkplt-type-card {
     position: relative;
     padding: 16px;
-    border: 2px solid var(--whm-border);
+    border: 2px solid var(--hkplt-border);
     border-radius: 12px;
-    background: var(--whm-surface);
+    background: var(--hkplt-surface);
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
@@ -908,63 +908,63 @@
     align-items: center;
 }
 
-.whm-type-card:hover {
-    border-color: var(--whm-primary-light);
-    background: var(--whm-surface-2);
+.hkplt-type-card:hover {
+    border-color: var(--hkplt-primary-light);
+    background: var(--hkplt-surface-2);
 }
 
-.whm-type-card.is-active {
-    border-color: var(--whm-primary);
-    background: var(--whm-primary-light);
-    box-shadow: 0 4px 12px rgba(var(--whm-primary-rgb), 0.1);
+.hkplt-type-card.is-active {
+    border-color: var(--hkplt-primary);
+    background: var(--hkplt-primary-light);
+    box-shadow: 0 4px 12px rgba(var(--hkplt-primary-rgb), 0.1);
 }
 
-.whm-type-card input {
+.hkplt-type-card input {
     position: absolute;
     opacity: 0;
 }
 
-.whm-type-card__icon {
+.hkplt-type-card__icon {
     font-size: 24px;
     margin-bottom: 8px;
     display: block;
 }
 
-.whm-type-card strong {
+.hkplt-type-card strong {
     display: block;
     font-size: 13px;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
     margin-bottom: 4px;
 }
 
-.whm-type-card small {
+.hkplt-type-card small {
     display: block;
     font-size: 11px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     line-height: 1.4;
 }
 
-.whm-type-card.is-active strong {
-    color: var(--whm-primary);
+.hkplt-type-card.is-active strong {
+    color: var(--hkplt-primary);
 }
 
 /* âââ Shortcodes Page ââââââââââââââââââââââââââââââââââââââââââ */
-.whm-shortcodes h2 {
+.hkplt-shortcodes h2 {
     margin-bottom: 4px !important;
 }
 
-.whm-shortcode-box {
+.hkplt-shortcode-box {
     margin: 18px 0 28px;
     background: #1d2327;
-    border-radius: var(--whm-radius);
+    border-radius: var(--hkplt-radius);
     padding: 16px 20px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.whm-shortcode-box pre.whm-code {
-    font-family: var(--whm-mono);
+.hkplt-shortcode-box pre.hkplt-code {
+    font-family: var(--hkplt-mono);
     font-size: 13px;
     color: #a5f3fc;
     margin: 0;
@@ -976,42 +976,42 @@
     padding: 0;
 }
 
-.whm-shortcodes h3 {
+.hkplt-shortcodes h3 {
     font-size: 15px !important;
     font-weight: 700 !important;
     margin: 0 0 4px !important;
-    color: var(--whm-text) !important;
+    color: var(--hkplt-text) !important;
     text-transform: none !important;
     letter-spacing: 0 !important;
 }
 
 /* Grid of shortcode copy cards */
-.whm-shortcode-grid {
+.hkplt-shortcode-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 14px;
 }
 
-.whm-shortcode-card {
+.hkplt-shortcode-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     padding: 11px 14px;
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
-    border-radius: var(--whm-radius-sm);
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
+    border-radius: var(--hkplt-radius-sm);
     transition: border-color .15s, box-shadow .15s;
 }
 
-.whm-shortcode-card:hover {
-    border-color: var(--whm-primary);
-    box-shadow: 0 2px 8px rgba(var(--whm-primary-rgb), .1);
+.hkplt-shortcode-card:hover {
+    border-color: var(--hkplt-primary);
+    box-shadow: 0 2px 8px rgba(var(--hkplt-primary-rgb), .1);
 }
 
-.whm-shortcode-card code {
-    font-family: var(--whm-mono);
+.hkplt-shortcode-card code {
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     color: #1e40af;
     background: #f0f9ff;
@@ -1025,7 +1025,7 @@
     font-weight: 600;
 }
 
-.whm-copy-shortcode {
+.hkplt-copy-shortcode {
     padding: 0 !important;
     height: 34px !important;
     width: 34px !important;
@@ -1034,19 +1034,19 @@
     align-items: center !important;
     justify-content: center !important;
     background: #fff !important;
-    border: 1px solid var(--whm-border) !important;
+    border: 1px solid var(--hkplt-border) !important;
     border-radius: 8px !important;
-    color: var(--whm-text-muted) !important;
+    color: var(--hkplt-text-muted) !important;
     transition: all 0.2s ease !important;
 }
 
-.whm-copy-shortcode:hover {
-    border-color: var(--whm-primary) !important;
-    color: var(--whm-primary) !important;
-    background: var(--whm-primary-light) !important;
+.hkplt-copy-shortcode:hover {
+    border-color: var(--hkplt-primary) !important;
+    color: var(--hkplt-primary) !important;
+    background: var(--hkplt-primary-light) !important;
 }
 
-.whm-copy-shortcode .dashicons {
+.hkplt-copy-shortcode .dashicons {
     font-size: 16px !important;
     width: 16px !important;
     height: 16px !important;
@@ -1055,7 +1055,7 @@
 }
 
 /* âââ Modal ââââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-modal {
+.hkplt-modal {
     position: fixed;
     inset: 0;
     z-index: 99999;
@@ -1064,19 +1064,19 @@
     justify-content: center;
 }
 
-.whm-modal__backdrop {
+.hkplt-modal__backdrop {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, .5);
     backdrop-filter: blur(2px);
 }
 
-.whm-modal__box {
+.hkplt-modal__box {
     position: relative;
     z-index: 1;
-    background: var(--whm-surface);
-    border-radius: var(--whm-radius);
-    box-shadow: var(--whm-shadow-md);
+    background: var(--hkplt-surface);
+    border-radius: var(--hkplt-radius);
+    box-shadow: var(--hkplt-shadow-md);
     width: 520px;
     max-width: 95vw;
     max-height: 90vh;
@@ -1085,64 +1085,64 @@
     overflow: hidden;
 }
 
-.whm-modal__head {
+.hkplt-modal__head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px 20px;
-    border-bottom: 1px solid var(--whm-border);
-    background: var(--whm-surface-2);
+    border-bottom: 1px solid var(--hkplt-border);
+    background: var(--hkplt-surface-2);
 }
 
-.whm-modal__head h3 {
+.hkplt-modal__head h3 {
     margin: 0 !important;
     font-size: 15px;
     font-weight: 700;
 }
 
-.whm-modal__close {
+.hkplt-modal__close {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 20px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     padding: 2px 6px;
     line-height: 1;
     border-radius: 4px;
     transition: background .15s, color .15s;
 }
 
-.whm-modal__close:hover {
-    background: var(--whm-border-light);
-    color: var(--whm-text);
+.hkplt-modal__close:hover {
+    background: var(--hkplt-border-light);
+    color: var(--hkplt-text);
 }
 
-.whm-modal__body {
+.hkplt-modal__body {
     padding: 20px;
     overflow-y: auto;
     flex: 1;
 }
 
-.whm-modal__foot {
+.hkplt-modal__foot {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
     padding: 14px 20px;
-    border-top: 1px solid var(--whm-border);
-    background: var(--whm-surface-2);
+    border-top: 1px solid var(--hkplt-border);
+    background: var(--hkplt-surface-2);
 }
 
-.whm-form--modal .whm-form-row {
+.hkplt-form--modal .hkplt-form-row {
     margin-bottom: 14px;
 }
 
 /* âââ Spinner ââââââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-spinner {
+.hkplt-spinner {
     visibility: hidden;
 }
 
-.whm-spinner.is-active {
+.hkplt-spinner.is-active {
     visibility: visible;
 }
 
@@ -1160,34 +1160,34 @@
 
 /* âââ Responsive âââââââââââââââââââââââââââââââââââââââââââââââ */
 @media (max-width: 1024px) {
-    .whm-admin-layout {
+    .hkplt-admin-layout {
         flex-direction: column;
     }
 
-    .whm-sidebar {
+    .hkplt-sidebar {
         width: 100%;
         position: static;
     }
 
-    .whm-cards {
+    .hkplt-cards {
         grid-template-columns: repeat(2, 1fr);
     }
-    .whm-ie-grid {
+    .hkplt-ie-grid {
         grid-template-columns: 1fr;
     }
 
 
-    .whm-shortcode-grid {
+    .hkplt-shortcode-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 640px) {
-    .whm-cards {
+    .hkplt-cards {
         grid-template-columns: 1fr;
     }
 
-    .whm-rule-hook {
+    .hkplt-rule-hook {
         max-width: 180px;
     }
 }
@@ -1196,8 +1196,8 @@
 
 
 /* âââ Section Box ââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-section-box {
-    border: 1px solid var(--whm-border);
+.hkplt-section-box {
+    border: 1px solid var(--hkplt-border);
     border-radius: 12px;
     padding: 32px;
     margin: 32px 0;
@@ -1205,10 +1205,10 @@
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
 }
 
-.whm-section-box__head {
+.hkplt-section-box__head {
     font-size: 15px;
     font-weight: 800;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
     margin: 0 0 24px !important;
     padding-bottom: 12px;
     border-bottom: 2px solid #f1f5f9;
@@ -1217,58 +1217,58 @@
 }
 
 /* âââ Tag Picker âââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-tag-picker {
+.hkplt-tag-picker {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 6px;
 }
 
-.whm-tag-btn {
+.hkplt-tag-btn {
     padding: 5px 12px;
     font-size: 12px;
-    font-family: var(--whm-mono);
+    font-family: var(--hkplt-mono);
     font-weight: 600;
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
-    border-radius: var(--whm-radius-sm);
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
+    border-radius: var(--hkplt-radius-sm);
     cursor: pointer;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     transition: all .15s;
 }
 
-.whm-tag-btn:hover {
-    border-color: var(--whm-primary);
-    color: var(--whm-primary);
-    background: var(--whm-primary-light);
+.hkplt-tag-btn:hover {
+    border-color: var(--hkplt-primary);
+    color: var(--hkplt-primary);
+    background: var(--hkplt-primary-light);
 }
 
-.whm-tag-btn.is-active {
-    background: var(--whm-primary);
-    border-color: var(--whm-primary);
+.hkplt-tag-btn.is-active {
+    background: var(--hkplt-primary);
+    border-color: var(--hkplt-primary);
     color: #fff;
 }
 
 /* âââ Wrapper Preview ââââââââââââââââââââââââââââââââââââââââââ */
-.whm-wrapper-preview {
+.hkplt-wrapper-preview {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 12px;
     padding: 10px 14px;
     background: #1d2327;
-    border-radius: var(--whm-radius-sm);
+    border-radius: var(--hkplt-radius-sm);
     font-size: 12px;
 }
 
-.whm-wrapper-preview span {
+.hkplt-wrapper-preview span {
     color: #9ca3af;
     font-size: 11px;
     white-space: nowrap;
 }
 
-.whm-wrapper-preview code {
-    font-family: var(--whm-mono);
+.hkplt-wrapper-preview code {
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     color: #a5f3fc;
     background: none;
@@ -1277,34 +1277,34 @@
 }
 
 /* âââ Priority Presets âââââââââââââââââââââââââââââââââââââââââ */
-.whm-priority-presets {
+.hkplt-priority-presets {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 8px;
 }
 
-.whm-preset-btn {
+.hkplt-preset-btn {
     padding: 3px 10px;
     font-size: 11px;
-    font-family: var(--whm-mono);
+    font-family: var(--hkplt-mono);
     font-weight: 700;
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     border-radius: 20px;
     cursor: pointer;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     transition: all .12s;
 }
 
-.whm-preset-btn:hover {
-    background: var(--whm-primary);
-    border-color: var(--whm-primary);
+.hkplt-preset-btn:hover {
+    background: var(--hkplt-primary);
+    border-color: var(--hkplt-primary);
     color: #fff;
 }
 
 /* âââ Priority Grid ââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-priority-grid {
+.hkplt-priority-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
@@ -1312,72 +1312,72 @@
 }
 
 /* âââ Field Hint âââââââââââââââââââââââââââââââââââââââââââââââ */
-.whm-field-hint {
+.hkplt-field-hint {
     font-size: 11px !important;
-    color: var(--whm-text-light) !important;
+    color: var(--hkplt-text-light) !important;
     margin: 5px 0 0 !important;
     font-style: italic;
 }
 
 @media (max-width: 900px) {
-    .whm-type-cards {
+    .hkplt-type-cards {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .whm-priority-grid {
+    .hkplt-priority-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 600px) {
-    .whm-type-cards {
+    .hkplt-type-cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* ——— Import / Export — Redesigned ——————————————————————————— */
-.whm-ie-grid {
+.hkplt-ie-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 }
 
-.whm-ie-section {
-    background: var(--whm-surface);
-    border: 1px solid var(--whm-border);
+.hkplt-ie-section {
+    background: var(--hkplt-surface);
+    border: 1px solid var(--hkplt-border);
     border-radius: 20px;
     padding: 28px;
-    box-shadow: var(--whm-shadow);
+    box-shadow: var(--hkplt-shadow);
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.whm-ie-header {
+.hkplt-ie-header {
     display: flex;
     align-items: flex-start;
     gap: 16px;
 }
 
-.whm-ie-header h3 {
+.hkplt-ie-header h3 {
     font-size: 16px !important;
     font-weight: 700 !important;
     margin: 0 !important;
-    color: var(--whm-text) !important;
+    color: var(--hkplt-text) !important;
     text-transform: none !important;
     letter-spacing: 0 !important;
     border: none !important;
     padding: 0 !important;
 }
 
-.whm-ie-header p {
+.hkplt-ie-header p {
     font-size: 13px;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
     margin: 4px 0 0;
     line-height: 1.4;
 }
 
-.whm-ie-icon {
+.hkplt-ie-icon {
     width: 44px;
     height: 44px;
     min-width: 44px;
@@ -1388,48 +1388,48 @@
     flex-shrink: 0;
 }
 
-.whm-ie-icon .dashicons {
+.hkplt-ie-icon .dashicons {
     font-size: 20px;
     width: 20px;
     height: 20px;
     color: inherit;
 }
 
-.whm-ie-icon--export {
+.hkplt-ie-icon--export {
     background: #eff6ff;
-    color: var(--whm-primary);
+    color: var(--hkplt-primary);
 }
 
-.whm-ie-icon--import {
+.hkplt-ie-icon--import {
     background: #f0fdf4;
-    color: var(--whm-success);
+    color: var(--hkplt-success);
 }
 
-.whm-ie-actions {
+.hkplt-ie-actions {
     margin-top: 4px;
 }
 
-.whm-ie-hint {
+.hkplt-ie-hint {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 12px !important;
-    color: var(--whm-text-muted) !important;
+    color: var(--hkplt-text-muted) !important;
     margin: 0 !important;
     padding: 10px 14px;
-    background: var(--whm-surface-2);
+    background: var(--hkplt-surface-2);
     border-radius: 10px;
 }
 
-.whm-ie-hint .dashicons {
+.hkplt-ie-hint .dashicons {
     font-size: 16px;
     width: 16px;
     height: 16px;
-    color: var(--whm-info);
+    color: var(--hkplt-info);
     flex-shrink: 0;
 }
 
-.whm-ie-warning {
+.hkplt-ie-warning {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -1439,24 +1439,24 @@
     border-radius: 10px;
 }
 
-.whm-ie-warning > .dashicons {
+.hkplt-ie-warning > .dashicons {
     font-size: 18px;
     width: 18px;
     height: 18px;
-    color: var(--whm-danger);
+    color: var(--hkplt-danger);
     flex-shrink: 0;
     margin-top: 1px;
 }
 
-.whm-ie-warning strong {
+.hkplt-ie-warning strong {
     display: block;
     font-size: 13px;
     font-weight: 700;
-    color: var(--whm-danger);
+    color: var(--hkplt-danger);
     margin-bottom: 2px;
 }
 
-.whm-ie-warning p {
+.hkplt-ie-warning p {
     font-size: 12px;
     color: #991b1b;
     margin: 0;
@@ -1464,42 +1464,42 @@
 }
 
 /* ——— Shortcode Attributes Table ———————————————————————————— */
-.whm-attr-table {
+.hkplt-attr-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
 }
 
-.whm-attr-table th {
-    background: var(--whm-surface-2);
+.hkplt-attr-table th {
+    background: var(--hkplt-surface-2);
     padding: 10px 14px;
     text-align: left;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--whm-text-muted);
-    border-bottom: 2px solid var(--whm-border);
+    color: var(--hkplt-text-muted);
+    border-bottom: 2px solid var(--hkplt-border);
 }
 
-.whm-attr-table td {
+.hkplt-attr-table td {
     padding: 12px 14px;
-    border-bottom: 1px solid var(--whm-border-light);
+    border-bottom: 1px solid var(--hkplt-border-light);
     vertical-align: middle;
-    color: var(--whm-text);
+    color: var(--hkplt-text);
     line-height: 1.5;
 }
 
-.whm-attr-table tr:last-child td {
+.hkplt-attr-table tr:last-child td {
     border-bottom: none;
 }
 
-.whm-attr-table tr:hover td {
-    background: var(--whm-surface-2);
+.hkplt-attr-table tr:hover td {
+    background: var(--hkplt-surface-2);
 }
 
-.whm-attr-table code {
-    font-family: var(--whm-mono);
+.hkplt-attr-table code {
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     color: #1e40af;
     background: #eff6ff;
@@ -1510,30 +1510,30 @@
 }
 
 /* ——— Shortcode Usage Examples ————————————————————————————— */
-.whm-example-list {
+.hkplt-example-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.whm-example-item {
+.hkplt-example-item {
     display: flex;
     flex-direction: column;
     gap: 6px;
     padding: 12px 16px;
-    background: var(--whm-surface-2);
+    background: var(--hkplt-surface-2);
     border-radius: 10px;
-    border: 1px solid var(--whm-border-light);
+    border: 1px solid var(--hkplt-border-light);
 }
 
-.whm-example-label {
+.hkplt-example-label {
     font-size: 12px;
     font-weight: 600;
-    color: var(--whm-text-muted);
+    color: var(--hkplt-text-muted);
 }
 
-.whm-example-item code {
-    font-family: var(--whm-mono);
+.hkplt-example-item code {
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     color: #1e40af;
     background: #fff;

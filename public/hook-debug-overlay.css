@@ -3,41 +3,41 @@
  *
  * Visual hook markers inspired by WooCommerce's official hook diagram style.
  * Each hook is shown as a dashed-border box with the hook name centered on
- * the top border, using the WHM plugin's brand colors (purple/indigo).
+ * the top border, using the Hookpilot plugin's brand colors (purple/indigo).
  *
- * @package WHM
+ * @package Hookpilot
  * @version 2.0.0
  */
 
 /* ============================================================
-   CSS Variables – WHM Brand Colors
+   CSS Variables – Hookpilot Brand Colors
    ============================================================ */
 :root {
-    --whm-purple:        #7c3aed;
-    --whm-indigo:        #4f46e5;
-    --whm-indigo-dark:   #4338ca;
-    --whm-indigo-light:  #e0e7ff;
-    --whm-indigo-bg:     rgba(79, 70, 229, 0.04);
-    --whm-border-dash:   rgba(79, 70, 229, 0.55);
-    --whm-label-bg:      #4f46e5;
-    --whm-label-color:   #ffffff;
-    --whm-compact-bg:    rgba(124, 58, 237, 0.08);
-    --whm-compact-border: rgba(124, 58, 237, 0.45);
-    --whm-font:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --whm-mono:          'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+    --hkplt-purple:        #7c3aed;
+    --hkplt-indigo:        #4f46e5;
+    --hkplt-indigo-dark:   #4338ca;
+    --hkplt-indigo-light:  #e0e7ff;
+    --hkplt-indigo-bg:     rgba(79, 70, 229, 0.04);
+    --hkplt-border-dash:   rgba(79, 70, 229, 0.55);
+    --hkplt-label-bg:      #4f46e5;
+    --hkplt-label-color:   #ffffff;
+    --hkplt-compact-bg:    rgba(124, 58, 237, 0.08);
+    --hkplt-compact-border: rgba(124, 58, 237, 0.45);
+    --hkplt-font:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --hkplt-mono:          'SF Mono', 'Fira Code', 'Fira Mono', monospace;
 }
 
 /* ============================================================
    Area Hook Box – Wraps a full page section
    (e.g. woocommerce_before_shop_loop, woocommerce_before_cart)
    ============================================================ */
-.whm-area-box {
+.hkplt-area-box {
     position: relative;
     display: block;
     width: 100%;
     box-sizing: border-box;
-    border: 2px dashed var(--whm-border-dash);
-    background: var(--whm-indigo-bg);
+    border: 2px dashed var(--hkplt-border-dash);
+    background: var(--hkplt-indigo-bg);
     padding: 20px 12px 8px;
     margin: 6px 0;
     clear: both;
@@ -45,15 +45,15 @@
 }
 
 /* The centered hook name label on the top border */
-.whm-area-label {
+.hkplt-area-label {
     position: absolute;
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    background: var(--whm-label-bg);
-    color: var(--whm-label-color);
-    font-family: var(--whm-mono);
+    background: var(--hkplt-label-bg);
+    color: var(--hkplt-label-color);
+    font-family: var(--hkplt-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -68,14 +68,14 @@
    Inline Marker – Single-line bar for hooks inside product
    cards and other compact contexts
    ============================================================ */
-.whm-inline-marker {
+.hkplt-inline-marker {
     display: flex !important;
     align-items: center;
     justify-content: center;
     width: 100% !important;
     box-sizing: border-box !important;
-    background: var(--whm-indigo-bg);
-    border: 2px dashed var(--whm-border-dash);
+    background: var(--hkplt-indigo-bg);
+    border: 2px dashed var(--hkplt-border-dash);
     padding: 10px 8px;
     margin: 6px 0;
     clear: both;
@@ -85,11 +85,11 @@
 }
 
 /* Pill-badge label for inline markers (matches area-box style) */
-.whm-inline-badge {
+.hkplt-inline-badge {
     display: inline-block;
-    background: var(--whm-label-bg);
-    color: var(--whm-label-color);
-    font-family: var(--whm-mono);
+    background: var(--hkplt-label-bg);
+    color: var(--hkplt-label-color);
+    font-family: var(--hkplt-mono);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -109,14 +109,14 @@
 
 
 /* Text displayed inside the inline marker box */
-.whm-inline-text {
+.hkplt-inline-text {
     display: block;
     width: 100%;
     text-align: center;
-    font-family: var(--whm-mono);
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     font-weight: 700;
-    color: var(--whm-indigo-dark);
+    color: var(--hkplt-indigo-dark);
     letter-spacing: 0.01em;
     white-space: nowrap;
     overflow: hidden;
@@ -124,14 +124,14 @@
     padding: 2px 8px;
 }
 /* Keep old class for backwards compat */
-.whm-inline-label {
+.hkplt-inline-label {
     display: block;
     width: 100%;
     text-align: center;
-    font-family: var(--whm-mono);
+    font-family: var(--hkplt-mono);
     font-size: 12px;
     font-weight: 600;
-    color: var(--whm-indigo);
+    color: var(--hkplt-indigo);
     letter-spacing: 0.01em;
     white-space: nowrap;
     overflow: hidden;
@@ -144,17 +144,17 @@
    ============================================================ */
 
 /* We inject a wrapper class onto WooCommerce .product elements */
-.whm-loop-item-wrap {
+.hkplt-loop-item-wrap {
     position: relative !important;
-    border: 1.5px dashed var(--whm-compact-border) !important;
-    background: var(--whm-compact-bg) !important;
+    border: 1.5px dashed var(--hkplt-compact-border) !important;
+    background: var(--hkplt-compact-bg) !important;
     box-sizing: border-box !important;
 }
 
 /* ============================================================
    Floating Panel (Hook List)
    ============================================================ */
-#whm-debug-panel {
+#hkplt-debug-panel {
     position: fixed;
     bottom: 88px;
     right: 24px;
@@ -167,26 +167,26 @@
     display: none;
     flex-direction: column;
     overflow: hidden;
-    font-family: var(--whm-font);
+    font-family: var(--hkplt-font);
     border: 1px solid rgba(79, 70, 229, 0.15);
 }
 
-#whm-debug-panel.whm-panel--open {
+#hkplt-debug-panel.hkplt-panel--open {
     display: flex;
 }
 
-.whm-panel-header {
+.hkplt-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 14px 18px 12px;
-    background: var(--whm-indigo);
+    background: var(--hkplt-indigo);
     color: #fff;
     flex-shrink: 0;
     border-radius: 16px 16px 0 0;
 }
 
-.whm-panel-title {
+.hkplt-panel-title {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -195,7 +195,7 @@
     gap: 8px;
 }
 
-.whm-panel-title-icon {
+.hkplt-panel-title-icon {
     width: 20px;
     height: 20px;
     background: rgba(255,255,255,0.2);
@@ -206,7 +206,7 @@
     font-size: 11px;
 }
 
-.whm-panel-count {
+.hkplt-panel-count {
     font-size: 11px;
     background: rgba(255,255,255,0.2);
     padding: 2px 8px;
@@ -214,7 +214,7 @@
     font-weight: 600;
 }
 
-.whm-panel-list {
+.hkplt-panel-list {
     list-style: none;
     margin: 0;
     padding: 8px;
@@ -222,18 +222,18 @@
     flex: 1;
 }
 
-.whm-panel-list::-webkit-scrollbar {
+.hkplt-panel-list::-webkit-scrollbar {
     width: 4px;
 }
-.whm-panel-list::-webkit-scrollbar-track {
+.hkplt-panel-list::-webkit-scrollbar-track {
     background: #f8f9ff;
 }
-.whm-panel-list::-webkit-scrollbar-thumb {
+.hkplt-panel-list::-webkit-scrollbar-thumb {
     background: #c7d2fe;
     border-radius: 4px;
 }
 
-.whm-panel-item {
+.hkplt-panel-item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -245,17 +245,17 @@
     transition: background 0.15s;
 }
 
-.whm-panel-item:hover {
+.hkplt-panel-item:hover {
     background: #f0f0ff;
-    color: var(--whm-indigo);
+    color: var(--hkplt-indigo);
 }
 
-.whm-panel-num {
+.hkplt-panel-num {
     width: 22px;
     height: 22px;
     border-radius: 6px;
-    background: var(--whm-indigo-light);
-    color: var(--whm-indigo);
+    background: var(--hkplt-indigo-light);
+    color: var(--hkplt-indigo);
     font-size: 10px;
     font-weight: 700;
     display: inline-flex;
@@ -264,8 +264,8 @@
     flex-shrink: 0;
 }
 
-.whm-panel-hook-name {
-    font-family: var(--whm-mono);
+.hkplt-panel-hook-name {
+    font-family: var(--hkplt-mono);
     font-size: 11px;
     flex: 1;
     overflow: hidden;
@@ -273,7 +273,7 @@
     white-space: nowrap;
 }
 
-.whm-panel-cb-count {
+.hkplt-panel-cb-count {
     font-size: 10px;
     background: #f3f4f6;
     color: #6b7280;
@@ -286,7 +286,7 @@
 /* ============================================================
    Floating Toggle Button
    ============================================================ */
-#whm-debug-toggle-btn {
+#hkplt-debug-toggle-btn {
     position: fixed;
     bottom: 24px;
     right: 24px;
@@ -294,7 +294,7 @@
     width: 54px;
     height: 54px;
     border-radius: 16px;
-    background: var(--whm-indigo);
+    background: var(--hkplt-indigo);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -305,25 +305,25 @@
     flex-direction: column;
     gap: 2px;
     transition: background 0.2s, transform 0.15s;
-    font-family: var(--whm-font);
+    font-family: var(--hkplt-font);
 }
 
-#whm-debug-toggle-btn:hover {
-    background: var(--whm-indigo-dark);
+#hkplt-debug-toggle-btn:hover {
+    background: var(--hkplt-indigo-dark);
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(79, 70, 229, 0.55);
 }
 
-#whm-debug-toggle-btn:active {
+#hkplt-debug-toggle-btn:active {
     transform: translateY(0);
 }
 
-.whm-toggle-icon {
+.hkplt-toggle-icon {
     font-size: 18px;
     line-height: 1;
 }
 
-.whm-toggle-label {
+.hkplt-toggle-label {
     font-size: 7px;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -336,13 +336,13 @@
    ============================================================ */
 
 /* Override base item for the rules layout */
-.whm-panel-item {
+.hkplt-panel-item {
     align-items: flex-start;
     gap: 8px;
 }
 
 /* Stacks hook name + sub-label vertically */
-.whm-panel-rule-body {
+.hkplt-panel-rule-body {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -352,10 +352,10 @@
 }
 
 /* Secondary label: callback name, wrapper class, etc. */
-.whm-rule-sub {
-    font-family: var(--whm-mono);
+.hkplt-rule-sub {
+    font-family: var(--hkplt-mono);
     font-size: 10px;
-    color: var(--whm-indigo);
+    color: var(--hkplt-indigo);
     opacity: 0.7;
     white-space: nowrap;
     overflow: hidden;
@@ -363,7 +363,7 @@
 }
 
 /* Right-side badges group */
-.whm-rule-badges {
+.hkplt-rule-badges {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -372,7 +372,7 @@
 }
 
 /* Coloured rule-type pill */
-.whm-rule-type-badge {
+.hkplt-rule-type-badge {
     font-size: 9px;
     font-weight: 700;
     color: #fff;
@@ -383,15 +383,15 @@
 }
 
 /* Priority indicator (e.g. "p10" or "5 → 20") */
-.whm-rule-priority {
-    font-family: var(--whm-mono);
+.hkplt-rule-priority {
+    font-family: var(--hkplt-mono);
     font-size: 9px;
     color: #9ca3af;
     white-space: nowrap;
 }
 
 /* Empty-state row */
-.whm-panel-empty {
+.hkplt-panel-empty {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -401,7 +401,7 @@
     font-style: italic;
 }
 
-.whm-panel-empty-icon {
+.hkplt-panel-empty-icon {
     font-size: 20px;
     flex-shrink: 0;
 }

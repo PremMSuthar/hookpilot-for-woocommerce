@@ -5,7 +5,7 @@
  * Captures and exposes all registered WooCommerce hooks so that they
  * can be displayed in the admin panel.
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -14,13 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WHM_Hook_Inspector
+ * Class HKPLT_Hook_Inspector
  */
-class WHM_Hook_Inspector {
+class HKPLT_Hook_Inspector {
 
 	/**
 	 * Known WooCommerce action/filter hooks to inspect.
-	 * This list covers the most commonly used hooks.
 	 *
 	 * @var string[]
 	 */
@@ -80,7 +79,7 @@ class WHM_Hook_Inspector {
 	 * Register WordPress hooks.
 	 */
 	public function register_hooks() {
-		add_action( 'wp_ajax_whm_get_hooks', array( $this, 'ajax_get_hooks' ) );
+		add_action( 'wp_ajax_hkplt_get_hooks', array( $this, 'ajax_get_hooks' ) );
 	}
 
 	/**
@@ -93,8 +92,7 @@ class WHM_Hook_Inspector {
 	}
 
 	/**
-	 * Build a structured array of all registered callbacks for each
-	 * monitored WooCommerce hook.
+	 * Build a structured array of all registered callbacks for each monitored hook.
 	 *
 	 * @return array<string, array<int, array<string, mixed>>>
 	 */
@@ -107,11 +105,8 @@ class WHM_Hook_Inspector {
 			$callbacks = array();
 
 			if ( isset( $wp_filter[ $hook_name ] ) ) {
-				$hook_obj = $wp_filter[ $hook_name ];
-
-				// WP_Hook stores callbacks in $callbacks property indexed by priority.
-				foreach ( $hook_obj->callbacks as $priority => $fns ) {
-					foreach ( $fns as $fn_key => $fn_data ) {
+				foreach ( $wp_filter[ $hook_name ]->callbacks as $priority => $fns ) {
+					foreach ( $fns as $fn_data ) {
 						$callback     = $fn_data['function'];
 						$callback_str = $this->callback_to_string( $callback );
 						$source       = $this->get_callback_source( $callback );
@@ -135,10 +130,9 @@ class WHM_Hook_Inspector {
 
 	/**
 	 * AJAX handler – returns hook data as JSON.
-	 * Requires capability: manage_options.
 	 */
 	public function ajax_get_hooks() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -193,7 +187,6 @@ class WHM_Hook_Inspector {
 				return 'WordPress Core';
 			}
 
-			// Normalise slashes.
 			$file = wp_normalize_path( $file );
 			$base = wp_normalize_path( WP_CONTENT_DIR );
 
@@ -217,8 +210,6 @@ class WHM_Hook_Inspector {
 
 	/**
 	 * Determine whether a hook name is a filter rather than an action.
-	 * (Heuristic: WooCommerce filters usually have "filter" in the name
-	 * or return values.)
 	 *
 	 * @param  string $hook_name Hook name.
 	 * @return bool

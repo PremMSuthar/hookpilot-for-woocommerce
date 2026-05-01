@@ -5,30 +5,30 @@
  * on every page (frontend and backend) for logged-in administrators.
  * Updates the admin bar label live via AJAX without a full page reload.
  *
- * @package WHM
+ * @package Hookpilot
  * @version 1.0.0
  */
 
-/* global whmBarData, jQuery */
+/* global hkpltBarData, jQuery */
 ( function ( $ ) {
     'use strict';
 
-    if ( typeof whmBarData === 'undefined' ) {
+    if ( typeof hkpltBarData === 'undefined' ) {
         return;
     }
 
     $( document ).ready( function () {
 
         function updateBarLabel( isEnabled ) {
-            var $switch = $( '#wp-admin-bar-whm-debug-bar .whm-ab-switch' );
-            var $action = $( '#wp-admin-bar-whm-debug-bar-toggle > .ab-item' );
+            var $switch = $( '#wp-admin-bar-hkplt-debug-bar .hkplt-ab-switch' );
+            var $action = $( '#wp-admin-bar-hkplt-debug-bar-toggle > .ab-item' );
 
             if ( isEnabled ) {
                 $switch.removeClass( 'is-off' ).addClass( 'is-on' );
-                $action.text( whmBarData.strings.disabled_label );
+                $action.text( hkpltBarData.strings.disabled_label );
             } else {
                 $switch.removeClass( 'is-on' ).addClass( 'is-off' );
-                $action.text( whmBarData.strings.enabled_label );
+                $action.text( hkpltBarData.strings.enabled_label );
             }
         }
 
@@ -41,18 +41,18 @@
             e.preventDefault();
 
             // Read current state from the live label.
-            var currentlyOn = $( '#wp-admin-bar-whm-debug-bar .whm-ab-switch' ).hasClass( 'is-on' );
+            var currentlyOn = $( '#wp-admin-bar-hkplt-debug-bar .hkplt-ab-switch' ).hasClass( 'is-on' );
             var newState    = currentlyOn ? 0 : 1;
 
             // Optimistic UI update.
             updateBarLabel( newState );
 
             $.ajax( {
-                url:  whmBarData.ajax_url,
+                url:  hkpltBarData.ajax_url,
                 type: 'POST',
                 data: {
-                    action:  'whm_toggle_debug',
-                    nonce:   whmBarData.nonce,
+                    action:  'hkplt_toggle_debug',
+                    nonce:   hkpltBarData.nonce,
                     enabled: newState
                 },
                 success: function ( response ) {
@@ -72,8 +72,8 @@
         }
 
         // Bind to the toggle sub-menu item AND the parent admin bar node.
-        $( document ).on( 'click', '#wp-admin-bar-whm-debug-bar-toggle a', handleToggle );
-        $( document ).on( 'click', '#wp-admin-bar-whm-debug-bar > .ab-item', handleToggle );
+        $( document ).on( 'click', '#wp-admin-bar-hkplt-debug-bar-toggle a', handleToggle );
+        $( document ).on( 'click', '#wp-admin-bar-hkplt-debug-bar > .ab-item', handleToggle );
 
     } );
 

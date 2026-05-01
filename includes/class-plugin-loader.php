@@ -5,7 +5,7 @@
  * Bootstraps all plugin subsystems and is the single entry-point
  * after the main plugin file has verified WooCommerce is active.
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -14,23 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WHM_Plugin_Loader
+ * Class HKPLT_Plugin_Loader
  *
  * Singleton that initialises every plugin component.
  */
-class WHM_Plugin_Loader {
+class HKPLT_Plugin_Loader {
 
 	/**
 	 * Singleton instance.
 	 *
-	 * @var WHM_Plugin_Loader|null
+	 * @var HKPLT_Plugin_Loader|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Returns (and lazily creates) the singleton instance.
 	 *
-	 * @return WHM_Plugin_Loader
+	 * @return HKPLT_Plugin_Loader
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -51,20 +51,19 @@ class WHM_Plugin_Loader {
 	 */
 	private function init_components() {
 		// Admin UI.
-		$admin = new WHM_Admin_Page();
+		$admin = new HKPLT_Admin_Page();
 		$admin->register_hooks();
 
 		// Hook manager (applies saved settings to the front-end).
-		$manager = new WHM_Hook_Manager();
+		$manager = new HKPLT_Hook_Manager();
 		$manager->register_hooks();
 
-
 		// Hook inspector (AJAX data provider for the admin panel).
-		$inspector = new WHM_Hook_Inspector();
+		$inspector = new HKPLT_Hook_Inspector();
 		$inspector->register_hooks();
 
 		// Export manager.
-		$export = new WHM_Export_Manager();
+		$export = new HKPLT_Export_Manager();
 		$export->register_hooks();
 	}
 }

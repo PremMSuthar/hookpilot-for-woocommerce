@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Manage hooks visually. Inspect callbacks, change priorities, add HTML wrappers, and inject custom content directly for WooCommerce.
+Manage WooCommerce hooks visually. Inspect callbacks, change priorities, add HTML wrappers, and inject custom content directly for WooCommerce.
 
 == Description ==
 
@@ -29,7 +29,7 @@ Built with a premium, responsive design, it allows you to:
 
 1. Upload the `hookpilot-for-woocommerce` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Access the manager via the 'Woo Hook Manager' menu in your admin sidebar.
+3. Access the manager via the 'Hookpilot' menu in your admin sidebar.
 
 == Frequently Asked Questions ==
 

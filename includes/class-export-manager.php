@@ -5,7 +5,7 @@
  * Generates PHP code snippets from the current hook settings so that
  * developers can paste them into a theme's functions.php.
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -14,15 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WHM_Export_Manager
+ * Class HKPLT_Export_Manager
  */
-class WHM_Export_Manager {
+class HKPLT_Export_Manager {
 
 	/**
 	 * Register WordPress hooks.
 	 */
 	public function register_hooks() {
-		add_action( 'wp_ajax_whm_export_config', array( $this, 'ajax_export_config' ) );
+		add_action( 'wp_ajax_hkplt_export_config', array( $this, 'ajax_export_config' ) );
 	}
 
 	/**
@@ -31,7 +31,7 @@ class WHM_Export_Manager {
 	 * @return string PHP snippet.
 	 */
 	public function generate_export_code() {
-		$settings = get_option( WHM_OPTION_KEY, array() );
+		$settings = get_option( HKPLT_OPTION_KEY, array() );
 		if ( ! is_array( $settings ) || empty( $settings ) ) {
 			return '// No hook settings found.';
 		}
@@ -39,7 +39,7 @@ class WHM_Export_Manager {
 		$lines   = array();
 		$lines[] = '<?php';
 		$lines[] = '/**';
-		$lines[] = ' * WooCommerce Hook Manager – Exported Configuration';
+		$lines[] = ' * Hookpilot for WooCommerce – Exported Configuration';
 		$lines[] = ' * Generated: ' . gmdate( 'Y-m-d H:i:s' ) . ' UTC';
 		$lines[] = ' * Place this code inside your theme\'s functions.php';
 		$lines[] = ' */';
@@ -121,7 +121,7 @@ class WHM_Export_Manager {
 	 * AJAX handler – returns export code as JSON.
 	 */
 	public function ajax_export_config() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );

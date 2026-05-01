@@ -15,7 +15,7 @@
  * WC requires at least: 6.0
  * WC tested up to:      8.0
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -24,26 +24,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin version.
-define( 'WHM_VERSION', '1.0.0' );
+define( 'HKPLT_VERSION', '1.0.0' );
 
 // Plugin directory path.
-define( 'WHM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'HKPLT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Plugin directory URL.
-define( 'WHM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'HKPLT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // Plugin basename.
-define( 'WHM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'HKPLT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Option key for settings storage.
-define( 'WHM_OPTION_KEY', 'whm_hook_settings' );
+define( 'HKPLT_OPTION_KEY', 'hkplt_hook_settings' );
 
 /**
  * Check if WooCommerce is active before loading the plugin.
  *
  * @return bool
  */
-function whm_is_woocommerce_active() {
+function hkplt_is_woocommerce_active() {
 	return in_array(
 		'woocommerce/woocommerce.php',
 		apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ),
@@ -54,7 +54,7 @@ function whm_is_woocommerce_active() {
 /**
  * Display an admin notice when WooCommerce is not active.
  */
-function whm_woocommerce_missing_notice() {
+function hkplt_woocommerce_missing_notice() {
 	?>
 	<div class="notice notice-error">
 		<p>
@@ -75,40 +75,40 @@ function whm_woocommerce_missing_notice() {
 /**
  * Load the plugin after all plugins are loaded to verify WooCommerce is active.
  */
-function whm_init() {
-	if ( ! whm_is_woocommerce_active() ) {
-		add_action( 'admin_notices', 'whm_woocommerce_missing_notice' );
+function hkplt_init() {
+	if ( ! hkplt_is_woocommerce_active() ) {
+		add_action( 'admin_notices', 'hkplt_woocommerce_missing_notice' );
 		return;
 	}
 
 	// Require core class files.
-	require_once WHM_PLUGIN_DIR . 'includes/class-plugin-loader.php';
-	require_once WHM_PLUGIN_DIR . 'includes/class-hook-inspector.php';
-	require_once WHM_PLUGIN_DIR . 'includes/class-hook-manager.php';
-	require_once WHM_PLUGIN_DIR . 'includes/class-admin-page.php';
-	require_once WHM_PLUGIN_DIR . 'includes/class-export-manager.php';
+	require_once HKPLT_PLUGIN_DIR . 'includes/class-plugin-loader.php';
+	require_once HKPLT_PLUGIN_DIR . 'includes/class-hook-inspector.php';
+	require_once HKPLT_PLUGIN_DIR . 'includes/class-hook-manager.php';
+	require_once HKPLT_PLUGIN_DIR . 'includes/class-admin-page.php';
+	require_once HKPLT_PLUGIN_DIR . 'includes/class-export-manager.php';
 
 	// Boot the plugin loader.
-	WHM_Plugin_Loader::get_instance();
+	HKPLT_Plugin_Loader::get_instance();
 }
-add_action( 'plugins_loaded', 'whm_init' );
+add_action( 'plugins_loaded', 'hkplt_init' );
 
 /**
  * Plugin activation hook.
  * Sets default options on first activation.
  */
-function whm_activate() {
-	if ( ! get_option( WHM_OPTION_KEY ) ) {
-		update_option( WHM_OPTION_KEY, array() );
+function hkplt_activate() {
+	if ( ! get_option( HKPLT_OPTION_KEY ) ) {
+		update_option( HKPLT_OPTION_KEY, array() );
 	}
-	update_option( 'whm_debug_mode', 0 );
+	update_option( 'hkplt_debug_mode', 0 );
 }
-register_activation_hook( __FILE__, 'whm_activate' );
+register_activation_hook( __FILE__, 'hkplt_activate' );
 
 /**
  * Plugin deactivation hook.
  */
-function whm_deactivate() {
+function hkplt_deactivate() {
 	// Nothing to do on deactivation – settings are kept.
 }
-register_deactivation_hook( __FILE__, 'whm_deactivate' );
+register_deactivation_hook( __FILE__, 'hkplt_deactivate' );

@@ -7,7 +7,7 @@
  * priority, wraps hook output, injects custom content, and enables
  * the frontend debug overlay.
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WHM_Hook_Manager
+ * Class HKPLT_Hook_Manager
  */
-class WHM_Hook_Manager {
+class HKPLT_Hook_Manager {
 
 	/**
 	 * Raw settings array loaded from the DB.
@@ -31,7 +31,7 @@ class WHM_Hook_Manager {
 	 * Constructor – loads settings once.
 	 */
 	public function __construct() {
-		$this->settings = get_option( WHM_OPTION_KEY, array() );
+		$this->settings = get_option( HKPLT_OPTION_KEY, array() );
 		if ( ! is_array( $this->settings ) ) {
 			$this->settings = array();
 		}
@@ -48,13 +48,13 @@ class WHM_Hook_Manager {
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_debug_overlay' ) );
 
 		// AJAX handlers.
-		add_action( 'wp_ajax_whm_save_settings', array( $this, 'ajax_save_settings' ) );
-		add_action( 'wp_ajax_whm_update_setting', array( $this, 'ajax_update_setting' ) );
-		add_action( 'wp_ajax_whm_delete_setting', array( $this, 'ajax_delete_setting' ) );
-		add_action( 'wp_ajax_whm_toggle_debug', array( $this, 'ajax_toggle_debug' ) );
-		add_action( 'wp_ajax_whm_toggle_uninstall_cleanup', array( $this, 'ajax_toggle_uninstall_cleanup' ) );
-		add_action( 'wp_ajax_whm_import_json', array( $this, 'ajax_import_json' ) );
-		add_action( 'wp_ajax_whm_get_hook_callbacks', array( $this, 'ajax_get_hook_callbacks' ) );
+		add_action( 'wp_ajax_hkplt_save_settings', array( $this, 'ajax_save_settings' ) );
+		add_action( 'wp_ajax_hkplt_update_setting', array( $this, 'ajax_update_setting' ) );
+		add_action( 'wp_ajax_hkplt_delete_setting', array( $this, 'ajax_delete_setting' ) );
+		add_action( 'wp_ajax_hkplt_toggle_debug', array( $this, 'ajax_toggle_debug' ) );
+		add_action( 'wp_ajax_hkplt_toggle_uninstall_cleanup', array( $this, 'ajax_toggle_uninstall_cleanup' ) );
+		add_action( 'wp_ajax_hkplt_import_json', array( $this, 'ajax_import_json' ) );
+		add_action( 'wp_ajax_hkplt_get_hook_callbacks', array( $this, 'ajax_get_hook_callbacks' ) );
 	}
 
 	/**
@@ -125,7 +125,6 @@ class WHM_Hook_Manager {
 
 		if ( strpos( $callback_name, '::' ) !== false ) {
 			list( $class, $method ) = explode( '::', $callback_name, 2 );
-			// Remove from any known object instance.
 			if ( has_action( $hook_name ) ) {
 				global $wp_filter;
 				if ( isset( $wp_filter[ $hook_name ] ) ) {
@@ -186,7 +185,6 @@ class WHM_Hook_Manager {
 
 	/**
 	 * Wrap a hook with HTML before and after it fires.
-	 * Supports legacy manual HTML and new dynamic tag/class/attr selection.
 	 *
 	 * @param  string $hook_name Hook name.
 	 * @param  array  $setting   The full setting row.
@@ -197,7 +195,6 @@ class WHM_Hook_Manager {
 		$class = ! empty( $setting['wrapper_class'] ) ? sanitize_text_field( $setting['wrapper_class'] ) : '';
 		$attrs = ! empty( $setting['wrapper_attrs'] ) ? sanitize_text_field( $setting['wrapper_attrs'] ) : '';
 
-		// If manual wrapper start is provided, it takes precedence (legacy support).
 		if ( ! empty( $setting['wrapper_start'] ) ) {
 			$before = $setting['wrapper_start'];
 			$after  = ! empty( $setting['wrapper_end'] ) ? $setting['wrapper_end'] : '</div>';
@@ -226,9 +223,9 @@ class WHM_Hook_Manager {
 	/**
 	 * Add an arbitrary HTML content output to a hook.
 	 *
-	 * @param  string $hook_name     Hook name.
-	 * @param  string $content       HTML content.
-	 * @param  int    $priority      Priority.
+	 * @param  string $hook_name Hook name.
+	 * @param  string $content   HTML content.
+	 * @param  int    $priority  Priority.
 	 */
 	private function add_custom_content( $hook_name, $content, $priority ) {
 		add_action(
@@ -265,38 +262,35 @@ class WHM_Hook_Manager {
 			return;
 		}
 
-		if ( ! get_option( 'whm_debug_mode', 0 ) ) {
+		if ( ! get_option( 'hkplt_debug_mode', 0 ) ) {
 			return;
 		}
 
 		wp_enqueue_style(
-			'whm-debug-overlay',
-			WHM_PLUGIN_URL . 'public/hook-debug-overlay.css',
+			'hkplt-debug-overlay',
+			HKPLT_PLUGIN_URL . 'public/hook-debug-overlay.css',
 			array(),
-			WHM_VERSION
+			HKPLT_VERSION
 		);
 
 		wp_enqueue_script(
-			'whm-debug-overlay',
-			WHM_PLUGIN_URL . 'public/hook-debug-overlay.js',
+			'hkplt-debug-overlay',
+			HKPLT_PLUGIN_URL . 'public/hook-debug-overlay.js',
 			array( 'jquery' ),
-			WHM_VERSION,
+			HKPLT_VERSION,
 			true
 		);
 
-		// Pass hook inspector data and active plugin rules to JS.
-		$inspector = new WHM_Hook_Inspector();
-		$hook_data = $inspector->get_all_hook_data();
-
-		// Build a clean list of active rules to display in the debug panel.
-		$raw_settings = get_option( WHM_OPTION_KEY, array() );
+		$inspector    = new HKPLT_Hook_Inspector();
+		$hook_data    = $inspector->get_all_hook_data();
+		$raw_settings = get_option( HKPLT_OPTION_KEY, array() );
 		$active_rules = array();
+
 		if ( is_array( $raw_settings ) ) {
 			foreach ( $raw_settings as $rule ) {
 				if ( empty( $rule['hook_name'] ) ) {
 					continue;
 				}
-				// Skip rules the admin has explicitly deactivated.
 				if ( isset( $rule['status'] ) && 'inactive' === $rule['status'] ) {
 					continue;
 				}
@@ -314,33 +308,32 @@ class WHM_Hook_Manager {
 		}
 
 		wp_localize_script(
-			'whm-debug-overlay',
-			'whmDebugData',
+			'hkplt-debug-overlay',
+			'hkpltDebugData',
 			array(
 				'hooks'   => $hook_data,
 				'rules'   => $active_rules,
 				'strings' => array(
-					'panel_title'  => esc_html__( 'Active WHM Rules', 'hookpilot-for-woocommerce' ),
-					'rule'         => esc_html__( 'rule', 'hookpilot-for-woocommerce' ),
-					'rules'        => esc_html__( 'rules', 'hookpilot-for-woocommerce' ),
-					'no_rules'     => esc_html__( 'No active rules configured.', 'hookpilot-for-woocommerce' ),
-					'disabled'     => esc_html__( 'Disabled', 'hookpilot-for-woocommerce' ),
-					'priority'     => esc_html__( 'Priority', 'hookpilot-for-woocommerce' ),
-					'wrapper'      => esc_html__( 'Wrapper', 'hookpilot-for-woocommerce' ),
-					'custom_html'  => esc_html__( 'Custom HTML', 'hookpilot-for-woocommerce' ),
-					'shortcode'    => esc_html__( 'Shortcode', 'hookpilot-for-woocommerce' ),
-					'active'       => esc_html__( 'Active', 'hookpilot-for-woocommerce' ),
+					'panel_title' => esc_html__( 'Active Hookpilot Rules', 'hookpilot-for-woocommerce' ),
+					'rule'        => esc_html__( 'rule', 'hookpilot-for-woocommerce' ),
+					'rules'       => esc_html__( 'rules', 'hookpilot-for-woocommerce' ),
+					'no_rules'    => esc_html__( 'No active rules configured.', 'hookpilot-for-woocommerce' ),
+					'disabled'    => esc_html__( 'Disabled', 'hookpilot-for-woocommerce' ),
+					'priority'    => esc_html__( 'Priority', 'hookpilot-for-woocommerce' ),
+					'wrapper'     => esc_html__( 'Wrapper', 'hookpilot-for-woocommerce' ),
+					'custom_html' => esc_html__( 'Custom HTML', 'hookpilot-for-woocommerce' ),
+					'shortcode'   => esc_html__( 'Shortcode', 'hookpilot-for-woocommerce' ),
+					'active'      => esc_html__( 'Active', 'hookpilot-for-woocommerce' ),
 				),
 			)
 		);
-
 	}
 
 	/**
 	 * AJAX: Save a hook setting.
 	 */
 	public function ajax_save_settings() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -360,13 +353,12 @@ class WHM_Hook_Manager {
 			wp_send_json_error( array( 'message' => esc_html__( 'Hook name is required.', 'hookpilot-for-woocommerce' ) ) );
 		}
 
-		$settings = get_option( WHM_OPTION_KEY, array() );
+		$settings = get_option( HKPLT_OPTION_KEY, array() );
 		if ( ! is_array( $settings ) ) {
 			$settings = array();
 		}
 
-		// Update existing or append.
-		$id   = isset( $setting['id'] ) ? (int) $setting['id'] : - 1;
+		$id    = isset( $setting['id'] ) ? (int) $setting['id'] : -1;
 		$saved = false;
 
 		if ( $id >= 0 && isset( $settings[ $id ] ) ) {
@@ -379,7 +371,7 @@ class WHM_Hook_Manager {
 			$settings[]    = $setting;
 		}
 
-		update_option( WHM_OPTION_KEY, $settings );
+		update_option( HKPLT_OPTION_KEY, $settings );
 
 		wp_send_json_success( array( 'message' => esc_html__( 'Setting saved.', 'hookpilot-for-woocommerce' ) ) );
 	}
@@ -388,7 +380,7 @@ class WHM_Hook_Manager {
 	 * AJAX: Update (edit) an existing hook setting by index.
 	 */
 	public function ajax_update_setting() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -400,14 +392,14 @@ class WHM_Hook_Manager {
 		if ( ! is_array( $raw ) ) {
 			$raw = array();
 		}
-		$id  = isset( $raw['id'] ) ? (int) $raw['id'] : -1;
+		$id = isset( $raw['id'] ) ? (int) $raw['id'] : -1;
 		// phpcs:enable
 
 		if ( $id < 0 ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Invalid rule ID.', 'hookpilot-for-woocommerce' ) ) );
 		}
 
-		$settings = get_option( WHM_OPTION_KEY, array() );
+		$settings = get_option( HKPLT_OPTION_KEY, array() );
 		if ( ! is_array( $settings ) || ! isset( $settings[ $id ] ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Rule not found.', 'hookpilot-for-woocommerce' ) ) );
 		}
@@ -420,7 +412,7 @@ class WHM_Hook_Manager {
 
 		$setting['id']   = $id;
 		$settings[ $id ] = $setting;
-		update_option( WHM_OPTION_KEY, $settings );
+		update_option( HKPLT_OPTION_KEY, $settings );
 
 		wp_send_json_success(
 			array(
@@ -435,17 +427,17 @@ class WHM_Hook_Manager {
 	 * AJAX: Delete a hook setting by index.
 	 */
 	public function ajax_delete_setting() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification -- already verified.
-		$id = isset( $_POST['id'] ) ? (int) $_POST['id'] : - 1;
+		$id = isset( $_POST['id'] ) ? (int) $_POST['id'] : -1;
 		// phpcs:enable
 
-		$settings = get_option( WHM_OPTION_KEY, array() );
+		$settings = get_option( HKPLT_OPTION_KEY, array() );
 		if ( ! is_array( $settings ) ) {
 			$settings = array();
 		}
@@ -455,8 +447,8 @@ class WHM_Hook_Manager {
 		}
 
 		unset( $settings[ $id ] );
-		$settings = array_values( $settings ); // Re-index.
-		update_option( WHM_OPTION_KEY, $settings );
+		$settings = array_values( $settings );
+		update_option( HKPLT_OPTION_KEY, $settings );
 
 		wp_send_json_success( array( 'message' => esc_html__( 'Setting deleted.', 'hookpilot-for-woocommerce' ) ) );
 	}
@@ -465,7 +457,7 @@ class WHM_Hook_Manager {
 	 * AJAX: Toggle the frontend debug mode flag.
 	 */
 	public function ajax_toggle_debug() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -475,7 +467,7 @@ class WHM_Hook_Manager {
 		$enabled = isset( $_POST['enabled'] ) ? (int) $_POST['enabled'] : 0;
 		// phpcs:enable
 
-		update_option( 'whm_debug_mode', $enabled ? 1 : 0 );
+		update_option( 'hkplt_debug_mode', $enabled ? 1 : 0 );
 
 		wp_send_json_success( array( 'debug_mode' => $enabled ) );
 	}
@@ -484,7 +476,7 @@ class WHM_Hook_Manager {
 	 * AJAX: Toggle the uninstall cleanup flag.
 	 */
 	public function ajax_toggle_uninstall_cleanup() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -494,7 +486,7 @@ class WHM_Hook_Manager {
 		$enabled = isset( $_POST['enabled'] ) ? (int) $_POST['enabled'] : 0;
 		// phpcs:enable
 
-		update_option( 'whm_uninstall_cleanup', $enabled ? 1 : 0 );
+		update_option( 'hkplt_uninstall_cleanup', $enabled ? 1 : 0 );
 
 		wp_send_json_success( array( 'uninstall_cleanup' => $enabled ) );
 	}
@@ -503,7 +495,7 @@ class WHM_Hook_Manager {
 	 * AJAX: Import settings from a JSON string.
 	 */
 	public function ajax_import_json() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Insufficient permissions.', 'hookpilot-for-woocommerce' ) ), 403 );
@@ -532,19 +524,19 @@ class WHM_Hook_Manager {
 			$sanitized_settings[] = $this->sanitize_setting( $row );
 		}
 
-		// Update indices to be sequential based on the new array order.
 		foreach ( $sanitized_settings as $index => &$setting ) {
 			$setting['id'] = $index;
 		}
 
-		update_option( WHM_OPTION_KEY, $sanitized_settings );
+		update_option( HKPLT_OPTION_KEY, $sanitized_settings );
 
-		wp_send_json_success( array(
-			'message' => esc_html__( 'Settings imported successfully.', 'hookpilot-for-woocommerce' ),
-			'count'   => count( $sanitized_settings ),
-		) );
+		wp_send_json_success(
+			array(
+				'message' => esc_html__( 'Settings imported successfully.', 'hookpilot-for-woocommerce' ),
+				'count'   => count( $sanitized_settings ),
+			)
+		);
 	}
-
 
 	/**
 	 * Sanitize a raw setting array from POST data.
@@ -558,7 +550,7 @@ class WHM_Hook_Manager {
 		}
 
 		return array(
-			'id'                => isset( $raw['id'] ) ? (int) $raw['id'] : - 1,
+			'id'                => isset( $raw['id'] ) ? (int) $raw['id'] : -1,
 			'rule_title'        => isset( $raw['rule_title'] ) ? sanitize_text_field( wp_unslash( $raw['rule_title'] ) ) : '',
 			'hook_name'         => isset( $raw['hook_name'] ) ? sanitize_text_field( wp_unslash( $raw['hook_name'] ) ) : '',
 			'callback_name'     => isset( $raw['callback_name'] ) ? sanitize_text_field( wp_unslash( $raw['callback_name'] ) ) : '',
@@ -586,10 +578,9 @@ class WHM_Hook_Manager {
 
 	/**
 	 * AJAX: Return registered callbacks for a specific hook.
-	 * Used to populate the Callback select when editing rules.
 	 */
 	public function ajax_get_hook_callbacks() {
-		check_ajax_referer( 'whm_nonce', 'nonce' );
+		check_ajax_referer( 'hkplt_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => 'Insufficient permissions.' ), 403 );
@@ -623,7 +614,6 @@ class WHM_Hook_Manager {
 						$name = '{closure}';
 					}
 
-					// Try to resolve source file.
 					$source = '';
 					try {
 						if ( is_string( $cb ) && function_exists( $cb ) ) {
@@ -646,10 +636,12 @@ class WHM_Hook_Manager {
 			}
 		}
 
-		// Sort by priority.
-		usort( $callbacks, function( $a, $b ) {
-			return $a['priority'] - $b['priority'];
-		} );
+		usort(
+			$callbacks,
+			function ( $a, $b ) {
+				return $a['priority'] - $b['priority'];
+			}
+		);
 
 		wp_send_json_success( array( 'callbacks' => $callbacks ) );
 	}

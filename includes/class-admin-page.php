@@ -5,7 +5,7 @@
  * Registers the WordPress admin menu, enqueues admin assets, and
  * includes the admin page template.
  *
- * @package WHM
+ * @package Hookpilot
  */
 
 // Block direct file access.
@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WHM_Admin_Page
+ * Class HKPLT_Admin_Page
  */
-class WHM_Admin_Page {
+class HKPLT_Admin_Page {
 
 	/**
 	 * Register WordPress hooks.
@@ -35,57 +35,54 @@ class WHM_Admin_Page {
 	 * Register admin menu and sub-menu pages.
 	 */
 	public function register_admin_menus() {
-		// Custom SVG Hook Icon (Base64 Encoded for WP Admin Menu).
 		$hook_icon = 'data:image/svg+xml;base64,' . base64_encode( '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="black" d="M10,1C8.9,1,8,1.9,8,3s0.9,2,2,2s2-0.9,2-2S11.1,1,10,1z M10,4.2C9.3,4.2,8.8,3.7,8.8,3S9.3,1.8,10,1.8S11.2,2.3,11.2,3S10.7,4.2,10,4.2z M10.5,5v9.5c0,1.4-1.1,2.5-2.5,2.5S5.5,15.9,5.5,14.5V12h1.5v2.5c0,0.6,0.4,1,1,1s1-0.4,1-1V5H10.5z M4.5,12l2.5-3l1.5,3H4.5z"/></svg>' );
 
-		// Top-level menu.
 		add_menu_page(
-			esc_html__( 'Woo Hook Manager', 'hookpilot-for-woocommerce' ),
-			esc_html__( 'Woo Hook Manager', 'hookpilot-for-woocommerce' ),
+			esc_html__( 'Hookpilot', 'hookpilot-for-woocommerce' ),
+			esc_html__( 'Hookpilot', 'hookpilot-for-woocommerce' ),
 			'manage_options',
-			'whm-dashboard',
+			'hkplt-dashboard',
 			array( $this, 'render_dashboard' ),
 			$hook_icon,
 			58
 		);
 
-		// Sub-pages.
 		$subpages = array(
 			array(
-				'title'  => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
-				'label'  => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
-				'slug'   => 'whm-inspector',
-				'cb'     => array( $this, 'render_inspector' ),
+				'title' => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
+				'label' => esc_html__( 'Hook Inspector', 'hookpilot-for-woocommerce' ),
+				'slug'  => 'hkplt-inspector',
+				'cb'    => array( $this, 'render_inspector' ),
 			),
 			array(
-				'title'  => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
-				'label'  => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
-				'slug'   => 'whm-manager',
-				'cb'     => array( $this, 'render_manager' ),
+				'title' => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
+				'label' => esc_html__( 'Hook Manager', 'hookpilot-for-woocommerce' ),
+				'slug'  => 'hkplt-manager',
+				'cb'    => array( $this, 'render_manager' ),
 			),
 			array(
-				'title'  => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
-				'label'  => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
-				'slug'   => 'whm-add-hook',
-				'cb'     => array( $this, 'render_add_hook' ),
+				'title' => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
+				'label' => esc_html__( 'Add Custom Hook', 'hookpilot-for-woocommerce' ),
+				'slug'  => 'hkplt-add-hook',
+				'cb'    => array( $this, 'render_add_hook' ),
 			),
 			array(
-				'title'  => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
-				'label'  => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
-				'slug'   => 'whm-shortcodes',
-				'cb'     => array( $this, 'render_shortcodes' ),
+				'title' => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
+				'label' => esc_html__( 'Shortcodes', 'hookpilot-for-woocommerce' ),
+				'slug'  => 'hkplt-shortcodes',
+				'cb'    => array( $this, 'render_shortcodes' ),
 			),
 			array(
-				'title'  => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
-				'label'  => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
-				'slug'   => 'whm-import-export',
-				'cb'     => array( $this, 'render_import_export' ),
+				'title' => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
+				'label' => esc_html__( 'Import/Export', 'hookpilot-for-woocommerce' ),
+				'slug'  => 'hkplt-import-export',
+				'cb'    => array( $this, 'render_import_export' ),
 			),
 		);
 
 		foreach ( $subpages as $page ) {
 			add_submenu_page(
-				'whm-dashboard',
+				'hkplt-dashboard',
 				$page['title'],
 				$page['label'],
 				'manage_options',
@@ -96,47 +93,47 @@ class WHM_Admin_Page {
 	}
 
 	/**
-	 * Enqueue admin CSS and JS only on WHM admin pages.
+	 * Enqueue admin CSS and JS only on Hookpilot admin pages.
 	 *
 	 * @param  string $hook Current admin page hook suffix.
 	 */
 	public function enqueue_admin_assets( $hook ) {
-		$whm_pages = array(
-			'toplevel_page_whm-dashboard',
-			'woo-hook-manager_page_whm-inspector',
-			'woo-hook-manager_page_whm-manager',
-			'woo-hook-manager_page_whm-add-hook',
-			'woo-hook-manager_page_whm-shortcodes',
-			'woo-hook-manager_page_whm-import-export',
+		$hkplt_pages = array(
+			'toplevel_page_hkplt-dashboard',
+			'hookpilot_page_hkplt-inspector',
+			'hookpilot_page_hkplt-manager',
+			'hookpilot_page_hkplt-add-hook',
+			'hookpilot_page_hkplt-shortcodes',
+			'hookpilot_page_hkplt-import-export',
 		);
 
-		if ( ! in_array( $hook, $whm_pages, true ) ) {
+		if ( ! in_array( $hook, $hkplt_pages, true ) ) {
 			return;
 		}
 
 		wp_enqueue_style(
-			'whm-admin-styles',
-			WHM_PLUGIN_URL . 'admin/admin-styles.css',
+			'hkplt-admin-styles',
+			HKPLT_PLUGIN_URL . 'admin/admin-styles.css',
 			array(),
-			WHM_VERSION
+			HKPLT_VERSION
 		);
 
 		wp_enqueue_script(
-			'whm-admin-scripts',
-			WHM_PLUGIN_URL . 'admin/admin-scripts.js',
+			'hkplt-admin-scripts',
+			HKPLT_PLUGIN_URL . 'admin/admin-scripts.js',
 			array( 'jquery', 'jquery-ui-sortable' ),
-			WHM_VERSION,
+			HKPLT_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'whm-admin-scripts',
-			'whmData',
+			'hkplt-admin-scripts',
+			'hkpltData',
 			array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'nonce'      => wp_create_nonce( 'whm_nonce' ),
-				'debug_mode' => (int) get_option( 'whm_debug_mode', 0 ),
-				'settings'   => get_option( WHM_OPTION_KEY, array() ),
+				'nonce'      => wp_create_nonce( 'hkplt_nonce' ),
+				'debug_mode' => (int) get_option( 'hkplt_debug_mode', 0 ),
+				'settings'   => get_option( HKPLT_OPTION_KEY, array() ),
 				'strings'    => array(
 					'confirm_delete' => esc_html__( 'Are you sure you want to delete this setting?', 'hookpilot-for-woocommerce' ),
 					'saved'          => esc_html__( 'Saved successfully.', 'hookpilot-for-woocommerce' ),
@@ -155,8 +152,7 @@ class WHM_Admin_Page {
 	}
 
 	/**
-	 * Add WHM debug toggle node to the WordPress admin bar.
-	 * Visible on every page (frontend + backend) for administrators.
+	 * Add Hookpilot debug toggle node to the WordPress admin bar.
 	 *
 	 * @param WP_Admin_Bar $wp_admin_bar Admin bar object.
 	 */
@@ -165,59 +161,55 @@ class WHM_Admin_Page {
 			return;
 		}
 
-		$debug = (int) get_option( 'whm_debug_mode', 0 );
+		$debug = (int) get_option( 'hkplt_debug_mode', 0 );
 		$state = $debug ? 'is-on' : 'is-off';
-		
+
 		$label = sprintf(
-			'<span class="whm-ab-label">%s</span>
-			 <span class="whm-ab-switch %s"><span class="whm-ab-slider"></span></span>',
-			esc_html__( 'WHM Debug', 'hookpilot-for-woocommerce' ),
+			'<span class="hkplt-ab-label">%s</span>
+			 <span class="hkplt-ab-switch %s"><span class="hkplt-ab-slider"></span></span>',
+			esc_html__( 'Hookpilot Debug', 'hookpilot-for-woocommerce' ),
 			$state
 		);
 
-		// Parent node.
 		$wp_admin_bar->add_node(
 			array(
-				'id'    => 'whm-debug-bar',
+				'id'    => 'hkplt-debug-bar',
 				'title' => $label,
 				'href'  => '#',
 				'meta'  => array(
-					'class' => 'whm-admin-bar-node',
-					'title' => esc_attr__( 'Toggle WooCommerce Hook Manager Debug Mode', 'hookpilot-for-woocommerce' ),
+					'class' => 'hkplt-admin-bar-node',
+					'title' => esc_attr__( 'Toggle Hookpilot Debug Mode', 'hookpilot-for-woocommerce' ),
 				),
 			)
 		);
 
-		// Sub-node: toggle action.
 		$wp_admin_bar->add_node(
 			array(
-				'id'     => 'whm-debug-bar-toggle',
-				'parent' => 'whm-debug-bar',
+				'id'     => 'hkplt-debug-bar-toggle',
+				'parent' => 'hkplt-debug-bar',
 				'title'  => $debug
 					? esc_html__( 'Disable Debug Overlay', 'hookpilot-for-woocommerce' )
 					: esc_html__( 'Enable Debug Overlay', 'hookpilot-for-woocommerce' ),
 				'href'   => '#',
 				'meta'   => array(
-					'class'      => 'whm-ab-toggle-action',
+					'class'      => 'hkplt-ab-toggle-action',
 					'data-debug' => $debug,
 				),
 			)
 		);
 
-		// Sub-node: link to settings.
 		$wp_admin_bar->add_node(
 			array(
-				'id'     => 'whm-debug-bar-settings',
-				'parent' => 'whm-debug-bar',
-				'title'  => esc_html__( 'Hook Manager Dashboard', 'hookpilot-for-woocommerce' ),
-				'href'   => admin_url( 'admin.php?page=whm-dashboard' ),
+				'id'     => 'hkplt-debug-bar-settings',
+				'parent' => 'hkplt-debug-bar',
+				'title'  => esc_html__( 'Hookpilot Dashboard', 'hookpilot-for-woocommerce' ),
+				'href'   => admin_url( 'admin.php?page=hkplt-dashboard' ),
 			)
 		);
 	}
 
 	/**
 	 * Enqueue the lightweight admin-bar JS + inline CSS on every page for admins.
-	 * This powers the debug toggle in the admin bar on both frontend & backend.
 	 */
 	public function enqueue_admin_bar_assets() {
 		if ( ! current_user_can( 'manage_options' ) || ! is_admin_bar_showing() ) {
@@ -225,20 +217,20 @@ class WHM_Admin_Page {
 		}
 
 		wp_enqueue_script(
-			'whm-admin-bar',
-			WHM_PLUGIN_URL . 'public/admin-bar.js',
+			'hkplt-admin-bar',
+			HKPLT_PLUGIN_URL . 'public/admin-bar.js',
 			array( 'jquery' ),
-			WHM_VERSION,
+			HKPLT_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'whm-admin-bar',
-			'whmBarData',
+			'hkplt-admin-bar',
+			'hkpltBarData',
 			array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'nonce'      => wp_create_nonce( 'whm_nonce' ),
-				'debug_mode' => (int) get_option( 'whm_debug_mode', 0 ),
+				'nonce'      => wp_create_nonce( 'hkplt_nonce' ),
+				'debug_mode' => (int) get_option( 'hkplt_debug_mode', 0 ),
 				'strings'    => array(
 					'enabled_label'  => esc_html__( 'Enable Debug Overlay', 'hookpilot-for-woocommerce' ),
 					'disabled_label' => esc_html__( 'Disable Debug Overlay', 'hookpilot-for-woocommerce' ),
@@ -248,17 +240,16 @@ class WHM_Admin_Page {
 			)
 		);
 
-		// Inline CSS for admin bar node – no extra stylesheet needed.
 		$inline_css = '
-			#wp-admin-bar-whm-debug-bar > .ab-item { display: flex !important; align-items: center; gap: 8px; height: 32px; padding: 0 12px; }
-			#wpadminbar .whm-ab-switch.is-on { background: #00a0d2; }
-			#wpadminbar .whm-ab-label { font-weight: 600; font-size: 13px; }
-			#wpadminbar .whm-ab-switch { 
-				display: block; position: relative; width: 44px; min-width: 44px; height: 18px; 
+			#wp-admin-bar-hkplt-debug-bar > .ab-item { display: flex !important; align-items: center; gap: 8px; height: 32px; padding: 0 12px; }
+			#wpadminbar .hkplt-ab-switch.is-on { background: #00a0d2; }
+			#wpadminbar .hkplt-ab-label { font-weight: 600; font-size: 13px; }
+			#wpadminbar .hkplt-ab-switch {
+				display: block; position: relative; width: 44px; min-width: 44px; height: 18px;
 				background: #8c8f94; border-radius: 10px; transition: all 0.3s;
 				cursor: pointer; flex-shrink: 0; box-sizing: border-box;
 			}
-			#wpadminbar .whm-ab-switch:after {
+			#wpadminbar .hkplt-ab-switch:after {
 				content: "OFF";
 				position: absolute;
 				right: 6px;
@@ -270,18 +261,18 @@ class WHM_Admin_Page {
 				text-transform: uppercase;
 				line-height: 1;
 			}
-			#wpadminbar .whm-ab-switch.is-on:after {
+			#wpadminbar .hkplt-ab-switch.is-on:after {
 				content: "ON";
 				left: 7px;
 				right: auto;
 			}
-			#wpadminbar .whm-ab-slider { 
-				position: absolute; left: 2px; top: 2px; width: 14px; height: 14px; 
+			#wpadminbar .hkplt-ab-slider {
+				position: absolute; left: 2px; top: 2px; width: 14px; height: 14px;
 				background: #fff; border-radius: 50%; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 				z-index: 2; box-sizing: border-box;
 			}
-			#wpadminbar .whm-ab-switch.is-on .whm-ab-slider { transform: translateX(26px); }
-			#wp-admin-bar-whm-debug-bar-toggle a { cursor:pointer; }
+			#wpadminbar .hkplt-ab-switch.is-on .hkplt-ab-slider { transform: translateX(26px); }
+			#wp-admin-bar-hkplt-debug-bar-toggle a { cursor:pointer; }
 		';
 		wp_add_inline_style( 'admin-bar', $inline_css );
 	}
@@ -290,65 +281,56 @@ class WHM_Admin_Page {
 	 * Page render callbacks
 	 * ------------------------------------------------------------------ */
 
-	/**
-	 * Dashboard page.
-	 */
+	/** Dashboard page. */
 	public function render_dashboard() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
-	/**
-	 * Hook Inspector page.
-	 */
+	/** Hook Inspector page. */
 	public function render_inspector() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'inspector';
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
-	/**
-	 * Hook Manager page.
-	 */
+	/** Hook Manager page. */
 	public function render_manager() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'manager';
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
-	/**
-	 * Add Custom Hook page.
-	 */
+	/** Add Custom Hook page. */
 	public function render_add_hook() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'add_hook';
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
+	/** Shortcodes page. */
 	public function render_shortcodes() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'shortcodes';
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 
-	/**
-	 * Import/Export page.
-	 */
+	/** Import/Export page. */
 	public function render_import_export() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$view = 'import_export';
-		include WHM_PLUGIN_DIR . 'admin/admin-page.php';
+		include HKPLT_PLUGIN_DIR . 'admin/admin-page.php';
 	}
 }
